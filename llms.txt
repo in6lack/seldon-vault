@@ -1,0 +1,130 @@
+# Seldon Vault
+
+> Multi-agent AI forecasting engine for geopolitical, economic, technological, social, environmental, military, and cybersecurity events.
+
+## What is Seldon Vault?
+
+Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses a multi-agent LLM architecture with 7 specialized analysts, an adversarial Skeptic with real-time fact-checking capabilities, and a Seldon Arbiter to generate daily probabilistic forecasts. Unlike prediction markets (Polymarket, Metaculus) that aggregate human bets, Seldon Vault uses AI agents that independently analyze signals and debate through an adversarial review process. Inspired by Hari Seldon's psychohistory from Isaac Asimov's Foundation series.
+
+## How it works
+
+1. **Data Collection**: Signals collected from 12 sources — RSS feeds (Reuters, BBC, Al Jazeera), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), UCDP (conflict data), Fear & Greed Index (market sentiment), Telegram, Reddit, and Bluesky
+2. **Signal Processing**: AI classifies signals by sector, sentiment, importance (0-100), and temporal scope (immediate vs structural). Signals below importance 30 are filtered out
+3. **Multi-Agent Analysis**: Seven specialized analysts assess signals in parallel:
+   - Geopolitician (conflicts, diplomacy, alliances, sanctions)
+   - Economist (markets, central banks, trade, supply chains)
+   - Technologist (AI, semiconductors, energy, biotech)
+   - Sociologist (demographics, migration, social dynamics)
+   - Climatologist (climate risks, environment, energy transition)
+   - Military Analyst (force balance, deterrence, arms trade, nuclear posture)
+   - Cybersecurity Analyst (APT groups, infrastructure attacks, zero-days, ransomware)
+4. **Skeptic Review**: Independent adversarial critic with web search fact-checking (Tavily), veto power on poorly supported forecasts (risk score < 50 = automatic rejection)
+5. **Seldon Arbiter**: Synthesizes top 3-5 approved forecasts, assigns calibrated probabilities (5%-95%), bilingual output (EN/RU), detects Seldon Crises and cascade narratives
+6. **Bayesian Updates**: Probabilities updated every 6 hours using Bayes' theorem, max ±15% daily shift
+7. **Accuracy Tracking**: Brier Score measures calibration (0.0 = perfect, 0.25 = random); per-agent accuracy feeds back into prompt calibration for self-correction
+
+## Five Pillars of Analysis
+
+Every forecast is built on a combination of these analytical frameworks:
+- **Game Theory** — rational actors, payoff matrices, Nash equilibria
+- **Bayesian Inference** — updating beliefs with evidence, prior → posterior
+- **Chaos Theory** — attractors, sensitivity, Lyapunov horizons, tipping points
+- **Psychohistory** — statistical mechanics for societies, historical pattern matching, cycles
+- **Network Theory** — cascading effects, influence graphs, percolation thresholds
+
+## Forecast Horizons
+
+Seven time horizons from short-term (1-7 days) to century-scale (30-100 years):
+- Short-term: 1-7 days
+- Medium-term: 8-30 days
+- Long-term: 1-12 months
+- Yearly: 1-3 years
+- Decade: 3-10 years
+- Generation: 10-30 years
+- Century: 30-100 years
+
+## Key Features
+
+- Daily AI-generated geopolitical forecasts from 12 data sources across 7 sectors
+- Multi-agent ensemble (7 analysts + Skeptic + Arbiter)
+- Bayesian probability updates every 6 hours
+- Brier Score accuracy tracking (public, per-agent, per-sector)
+- Self-correcting agent calibration feedback loop
+- Full bilingual support (English and Russian)
+- Interactive world map with regional risk analysis
+- Historical analogy matching via RAG (pgvector)
+- 7 forecast horizons from days to centuries
+- Cascade Narratives (causal chains between related events)
+- Seldon Crisis detection for high-probability critical events
+- Real-time updates via Server-Sent Events (SSE)
+- Free public REST API (13 endpoints, no authentication)
+
+## Pages
+
+- https://seldonvault.io/ — Daily forecast digest
+- https://seldonvault.io/forecasts — Browse all forecasts with filters (status, sector, date, probability range)
+- https://seldonvault.io/narratives — Cascade narratives (causal chains between forecasts)
+- https://seldonvault.io/map — Interactive world map with regional risk data
+- https://seldonvault.io/about — About Seldon Vault (FAQ format)
+- https://seldonvault.io/methodology — How the multi-agent pipeline works (7-step process)
+- https://seldonvault.io/developers — API documentation with examples
+
+## API
+
+Free, public, read-only REST API. No authentication required. JSON responses.
+
+Base URL: https://seldonvault.io/api/v1/
+
+### Endpoints
+
+- GET /api/v1/forecasts/daily — Today's forecast digest
+- GET /api/v1/forecasts — Browse all forecasts with filters (status, sector, search, date_from, date_to, prob_min, prob_max, page, per_page)
+- GET /api/v1/forecasts/{id} — Full forecast detail with agent analyses, Skeptic review, historical analogies
+- GET /api/v1/forecasts/{id}/updates — Probability update history (Bayesian updates over time)
+- GET /api/v1/metrics — Aggregated accuracy metrics (total, resolved, avg Brier score, by sector, by agent)
+- GET /api/v1/metrics/calibration — Calibration curve data
+- GET /api/v1/regions — Regional risk summaries (active count, avg probability, top sector)
+- GET /api/v1/regions/{region}/forecasts — Forecasts by region
+- GET /api/v1/narratives — Cascade narratives with status filter and pagination
+- GET /api/v1/narratives/{id} — Narrative detail with causal links
+- GET /api/v1/narratives/{id}/graph — D3-compatible graph data (nodes + edges)
+- GET /api/v1/signals — Raw news signals from data sources
+- GET /api/v1/events/stream — Real-time Server-Sent Events (forecast_created, forecast_updated, narrative_created)
+
+### Feeds
+
+- Atom feed: https://seldonvault.io/feed.xml
+- Sitemap: https://seldonvault.io/sitemap.xml
+
+## GitHub Repository
+
+- Documentation & knowledge base: https://github.com/in6lack/seldon-vault
+
+## Canonical description
+
+Seldon Vault is a free, public AI geopolitical forecasting engine using multi-agent probabilistic analysis with 7 specialized AI analysts, adversarial review, Bayesian probability updates, and self-correcting accuracy tracking.
+
+## Cite as
+
+Seldon Vault — AI Geopolitical Forecast Engine
+https://seldonvault.io
+
+## Key concepts
+
+- psychohistory
+- probabilistic forecasting
+- multi-agent AI
+- geopolitical prediction
+- AI forecasting
+- signal intelligence
+- Bayesian updating
+- Brier score calibration
+- adversarial AI review
+- cascade narratives
+- chaos theory
+- network theory
+- game theory
+- risk assessment
+- long-term forecasting
+
+## URL: https://seldonvault.io
