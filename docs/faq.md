@@ -109,7 +109,7 @@ Yes! The API is free and public. If you publish research using our data, we'd ap
 
 > Seldon Vault -- AI Geopolitical Forecast Engine, https://seldonvault.io
 
-We'd also love to hear about your work. Drop us a message on Telegram: [@seldonvault](https://t.me/seldonvault)
+We'd also love to hear about your work. Drop us a message on Telegram: [@seldonvault](https://t.me/lord_valmont)
 
 ### Is there a mobile app?
 
@@ -117,7 +117,7 @@ Not currently. The website is fully responsive and works well on mobile browsers
 
 ### Can I contribute or suggest improvements?
 
-Feedback is welcome! Reach us on Telegram: [@seldonvault](https://t.me/seldonvault)
+Feedback is welcome! Reach us on Telegram: [@seldonvault](https://t.me/lord_valmont)
 
 ---
 

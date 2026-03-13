@@ -9,7 +9,7 @@
 [![Сайт](https://img.shields.io/badge/Сайт-seldonvault.io-blue)](https://seldonvault.io)
 [![API](https://img.shields.io/badge/API-Бесплатный-green)](https://seldonvault.io/developers)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
-[![Telegram](https://img.shields.io/badge/Telegram-@seldonvault-blue)](https://t.me/seldonvault)
+[![Telegram](https://img.shields.io/badge/Telegram-@seldonvault-blue)](https://t.me/lord_valmont)
 
 **[English version (README.md)](README.md)**
 
@@ -197,7 +197,7 @@ Seldon Vault назван в честь **Хари Селдона** — мате
 - **Методология:** [seldonvault.io/methodology](https://seldonvault.io/methodology)
 - **Карта мира:** [seldonvault.io/map](https://seldonvault.io/map)
 - **Atom-лента:** [seldonvault.io/feed.xml](https://seldonvault.io/feed.xml)
-- **Telegram:** [@seldonvault](https://t.me/seldonvault)
+- **Telegram:** [@seldonvault](https://t.me/lord_valmont)
 - **Habr:** [habr.com/ru/users/in6lack/](https://habr.com/ru/users/in6lack/)
 
 ---

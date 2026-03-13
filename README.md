@@ -9,7 +9,7 @@
 [![Website](https://img.shields.io/badge/Website-seldonvault.io-blue)](https://seldonvault.io)
 [![API](https://img.shields.io/badge/API-Free%20%26%20Public-green)](https://seldonvault.io/developers)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
-[![Telegram](https://img.shields.io/badge/Telegram-@seldonvault-blue)](https://t.me/seldonvault)
+[![Telegram](https://img.shields.io/badge/Telegram-@seldonvault-blue)](https://t.me/lord_valmont)
 
 **[Русская версия (README.ru.md)](README.ru.md)**
 
@@ -225,7 +225,7 @@ The result isn't prophecy. It's calibrated probability with transparent reasonin
 - **Methodology:** [seldonvault.io/methodology](https://seldonvault.io/methodology)
 - **World Map:** [seldonvault.io/map](https://seldonvault.io/map)
 - **Atom Feed:** [seldonvault.io/feed.xml](https://seldonvault.io/feed.xml)
-- **Telegram:** [@seldonvault](https://t.me/seldonvault)
+- **Telegram:** [@seldonvault](https://t.me/lord_valmont)
 - **Habr:** [habr.com/ru/users/in6lack/](https://habr.com/ru/users/in6lack/)
 
 ---
