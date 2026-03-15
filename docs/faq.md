@@ -74,6 +74,10 @@ Long-term forecasts focus on structural trends rather than specific events. Pred
 
 It gets scored. The [Brier Score](accuracy.md) records the error, and this feeds back into the agent calibration system. Agents that consistently underperform in certain domains receive corrective feedback in their prompts. Mistakes are tracked publicly -- we believe transparency about failures is just as important as celebrating successes.
 
+### How does Seldon Vault weight different analysts?
+
+Each agent receives a dynamic **reliability weight** per sector, computed from their 30-day Brier Score. An analyst with a strong track record in economics will have high weight in economic forecasts but may have lower weight in geopolitics if their accuracy there is weaker. The Seldon Arbiter uses these weights when reconciling disagreements between agents. Agents with Brier Score above 0.40 in a sector are automatically disqualified — their opinion in that domain carries zero weight until accuracy improves.
+
 ### What data sources does Seldon Vault use?
 
 12 sources across news, conflict data, economic indicators, prediction markets, and social media:

@@ -33,7 +33,7 @@ Seldon Vault runs a 7-step pipeline every day:
 4. **Skeptic Review** — An adversarial critic with real-time web search (Tavily) tries to disprove each proposal. Checks for logical flaws, missing evidence, base rate neglect, and confirmation bias. Proposals scoring below 50/100 are automatically vetoed
 5. **Seldon Synthesis** — The Arbiter selects the top 3-5 strongest forecasts from all approved proposals, calibrates probabilities, writes bilingual descriptions (EN/RU), and detects [Seldon Crises](docs/how-it-works.md#seldon-crisis-detection) and [Cascade Narratives](docs/how-it-works.md#cascade-narratives)
 6. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
-7. **Accuracy Tracking** — Every resolved forecast is scored by [Brier Score](docs/accuracy.md). Per-agent accuracy feeds back into prompt calibration, creating a self-correcting system
+7. **Accuracy Tracking** — Every resolved forecast is scored by [Brier Score](docs/accuracy.md). Per-agent accuracy feeds back into prompt calibration and into reliability weights that shape future synthesis, creating a self-correcting system
 
 > **[Full pipeline details →](docs/how-it-works.md)**
 
@@ -126,6 +126,7 @@ We don't claim to predict the future perfectly — we track how often we're righ
 - Every resolved forecast is scored by **Brier Score** (0.0 = perfect, 0.25 = random guessing)
 - **Calibration curves** are publicly available — when we say 70%, it should happen ~70% of the time
 - **Per-agent accuracy** is tracked — underperforming agents get feedback through a self-correcting calibration loop
+- **Dynamic agent weighting** — each agent receives a reliability weight per sector based on their Brier Score track record. The Seldon Arbiter weighs opinions from more accurate agents more heavily. Agents with Brier Score above 0.40 in a sector are automatically disqualified from influencing forecasts in that domain
 - **Per-sector breakdown** shows which domains (geopolitics, economics, technology) have the best track record
 - Full **probability history** for every forecast shows how our confidence evolved over time
 - This is an experiment in AI forecasting, not an oracle. Black swan events are inherently unpredictable
@@ -158,6 +159,7 @@ curl https://seldonvault.io/api/v1/events/stream
 - **Bayesian probability updates** every 6 hours with new evidence
 - **Brier Score accuracy tracking** — public, per-agent, per-sector
 - **Self-correcting system** — agent calibration feedback loop adjusts prompts based on accuracy
+- **Dynamic agent weighting** — per-sector reliability weights computed from Brier Score history
 - **Bilingual** — full English and Russian support
 - **Interactive world map** with regional risk analysis
 - **Historical analogy matching** via RAG (Retrieval-Augmented Generation)

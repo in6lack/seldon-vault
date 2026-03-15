@@ -58,6 +58,24 @@ Each of the 7 analyst agents has their own Brier Score, tracked independently:
 
 ---
 
+## Agent Weight Ranking
+
+Beyond tracking accuracy, Seldon Vault converts Brier Scores into **reliability weights** that directly influence future forecasts.
+
+**How it works:**
+- Each agent's Brier Score is computed **per sector** (geopolitics, economics, technology, etc.)
+- Scores are converted to weights using the formula: `weight = 1 / (Brier + 0.05)`, then normalized so weights within each sector sum to 1.0
+- An agent with Brier Score 0.10 in geopolitics gets roughly 2.7x more influence than an agent with 0.35
+- Agents whose Brier Score exceeds **0.40** in a sector are **disqualified** — their weight drops to zero in that domain
+- **Trend tracking** compares recent 15-day performance against the previous 15 days, detecting whether an agent is improving, degrading, or stable
+
+**Why this matters:**
+The calibration feedback loop (Step 7) tells agents they're inaccurate. Weight ranking goes further — it ensures that the Seldon Arbiter *acts* on that accuracy data by weighting reliable agents more heavily in synthesis. This creates a dual feedback mechanism: agents try to improve (prompt calibration), and the system reduces their influence until they do (weight ranking).
+
+**Key detail:** Weights are computed on-the-fly from resolved forecasts — no separate database table, no manual configuration. The system self-adjusts as more forecasts resolve.
+
+---
+
 ## Per-Sector Breakdown
 
 Accuracy varies by domain, and we track it separately for each:

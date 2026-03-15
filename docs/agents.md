@@ -218,6 +218,18 @@ Underperforming agents receive explicit feedback: "Your conflict probability est
 
 Over time, this calibration process pushes each agent toward better-calibrated probabilities, making the entire system more accurate with each cycle.
 
+### Agent Weight Ranking
+
+The calibration loop tells agents how to improve. **Weight ranking** ensures the system doesn't wait for them to get better — it adjusts their influence immediately.
+
+Each agent receives a **reliability weight per sector** based on their 30-day Brier Score:
+- Higher accuracy → higher weight → more influence on final forecasts
+- Agents are ranked independently in each domain (an economist may be excellent at economics but mediocre at geopolitics)
+- Agents with Brier > 0.40 in a sector are automatically **disqualified** from that domain
+- **Trend detection** tracks whether agents are improving or declining
+
+The Seldon Arbiter receives a structured "weight card" showing each agent's reliability. When two analysts disagree — say the Geopolitician predicts 80% and the Economist predicts 40% — the Arbiter no longer has to guess who to trust. The weight card provides a data-driven basis: if the Geopolitician has weight 0.85 in this sector and the Economist has 0.45, the Arbiter anchors closer to the Geopolitician's estimate.
+
 ---
 
 ## Learn More

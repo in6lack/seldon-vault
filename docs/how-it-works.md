@@ -225,6 +225,14 @@ Every **30 days**, each agent receives its calibration data:
 
 This data is **injected directly into the agent's prompt**, creating a **self-correcting system**. An agent that has been systematically overconfident on military forecasts will receive instructions to temper its confidence in that sector. Over time, the system converges toward better calibration — not because someone manually tuned it, but because the feedback loop is built into the architecture.
 
+### Agent Weight Ranking
+
+Calibration data also drives a **weight ranking system** that shapes how the Seldon Arbiter weighs competing analyses.
+
+Each agent's Brier Score is tracked per sector. These scores are converted into normalized weights — an agent with excellent accuracy in economics (Brier 0.10) gets roughly **2.7 times more influence** than one with fair accuracy (Brier 0.35). Agents whose accuracy drops below a threshold (Brier > 0.40) are automatically **disqualified** from influencing forecasts in that sector.
+
+This means the system doesn't just tell agents they're wrong — it **reduces their impact** on output until they improve. The dual mechanism of prompt calibration (changing how agents think) and weight ranking (changing how much their opinions count) creates a robust self-correction system.
+
 ### Per-Sector Breakdown
 
 Accuracy is tracked per sector (geopolitics, economics, technology, etc.), allowing fine-grained analysis of where the system excels and where it struggles.

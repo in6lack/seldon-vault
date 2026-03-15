@@ -50,6 +50,7 @@ Seven time horizons from short-term (1-7 days) to century-scale (30-100 years):
 - Bayesian probability updates every 6 hours
 - Brier Score accuracy tracking (public, per-agent, per-sector)
 - Self-correcting agent calibration feedback loop
+- Dynamic agent weighting per sector based on Brier Score track record
 - Full bilingual support (English and Russian)
 - Interactive world map with regional risk analysis
 - Historical analogy matching via RAG (pgvector)
@@ -125,6 +126,8 @@ https://seldonvault.io
 - network theory
 - game theory
 - risk assessment
+- agent reliability weighting
+- per-sector agent ranking
 - long-term forecasting
 
 ## URL: https://seldonvault.io
