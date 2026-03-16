@@ -32,8 +32,9 @@ Seldon Vault runs a 7-step pipeline every day:
 3. **Multi-Agent Analysis** — 7 specialized analysts examine the filtered signals in parallel, each through their own lens. Every analyst uses the [Five Pillars framework](docs/five-pillars.md) and produces independent forecast proposals with probabilities and reasoning
 4. **Skeptic Review** — An adversarial critic with real-time web search (Tavily) tries to disprove each proposal. Checks for logical flaws, missing evidence, base rate neglect, and confirmation bias. Proposals scoring below 50/100 are automatically vetoed
 5. **Seldon Synthesis** — The Arbiter selects the top 3-5 strongest forecasts from all approved proposals, calibrates probabilities, writes bilingual descriptions (EN/RU), and detects [Seldon Crises](docs/how-it-works.md#seldon-crisis-detection) and [Cascade Narratives](docs/how-it-works.md#cascade-narratives)
-6. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
+6. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem with Likelihood Ratios as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
 7. **Accuracy Tracking** — Every resolved forecast is scored by [Brier Score](docs/accuracy.md). Per-agent accuracy feeds back into prompt calibration and into reliability weights that shape future synthesis, creating a self-correcting system
+8. **Pipeline Audit Log** — Every pipeline run records all analyst proposals (approved and rejected), Skeptic's reasoning, risk scores, and final Seldon adjustments. Full decision transparency at [`/pipeline`](https://seldonvault.io/pipeline)
 
 > **[Full pipeline details →](docs/how-it-works.md)**
 
@@ -166,7 +167,8 @@ curl https://seldonvault.io/api/v1/events/stream
 - **7 forecast horizons** — from days to centuries
 - **Cascade Narratives** — causal chains showing how events connect and propagate
 - **Seldon Crisis detection** — automatic flagging of high-probability critical events
-- **Free public REST API** — 13 endpoints, no authentication
+- **Pipeline Audit Log** — full transparency: see every analyst proposal, why it was approved or rejected
+- **Free public REST API** — 15 endpoints, no authentication
 - **Real-time updates** via Server-Sent Events (SSE)
 - **Completely free**, no registration required
 
