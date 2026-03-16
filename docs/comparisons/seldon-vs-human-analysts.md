@@ -24,7 +24,7 @@ Professional analysts bring things to the table that no AI system currently matc
 
 Seldon Vault's architecture addresses specific, well-documented weaknesses in human analysis:
 
-- **Scale.** A human analyst can deeply study a handful of situations at once. Seldon Vault analyzes hundreds of signals daily across seven domains simultaneously. It doesn't get overwhelmed or have to triage.
+- **Scale.** A human analyst can deeply study a handful of situations at once. Seldon Vault analyzes hundreds of signals daily across eight domains simultaneously. It doesn't get overwhelmed or have to triage.
 
 - **Consistency.** Human analysis quality varies with fatigue, mood, workload, and personal circumstances. Seldon Vault applies the same rigorous process to every forecast, every time.
 
@@ -44,8 +44,8 @@ Seldon Vault's architecture addresses specific, well-documented weaknesses in hu
 
 | Dimension | Seldon Vault | Human Analysts |
 |---|---|---|
-| **Source of analysis** | 9 AI agents with specialized perspectives | Individual experts or small teams |
-| **Scale** | Hundreds of signals across 7 domains daily | Deep focus on a few situations |
+| **Source of analysis** | 10 AI agents with specialized perspectives | Individual experts or small teams |
+| **Scale** | Hundreds of signals across 8 domains daily | Deep focus on a few situations |
 | **Cost** | Free | $$$–$$$$ (subscriptions, consulting fees) |
 | **Transparency** | Full reasoning chain visible | Conclusions published; reasoning often opaque |
 | **Accuracy tracking** | Brier Score per forecast, public calibration data | Rarely published |
@@ -73,13 +73,13 @@ Seldon Vault's architecture addresses specific, well-documented weaknesses in hu
 
 ## When Seldon Vault Is Better
 
-- **Systematic coverage across all domains simultaneously.** No human team can maintain deep, daily coverage of geopolitics, economics, military affairs, cybersecurity, social dynamics, environmental developments, and technology at the same time. Seldon Vault's multi-agent architecture does this by design.
+- **Systematic coverage across all domains simultaneously.** No human team can maintain deep, daily coverage of geopolitics, economics, military affairs, cybersecurity, social dynamics, environmental developments, technology, and domestic politics at the same time. Seldon Vault's multi-agent architecture does this by design.
 
 - **When you need probabilistic estimates, not just qualitative assessment.** "The situation is deteriorating" is less useful than "Probability of escalation has risen from 31% to 48% over the past two weeks, driven primarily by military buildup and diplomatic breakdown."
 
 - **When cost is a factor.** Professional geopolitical analysis is expensive. Seldon Vault provides multi-domain, multi-perspective analysis for free.
 
-- **When you want transparent reasoning from multiple perspectives.** Seeing exactly how seven different analytical lenses assess the same question — and where they agree and disagree — is valuable context that most professional reports don't provide.
+- **When you want transparent reasoning from multiple perspectives.** Seeing exactly how eight different analytical lenses assess the same question — and where they agree and disagree — is valuable context that most professional reports don't provide.
 
 - **When you want accuracy to be tracked and published.** If you're relying on a forecast to make decisions, you should be able to see the forecaster's track record. Seldon Vault publishes this. Most human analysts don't.
 
@@ -93,4 +93,4 @@ AI doesn't replace human expertise. But it does complement it — filling gaps i
 
 ---
 
-[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Nine Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)
+[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Ten Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)

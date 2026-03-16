@@ -3,7 +3,7 @@
 > What if AI could predict the future? Seldon Vault is trying to find out.
 >
 > Inspired by Hari Seldon's psychohistory from Asimov's *Foundation*,
-> Seldon Vault uses 9 AI agents to analyze world events and generate
+> Seldon Vault uses 10 AI agents to analyze world events and generate
 > daily probabilistic forecasts. Free, public, no registration required.
 
 [![Website](https://img.shields.io/badge/Website-seldonvault.io-blue)](https://seldonvault.io)
@@ -17,7 +17,7 @@
 
 ## What is Seldon Vault?
 
-Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It doesn't rely on human bets like prediction markets (Polymarket, Metaculus) or give one-shot answers like asking ChatGPT directly. Instead, it uses a **multi-agent AI system** where 7 specialized analysts independently examine world events from different perspectives, an adversarial Skeptic fact-checks their work, and a Seldon Arbiter synthesizes the strongest forecasts into calibrated probabilities.
+Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It doesn't rely on human bets like prediction markets (Polymarket, Metaculus) or give one-shot answers like asking ChatGPT directly. Instead, it uses a **multi-agent AI system** where 8 specialized analysts independently examine world events from different perspectives, an adversarial Skeptic fact-checks their work, and a Seldon Arbiter synthesizes the strongest forecasts into calibrated probabilities.
 
 Every forecast comes with full reasoning from each agent, a probability between 5% and 95%, and a time horizon. Probabilities are updated every 6 hours using Bayesian inference as new evidence arrives. Accuracy is tracked publicly through [Brier Score](docs/accuracy.md) — because a prediction without a track record is just an opinion.
 
@@ -29,7 +29,7 @@ Seldon Vault runs a 7-step pipeline every day:
 
 1. **Signal Collection** — News and data signals collected from 12 sources: RSS feeds (Reuters, BBC, Al Jazeera), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), UCDP (conflict data), Fear & Greed Index (market sentiment), Telegram channels, Reddit, and Bluesky
 2. **Signal Processing** — An AI classifier categorizes each signal by sector, sentiment, importance (0-100), and temporal scope (breaking news vs. structural trend). Signals below importance 30 are filtered out
-3. **Multi-Agent Analysis** — 7 specialized analysts examine the filtered signals in parallel, each through their own lens. Every analyst uses the [Five Pillars framework](docs/five-pillars.md) and produces independent forecast proposals with probabilities and reasoning
+3. **Multi-Agent Analysis** — 8 specialized analysts examine the filtered signals in parallel, each through their own lens. Every analyst uses the [Five Pillars framework](docs/five-pillars.md) and produces independent forecast proposals with probabilities and reasoning
 4. **Skeptic Review** — An adversarial critic with real-time web search (Tavily) tries to disprove each proposal. Checks for logical flaws, missing evidence, base rate neglect, and confirmation bias. Proposals scoring below 50/100 are automatically vetoed
 5. **Seldon Synthesis** — The Arbiter selects the top 3-5 strongest forecasts from all approved proposals, calibrates probabilities, writes bilingual descriptions (EN/RU), and detects [Seldon Crises](docs/how-it-works.md#seldon-crisis-detection) and [Cascade Narratives](docs/how-it-works.md#cascade-narratives)
 6. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem with Likelihood Ratios as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
@@ -49,6 +49,7 @@ Seldon Vault runs a 7-step pipeline every day:
 | **Climatologist** | Climate risks, extreme weather, energy transition, tipping points | An environmental scientist |
 | **Military Analyst** | Force balance, deterrence, arms trade, nuclear posture | A defense intelligence officer |
 | **Cybersecurity Analyst** | APT groups, zero-days, ransomware, information warfare | A cybersecurity investigator |
+| **Political Analyst** | Domestic politics, regime stability, censorship, mobilization | A political risk consultant |
 | **Skeptic** | Everything above — finds flaws, biases, and missing evidence | A devil's advocate with Google |
 | **Seldon Arbiter** | Synthesizes all analyses into final calibrated forecasts | The judge who makes the final call |
 
@@ -109,7 +110,7 @@ Long-term forecasts use a separate analytical mode focused on structural trends,
 
 | Feature | Seldon Vault | Prediction Markets | Asking ChatGPT | News Media | Human Analysts |
 |---------|-------------|-------------------|----------------|------------|----------------|
-| **Source** | 9 specialized AI agents | Crowd bets | Single LLM | Journalists | Individual experts |
+| **Source** | 10 specialized AI agents | Crowd bets | Single LLM | Journalists | Individual experts |
 | **Methodology** | Multi-agent debate + Skeptic review | Market price = probability | One-shot answer | Narrative-driven | Subjective assessment |
 | **Accuracy tracking** | Brier Score per forecast | Market resolution | None | None | Rare |
 | **Updates** | Bayesian, every 6 hours | Real-time (market) | None (conversation-bound) | Article by article | Periodic reports |
@@ -156,7 +157,7 @@ curl https://seldonvault.io/api/v1/events/stream
 ## Key Features
 
 - **Daily AI-generated geopolitical forecasts** from 12 data sources across 7 sectors
-- **Multi-agent ensemble** — 7 specialized analysts + adversarial Skeptic + Arbiter
+- **Multi-agent ensemble** — 8 specialized analysts + adversarial Skeptic + Arbiter
 - **Bayesian probability updates** every 6 hours with new evidence
 - **Brier Score accuracy tracking** — public, per-agent, per-sector
 - **Self-correcting system** — agent calibration feedback loop adjusts prompts based on accuracy
@@ -203,7 +204,7 @@ The result isn't prophecy. It's calibrated probability with transparent reasonin
 | Document | Description |
 |----------|-------------|
 | [How It Works](docs/how-it-works.md) | Detailed 7-step pipeline walkthrough |
-| [The AI Agents](docs/agents.md) | Profiles of all 9 core agents + supporting roles |
+| [The AI Agents](docs/agents.md) | Profiles of all 10 core agents + supporting roles |
 | [Five Pillars](docs/five-pillars.md) | The analytical framework behind every forecast |
 | [Accuracy & Metrics](docs/accuracy.md) | Brier Score, calibration, feedback loops |
 | [Technology](docs/technology.md) | Architecture and tech stack |

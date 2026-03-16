@@ -6,7 +6,7 @@
 
 ### What is Seldon Vault?
 
-Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses 9 AI agents (7 specialized analysts + an adversarial Skeptic + a Seldon Arbiter) to analyze world events and generate daily probabilistic forecasts. Think of it as a "psychohistory engine" inspired by Asimov's Foundation series.
+Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses 10 AI agents (8 specialized analysts + an adversarial Skeptic + a Seldon Arbiter) to analyze world events and generate daily probabilistic forecasts. Think of it as a "psychohistory engine" inspired by Asimov's Foundation series.
 
 Learn more: [How It Works](how-it-works.md) | [Meet the Agents](agents.md)
 
@@ -42,7 +42,7 @@ Because certainty is rare in a complex world. Probabilities are constrained betw
 
 Five key differences:
 
-1. **Multi-agent:** 7 specialists vs 1 generalist.
+1. **Multi-agent:** 8 specialists vs 1 generalist.
 2. **Adversarial review:** the Skeptic fact-checks everything.
 3. **Accuracy tracking:** every forecast is scored by Brier Score.
 4. **Bayesian updates:** probabilities update every 6 hours as new data arrives.

@@ -27,11 +27,11 @@ When ChatGPT gives you a probability estimate, that answer disappears into your 
 
 Seldon Vault tracks every forecast with a timestamp, a probability, and a Brier Score when the event resolves. You can see which forecasts were accurate and which weren't — and so can everyone else.
 
-### 2. One Agent vs Nine
+### 2. One Agent vs Ten
 
 A single LLM gives you one perspective — whatever its training data and current prompt produce. It's one voice answering from one angle.
 
-Seldon Vault runs the same question through seven specialist agents (Geopolitical, Economic, Military, Cybersecurity, Social Stability, Environmental, and Technological), then subjects the results to adversarial review by the Skeptic, and finally synthesizes everything through the Arbiter. The same question gets analyzed from seven different angles before a probability is set.
+Seldon Vault runs the same question through eight specialist agents (Geopolitical, Economic, Military, Cybersecurity, Social Stability, Environmental, Technological, and Political), then subjects the results to adversarial review by the Skeptic, and finally synthesizes everything through the Arbiter. The same question gets analyzed from eight different angles before a probability is set.
 
 ### 3. No Fact-Checking
 
@@ -57,7 +57,7 @@ Seldon Vault publishes calibration curves and accuracy metrics. You can see whet
 
 | Dimension | Seldon Vault | Asking ChatGPT |
 |---|---|---|
-| **Perspectives** | 9 agents (7 specialists + Skeptic + Arbiter) | 1 model, 1 perspective |
+| **Perspectives** | 10 agents (8 specialists + Skeptic + Arbiter) | 1 model, 1 perspective |
 | **Fact-checking** | Skeptic performs real-time web verification | No systematic verification |
 | **Accuracy tracking** | Brier Score per forecast, calibration curves | None |
 | **Updates** | Automatic Bayesian updates every 6 hours | Snapshot only (ask again manually) |
@@ -83,7 +83,7 @@ Seldon Vault publishes calibration curves and accuracy metrics. You can see whet
 ## When Seldon Vault Is Better
 
 - **When accuracy matters and should be tracked.** If you're making decisions based on the forecast, you want to know whether the forecaster has a good track record.
-- **When you need multiple expert perspectives.** Seven specialist domains plus adversarial review beats a single model's single take.
+- **When you need multiple expert perspectives.** Eight specialist domains plus adversarial review beats a single model's single take.
 - **When you want continuously updated probabilities.** Automatic Bayesian updates mean the forecast stays current without you having to re-ask.
 - **When you need adversarial fact-checking.** The Skeptic agent exists specifically to challenge assumptions and find counter-evidence.
 - **When you want to see how a forecast evolved.** The full probability history shows how confidence changed as events unfolded — something no chatbot conversation preserves.
@@ -92,10 +92,10 @@ Seldon Vault publishes calibration curves and accuracy metrics. You can see whet
 
 ## Conclusion
 
-Asking ChatGPT is like asking a smart friend for their take. Seldon Vault is like convening a panel of seven specialists, having them independently analyze the question, appointing a devil's advocate to challenge their conclusions, and then publishing a tracked, scored, continuously updated forecast.
+Asking ChatGPT is like asking a smart friend for their take. Seldon Vault is like convening a panel of eight specialists, having them independently analyze the question, appointing a devil's advocate to challenge their conclusions, and then publishing a tracked, scored, continuously updated forecast.
 
 Both have their place. Use chatbots for quick takes and interactive exploration. Use Seldon Vault when the answer matters enough to deserve rigor.
 
 ---
 
-[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Nine Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)
+[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Ten Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)

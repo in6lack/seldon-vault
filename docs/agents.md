@@ -2,15 +2,15 @@
 
 > *"Like the Second Foundation in Asimov's universe, Seldon Vault's agents work independently — each a specialist, none seeing the others' analysis until the final synthesis."*
 
-Seldon Vault doesn't rely on a single AI to predict the future. Instead, it deploys a team of nine specialized agents, each trained to see the world through a different lens. They argue, challenge, and synthesize — producing forecasts that no single perspective could achieve alone.
+Seldon Vault doesn't rely on a single AI to predict the future. Instead, it deploys a team of ten specialized agents, each trained to see the world through a different lens. They argue, challenge, and synthesize — producing forecasts that no single perspective could achieve alone.
 
 ---
 
 ## The Core Team
 
-The architecture is deliberately adversarial. Seven domain analysts work in parallel, each producing independent forecasts from the same intelligence signals. They never see each other's work. Then the Skeptic tears their conclusions apart, searching for flaws, biases, and blind spots. Finally, the Seldon Arbiter synthesizes the surviving forecasts into a coherent picture.
+The architecture is deliberately adversarial. Eight domain analysts work in parallel, each producing independent forecasts from the same intelligence signals. They never see each other's work. Then the Skeptic tears their conclusions apart, searching for flaws, biases, and blind spots. Finally, the Seldon Arbiter synthesizes the surviving forecasts into a coherent picture.
 
-**7 Analysts (parallel)** --> **1 Skeptic (adversarial review)** --> **1 Arbiter (final synthesis)**
+**8 Analysts (parallel)** --> **1 Skeptic (adversarial review)** --> **1 Arbiter (final synthesis)**
 
 This structure prevents groupthink — the silent killer of prediction accuracy. When everyone sees everyone else's answer, forecasts converge toward consensus rather than truth. Seldon Vault's agents converge only at the end, and only after surviving hostile scrutiny.
 
@@ -123,7 +123,22 @@ APT attribution --> Infrastructure vulnerability --> Zero-day economics --> Rans
 
 ---
 
-### 8. The Skeptic
+### 8. The Political Analyst
+
+**Role:** Political lens — domestic politics, regime stability, censorship, mobilization, civil liberties
+
+**Focus areas:** Regime stability, domestic politics, protests, censorship, mobilization, civil liberties, electoral manipulation
+
+**Analytical framework:**
+Regime stability --> Domestic power dynamics --> Censorship & information control --> Mobilization capacity --> Civil liberties trajectory
+
+**Pillars:** [Game Theory](five-pillars.md#1-game-theory) | [Psychohistory](five-pillars.md#4-psychohistory) | [Network Theory](five-pillars.md#5-network-theory)
+
+*Think of them as: A political risk consultant who monitors the internal fault lines of states.* The Political Analyst watches the domestic arena — the space where regimes consolidate or fracture, where censorship tightens or cracks, and where populations are mobilized or suppressed. While the Geopolitician focuses on relations between states, the Political Analyst looks inside them: tracking regime stability indicators, protest movements, electoral manipulation, civil liberties erosion, and the mobilization dynamics that precede both revolutions and repressions. When a government cracks down on dissent or a protest movement gains momentum, this agent maps the trajectory of internal political risk.
+
+---
+
+### 9. The Skeptic
 
 **Role:** Adversarial critic — exists to DISPROVE analyst forecasts
 
@@ -138,11 +153,11 @@ APT attribution --> Infrastructure vulnerability --> Zero-day economics --> Rans
 
 **Veto power:** Any forecast receiving a risk score below 50 is automatically rejected.
 
-*Think of them as: A devil's advocate with a search engine and veto power.* The Skeptic is the most important quality control mechanism in the system. While the seven analysts build cases for their forecasts, the Skeptic tears them down. They search the live web for contradicting evidence, check base rates, probe logical weaknesses, and flag biases. A forecast that survives the Skeptic has been stress-tested. One that doesn't is sent back or discarded entirely.
+*Think of them as: A devil's advocate with a search engine and veto power.* The Skeptic is the most important quality control mechanism in the system. While the eight analysts build cases for their forecasts, the Skeptic tears them down. They search the live web for contradicting evidence, check base rates, probe logical weaknesses, and flag biases. A forecast that survives the Skeptic has been stress-tested. One that doesn't is sent back or discarded entirely.
 
 ---
 
-### 9. The Seldon Arbiter
+### 10. The Seldon Arbiter
 
 **Named after Hari Seldon himself** — the mathematician who proved that the future of civilizations could be predicted through the statistical behavior of populations.
 
@@ -195,7 +210,7 @@ The entire pipeline runs every 6 hours, processing the latest intelligence signa
 | Stage | Agent(s) | Input | Output |
 |-------|----------|-------|--------|
 | **1. Signal Processing** | Signal Processor | Raw news feeds | Structured intelligence signals |
-| **2. Parallel Analysis** | 7 Domain Analysts | Intelligence signals | Independent forecasts (7 sets) |
+| **2. Parallel Analysis** | 8 Domain Analysts | Intelligence signals | Independent forecasts (8 sets) |
 | **3. Adversarial Review** | The Skeptic | All analyst forecasts | Validated forecasts + rejections |
 | **4. Synthesis** | The Seldon Arbiter | Validated forecasts | Final top 3-5 forecasts, calibrated |
 | **5. Cascade Detection** | Cascade Detector | Final forecasts | Cascade narratives + links |

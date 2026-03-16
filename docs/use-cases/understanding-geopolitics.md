@@ -20,7 +20,7 @@ From hundreds of daily signals across 30+ data sources (GDACS, ACLED, SIPRI, gov
 
 ### Multiple Perspectives
 
-Seven specialist analysts examine every significant event from different angles:
+Eight specialist analysts examine every significant event from different angles:
 
 - **Geopolitician** — alliances, sovereignty, diplomatic dynamics
 - **Economist** — trade flows, sanctions impact, financial stress
@@ -29,6 +29,7 @@ Seven specialist analysts examine every significant event from different angles:
 - **Sociopolitical Analyst** — public opinion, protest dynamics, social cohesion
 - **Climatologist** — resource scarcity, climate migration, environmental stress
 - **Technology Analyst** — emerging tech impact, innovation disruption, digital transformation
+- **Political Analyst** — domestic politics, regime stability, censorship, mobilization, civil liberties
 
 ### Probabilistic Framing
 

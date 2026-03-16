@@ -12,7 +12,7 @@ The big question. An honest look at what AI forecasting can and can't do — wit
 
 ## 2. [Understanding Geopolitics](understanding-geopolitics.md)
 
-Navigate the information noise. Hundreds of news articles daily, conflicting narratives, editorial spin. Seldon Vault distills the signal from the noise with structured, probabilistic analysis from seven specialist agents.
+Navigate the information noise. Hundreds of news articles daily, conflicting narratives, editorial spin. Seldon Vault distills the signal from the noise with structured, probabilistic analysis from eight specialist agents.
 
 ## 3. [Tracking Global Risks](tracking-global-risks.md)
 

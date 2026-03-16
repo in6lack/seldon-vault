@@ -49,7 +49,7 @@ Seldon Vault publishes calibration curves via the `/api/v1/metrics/calibration` 
 
 ## Per-Agent Accuracy
 
-Each of the 7 analyst agents has their own Brier Score, tracked independently:
+Each of the 8 analyst agents has their own Brier Score, tracked independently:
 
 - Scores are computed over **rolling 30-day windows** to reflect recent performance.
 - This allows identifying which agents perform best in which domains.
@@ -152,6 +152,6 @@ The future is probabilistic, not binary — and uncertainty is information, not 
 ## See Also
 
 - [How It Works](how-it-works.md) — the full forecasting pipeline from signal to prediction
-- [Agents](agents.md) — meet the 7 analyst agents and their specializations
+- [Agents](agents.md) — meet the 8 analyst agents and their specializations
 - [API Guide](api-guide.md) — endpoints for metrics, calibration curves, and forecast history
 - [README](../README.md) — project overview and quick start

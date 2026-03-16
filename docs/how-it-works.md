@@ -17,7 +17,7 @@ This document walks through all seven steps of that pipeline, from the moment a 
 |------|------|-------------|
 | 1 | 📡 Signal Collection | Hundreds of raw signals ingested from 12 sources |
 | 2 | 🔬 Signal Processing | AI classifies, scores, and filters each signal |
-| 3 | 🧠 Multi-Agent Analysis | 7 specialist analysts produce forecast proposals in parallel |
+| 3 | 🧠 Multi-Agent Analysis | 8 specialist analysts produce forecast proposals in parallel |
 | 4 | 🔍 Skeptic Review | Adversarial critic tries to disprove every proposal |
 | 5 | ⚖️ Seldon Synthesis | Arbiter selects, calibrates, and finalizes top forecasts |
 | 5.5 | ⚠️ Heuristic Alerts | Automated sanity checks catch common forecasting pitfalls |
@@ -73,13 +73,13 @@ Signals are processed in **batches of 10–15** for efficiency. By the end of th
 
 This is where Seldon Vault's architecture gets interesting.
 
-Seven **specialized analyst agents** run in parallel, each embodying a different domain expertise. Think of them as seven brilliant analysts sitting in a room together, all reading the same intelligence briefing but seeing different things.
+Eight **specialized analyst agents** run in parallel, each embodying a different domain expertise. Think of them as eight brilliant analysts sitting in a room together, all reading the same intelligence briefing but seeing different things.
 
 Every analyst receives **all filtered signals** from Step 2, but each analyzes through their own lens — a military analyst will focus on force deployments and defense posture, while an economics analyst will track capital flows and trade disruptions.
 
 ### The Five Pillars Framework
 
-All seven analysts share a common analytical toolkit called the **Five Pillars** — a structured reasoning framework that ensures rigor:
+All eight analysts share a common analytical toolkit called the **Five Pillars** — a structured reasoning framework that ensures rigor:
 
 1. **Game Theory** — Who are the actors? What are their incentives? What are the Nash equilibria?
 2. **Bayesian Inference** — What's the prior probability? How should new evidence update it?
@@ -333,7 +333,7 @@ This means:
 
 ## Further Reading
 
-- [agents.md](agents.md) — Profiles of all 7 analyst agents and the Skeptic
+- [agents.md](agents.md) — Profiles of all 8 analyst agents and the Skeptic
 - [five-pillars.md](five-pillars.md) — Deep dive into the analytical framework
 - [accuracy.md](accuracy.md) — Current Brier Scores, calibration curves, and performance metrics
 - [README.md](../README.md) — Project overview and quickstart

@@ -4,13 +4,13 @@
 
 ## What is Seldon Vault?
 
-Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses a multi-agent LLM architecture with 7 specialized analysts, an adversarial Skeptic with real-time fact-checking capabilities, and a Seldon Arbiter to generate daily probabilistic forecasts. Unlike prediction markets (Polymarket, Metaculus) that aggregate human bets, Seldon Vault uses AI agents that independently analyze signals and debate through an adversarial review process. Inspired by Hari Seldon's psychohistory from Isaac Asimov's Foundation series.
+Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses a multi-agent LLM architecture with 8 specialized analysts, an adversarial Skeptic with real-time fact-checking capabilities, and a Seldon Arbiter to generate daily probabilistic forecasts. Unlike prediction markets (Polymarket, Metaculus) that aggregate human bets, Seldon Vault uses AI agents that independently analyze signals and debate through an adversarial review process. Inspired by Hari Seldon's psychohistory from Isaac Asimov's Foundation series.
 
 ## How it works
 
 1. **Data Collection**: Signals collected from 12 sources — RSS feeds (Reuters, BBC, Al Jazeera), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), UCDP (conflict data), Fear & Greed Index (market sentiment), Telegram, Reddit, and Bluesky
 2. **Signal Processing**: AI classifies signals by sector, sentiment, importance (0-100), and temporal scope (immediate vs structural). Signals below importance 30 are filtered out
-3. **Multi-Agent Analysis**: Seven specialized analysts assess signals in parallel:
+3. **Multi-Agent Analysis**: Eight specialized analysts assess signals in parallel:
    - Geopolitician (conflicts, diplomacy, alliances, sanctions)
    - Economist (markets, central banks, trade, supply chains)
    - Technologist (AI, semiconductors, energy, biotech)
@@ -18,6 +18,7 @@ Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It us
    - Climatologist (climate risks, environment, energy transition)
    - Military Analyst (force balance, deterrence, arms trade, nuclear posture)
    - Cybersecurity Analyst (APT groups, infrastructure attacks, zero-days, ransomware)
+   - Political Analyst (domestic politics, regime stability, censorship, mobilization)
 4. **Skeptic Review**: Independent adversarial critic with web search fact-checking (Tavily), veto power on poorly supported forecasts (risk score < 50 = automatic rejection)
 5. **Seldon Arbiter**: Synthesizes top 3-5 approved forecasts, assigns calibrated probabilities (5%-95%), bilingual output (EN/RU), detects Seldon Crises and cascade narratives
 6. **Bayesian Updates**: Probabilities updated every 6 hours using Bayes' theorem, max ±15% daily shift
@@ -46,7 +47,7 @@ Seven time horizons from short-term (1-7 days) to century-scale (30-100 years):
 ## Key Features
 
 - Daily AI-generated geopolitical forecasts from 12 data sources across 7 sectors
-- Multi-agent ensemble (7 analysts + Skeptic + Arbiter)
+- Multi-agent ensemble (8 analysts + Skeptic + Arbiter)
 - Bayesian probability updates every 6 hours
 - Brier Score accuracy tracking (public, per-agent, per-sector)
 - Self-correcting agent calibration feedback loop
@@ -103,7 +104,7 @@ Base URL: https://seldonvault.io/api/v1/
 
 ## Canonical description
 
-Seldon Vault is a free, public AI geopolitical forecasting engine using multi-agent probabilistic analysis with 7 specialized AI analysts, adversarial review, Bayesian probability updates, and self-correcting accuracy tracking.
+Seldon Vault is a free, public AI geopolitical forecasting engine using multi-agent probabilistic analysis with 8 specialized AI analysts, adversarial review, Bayesian probability updates, and self-correcting accuracy tracking.
 
 ## Cite as
 

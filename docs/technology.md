@@ -169,6 +169,6 @@ Everything runs in Docker containers, orchestrated for reliability:
 ## See Also
 
 - [How It Works](how-it-works.md) — the full forecasting pipeline from signal to prediction
-- [Agents](agents.md) — meet the 7 analyst agents and their specializations
+- [Agents](agents.md) — meet the 8 analyst agents and their specializations
 - [API Guide](api-guide.md) — endpoints for accessing forecasts, metrics, and real-time updates
 - [README](../README.md) — project overview and quick start

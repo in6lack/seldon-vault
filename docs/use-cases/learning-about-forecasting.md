@@ -98,7 +98,7 @@ For the full breakdown, see [The Five Pillars](../five-pillars.md).
 
 | Forecasting Principle | Seldon Vault Implementation |
 |---|---|
-| Diverse perspectives | 7 specialist agents analyzing independently |
+| Diverse perspectives | 8 specialist agents analyzing independently |
 | Devil's advocate | Skeptic agent with structured adversarial review |
 | Systematic evidence updating | Bayesian refresh every 6 hours |
 | Accountability | Brier Score for every forecast |

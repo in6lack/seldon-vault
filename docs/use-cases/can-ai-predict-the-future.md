@@ -45,13 +45,13 @@ The future is probabilistic, not binary. A forecast of "72% probability of escal
 
 Seldon Vault doesn't use a single AI model making predictions. It uses a structured system designed around the principles that research shows produce the best forecasts:
 
-- **Multi-agent system:** 7 specialist analysts examine events independently — no groupthink, no single point of failure
+- **Multi-agent system:** 8 specialist analysts examine events independently — no groupthink, no single point of failure
 - **Adversarial review:** A dedicated Skeptic agent tries to disprove every forecast, checking for bias, base rate neglect, and overconfidence
 - **Bayesian updates:** Probabilities evolve every 6 hours as new evidence arrives from 30+ data sources
 - **Accuracy tracking:** Every forecast is scored with a Brier Score — the gold standard metric for probabilistic accuracy
 - **Self-correcting:** A calibration feedback loop adjusts agent behavior based on past performance
 
-## Why 9 Agents Are Better Than 1
+## Why 10 Agents Are Better Than 1
 
 This isn't just architectural preference — it's backed by research:
 

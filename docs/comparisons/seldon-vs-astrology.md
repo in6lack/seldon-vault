@@ -25,7 +25,7 @@ Before dismissing non-evidence-based approaches, it's worth understanding why th
 | | Seldon Vault | Astrology | Expert Gut Feeling |
 |---|---|---|---|
 | **Methodology** | Multi-agent AI analysis with Bayesian inference | Interpretation of celestial positions | Personal experience and intuition |
-| **Evidence base** | 12 real-time data sources across 7 domains | Birth charts and planetary alignments | Past experience (selective memory) |
+| **Evidence base** | 12 real-time data sources across 8 domains | Birth charts and planetary alignments | Past experience (selective memory) |
 | **Falsifiable** | Yes — every forecast has a Brier Score | Not testable in any systematic way | Rarely tracked or scored |
 | **Transparency** | Full reasoning chain from each agent | "Mercury is in retrograde" | "I have a feeling about this" |
 | **Self-correcting** | Yes — calibration feedback improves the system | No mechanism for self-correction | Sometimes, if the person is honest |
@@ -55,7 +55,7 @@ Good forecasting isn't prophecy. Nobody can see the future with certainty. But t
 
 A good forecast includes:
 
-- **A calibrated probability with transparent reasoning.** Not "this will happen" but "there's a 72% probability, and here's why seven different analytical perspectives converged on that number."
+- **A calibrated probability with transparent reasoning.** Not "this will happen" but "there's a 72% probability, and here's why eight different analytical perspectives converged on that number."
 
 - **A public track record.** Forecasts that can be checked against reality, scored, and published — including the wrong ones.
 
@@ -63,7 +63,7 @@ A good forecast includes:
 
 - **Honest acknowledgment of uncertainty and limitations.** A forecaster who says "I don't know" or "my confidence is low on this one" is more trustworthy than one who projects certainty about everything.
 
-- **Multiple perspectives, not a single narrative.** Instead of one guru's pronouncement, you get seven specialist analyses, an adversarial review, and a structured synthesis.
+- **Multiple perspectives, not a single narrative.** Instead of one guru's pronouncement, you get eight specialist analyses, an adversarial review, and a structured synthesis.
 
 That's the difference between "Mercury is in retrograde, expect communication problems" and "There's a 72% probability of diplomatic breakdown between these parties, based on converging signals from military buildup, economic pressure, and failed back-channel negotiations, with the Skeptic noting that similar situations in 2019 de-escalated unexpectedly."
 
