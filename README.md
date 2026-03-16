@@ -168,6 +168,8 @@ curl https://seldonvault.io/api/v1/events/stream
 - **Cascade Narratives** — causal chains showing how events connect and propagate
 - **Seldon Crisis detection** — automatic flagging of high-probability critical events
 - **Pipeline Audit Log** — full transparency: see every analyst proposal, why it was approved or rejected
+- **Heuristic Sanity Checks** — automated detection of overconfidence, anchoring, analyst disagreement, and temporal mismatches
+- **Media Bias Detection** — Skeptic agent identifies availability bias, selection bias, and narrative momentum in news sources
 - **Free public REST API** — 15 endpoints, no authentication
 - **Real-time updates** via Server-Sent Events (SSE)
 - **Completely free**, no registration required
@@ -179,7 +181,8 @@ curl https://seldonvault.io/api/v1/events/stream
 - **RAG** (Retrieval-Augmented Generation) with pgvector for historical analogy matching
 - **Bayesian inference engine** for probability updates with per-horizon shift constraints
 - **12 data collectors** — RSS, GDELT, ACLED, FRED, Metaculus, Polymarket, GDACS, UCDP, Fear & Greed Index, Telegram, Reddit, Bluesky
-- **Adversarial fact-checking** via Tavily Search API
+- **Adversarial fact-checking** via Tavily Search API with media bias detection
+- **Heuristic alert engine** — 5 deterministic rules catch forecasting pitfalls before storage
 - **Interactive D3.js world map** with TopoJSON and regional risk scoring
 - **Server-Sent Events (SSE)** for real-time push updates
 - **Cascade Propagation** — graph algorithms for causal chain detection

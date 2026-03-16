@@ -20,6 +20,7 @@ This document walks through all seven steps of that pipeline, from the moment a 
 | 3 | 🧠 Multi-Agent Analysis | 7 specialist analysts produce forecast proposals in parallel |
 | 4 | 🔍 Skeptic Review | Adversarial critic tries to disprove every proposal |
 | 5 | ⚖️ Seldon Synthesis | Arbiter selects, calibrates, and finalizes top forecasts |
+| 5.5 | ⚠️ Heuristic Alerts | Automated sanity checks catch common forecasting pitfalls |
 | 6 | 📊 Bayesian Updates | Probabilities revised every 6 hours as new evidence arrives |
 | 7 | 🎯 Accuracy Tracking | Resolved forecasts scored, agents receive calibration feedback |
 
@@ -149,6 +150,24 @@ During synthesis, the Arbiter runs **Seldon Crisis Detection** (more on this [be
 ### Cascade Analysis
 
 A separate **Cascade Detector** agent identifies **causal chains** between forecasts (more on this [below](#cascade-narratives)). If a new war forecast logically connects to an energy price forecast which connects to a recession forecast, the system maps that chain explicitly.
+
+---
+
+## Step 5.5: ⚠️ Heuristic Alerts
+
+Before forecasts are saved, a **deterministic rule engine** runs five sanity checks designed to catch common cognitive biases that even multi-agent systems can exhibit:
+
+| Check | What It Catches | Example |
+|-------|----------------|---------|
+| **Overconfidence** | Extreme probabilities (>90% or <10%) without overwhelming evidence | "95% that Country X invades" — really? |
+| **Mid-range Anchoring** | Probabilities clustered around 50% that signal hedging, not analysis | "50% chance of recession" = "I don't know" |
+| **Analyst Disagreement** | Large spread (>30%) between analysts on the same forecast | Geopolitician says 80%, Economist says 35% |
+| **Skeptic Red Flag** | Skeptic adjusted probability by >15% but still approved (caution zone) | Original 70% → Skeptic adjusted to 52% |
+| **Temporal Mismatch** | Description says "imminent" but horizon is 60 days | Words and numbers should agree |
+
+These are **alerts, not auto-corrections**. The system flags potential issues but doesn't override the Seldon Arbiter's judgment. Alert data is stored on each forecast and visible in the forecast detail page. As the system accumulates more resolved forecasts, future phases will add calibration-curve-based corrections.
+
+The Skeptic agent also has **media bias detection** built into its review process, looking for three systematic distortions: **availability bias** (media volume ≠ real risk), **selection bias** (disproportionate coverage), and **narrative momentum** (stories continuing after conditions change).
 
 ---
 

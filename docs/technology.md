@@ -76,6 +76,21 @@ Powered by the **Tavily Search API**, the adversarial fact-checking system adds 
 - The **Skeptic agent** performs real-time web searches to verify claims made by other analysts.
 - Checks for: outdated information, missing context, contradictory evidence.
 - Provides **evidence-backed critique with sources** — not just disagreement, but substantiated challenge.
+- **Media bias detection:** The Skeptic actively checks for availability bias (media hype ≠ real risk), selection bias (disproportionate coverage), and narrative momentum (stories outliving their facts).
+
+---
+
+## Heuristic Alert Engine
+
+A deterministic rule engine runs **post-synthesis sanity checks** before forecasts are stored, catching cognitive biases that LLMs can exhibit:
+
+- **Overconfidence check** — probabilities above 90% or below 10% flagged for extra scrutiny
+- **Mid-range anchoring** — probabilities near 50% may indicate hedging rather than genuine analysis
+- **Analyst disagreement** — large spread between analyst opinions triggers high-severity alert
+- **Skeptic red flags** — large probability adjustment in the caution zone signals unresolved quality concerns
+- **Temporal mismatch** — catches mismatches between description language ("imminent") and forecast horizon (60 days)
+
+All alerts are informational — **no auto-correction**. Stored as structured data on each forecast for full transparency.
 
 ---
 
