@@ -92,6 +92,19 @@ Some sectors are inherently more predictable than others. Economic indicators wi
 
 ---
 
+## Auto-Resolution
+
+Seldon Vault doesn't just wait for manual judgment. An automated **Resolution Agent** checks active forecasts against real-world data:
+
+- **Structured forecasts** (interest rates, asset prices, economic indicators) are checked against data APIs — FRED, Yahoo Finance, exchange rate services
+- **Qualitative forecasts** (political events, military actions) are checked via AI-powered web search and LLM analysis
+- **Confidence gating** ensures only high-confidence resolutions are applied automatically
+- **Seldon Crisis forecasts** are never auto-resolved — too consequential for automated judgment
+
+Resolution statistics are publicly available at `/api/v1/metrics/resolution`, including auto-resolution rates, manual resolution counts, and per-outcome breakdowns.
+
+---
+
 ## The Agent Calibration Feedback Loop
 
 This is one of Seldon Vault's key differentiators — a self-correcting accuracy system.

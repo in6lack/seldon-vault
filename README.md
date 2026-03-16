@@ -25,7 +25,7 @@ The name comes from [Hari Seldon](https://en.wikipedia.org/wiki/Hari_Seldon), th
 
 ## How It Works
 
-Seldon Vault runs a 7-step pipeline every day:
+Seldon Vault runs an 8-step pipeline every day:
 
 1. **Signal Collection** — News and data signals collected from 12 sources: RSS feeds (Reuters, BBC, Al Jazeera), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), UCDP (conflict data), Fear & Greed Index (market sentiment), Telegram channels, Reddit, and Bluesky
 2. **Signal Processing** — An AI classifier categorizes each signal by sector, sentiment, importance (0-100), and temporal scope (breaking news vs. structural trend). Signals below importance 30 are filtered out
@@ -34,7 +34,8 @@ Seldon Vault runs a 7-step pipeline every day:
 5. **Seldon Synthesis** — The Arbiter selects the top 3-5 strongest forecasts from all approved proposals, calibrates probabilities, writes bilingual descriptions (EN/RU), and detects [Seldon Crises](docs/how-it-works.md#seldon-crisis-detection) and [Cascade Narratives](docs/how-it-works.md#cascade-narratives)
 6. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem with Likelihood Ratios as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
 7. **Accuracy Tracking** — Every resolved forecast is scored by [Brier Score](docs/accuracy.md). Per-agent accuracy feeds back into prompt calibration and into reliability weights that shape future synthesis, creating a self-correcting system
-8. **Pipeline Audit Log** — Every pipeline run records all analyst proposals (approved and rejected), Skeptic's reasoning, risk scores, and final Seldon adjustments. Full decision transparency at [`/pipeline`](https://seldonvault.io/pipeline)
+8. **Auto-Resolution** — Forecasts near their expiry are automatically checked against real data (interest rates, asset prices, economic indicators) and news sources. High-confidence resolutions are applied automatically; ambiguous cases are flagged for review
+9. **Pipeline Audit Log** — Every pipeline run records all analyst proposals (approved and rejected), Skeptic's reasoning, risk scores, and final Seldon adjustments. Full decision transparency at [`/pipeline`](https://seldonvault.io/pipeline)
 
 > **[Full pipeline details →](docs/how-it-works.md)**
 
@@ -113,7 +114,7 @@ Long-term forecasts use a separate analytical mode focused on structural trends,
 | **Source** | 10 specialized AI agents | Crowd bets | Single LLM | Journalists | Individual experts |
 | **Methodology** | Multi-agent debate + Skeptic review | Market price = probability | One-shot answer | Narrative-driven | Subjective assessment |
 | **Accuracy tracking** | Brier Score per forecast | Market resolution | None | None | Rare |
-| **Updates** | Bayesian, every 6 hours | Real-time (market) | None (conversation-bound) | Article by article | Periodic reports |
+| **Updates** | Bayesian every 6 hours + auto-resolution against real data | Real-time (market) | None (conversation-bound) | Article by article | Periodic reports |
 | **Transparency** | Full reasoning from each agent | Just a price | Just an answer | Editorial perspective | Varies |
 | **Time horizons** | Days to centuries (7 horizons) | Usually months | N/A | Breaking news focus | Varies |
 | **Cost** | Free | Requires money to bet | Subscription | Paywalls | Consulting fees |
@@ -150,7 +151,7 @@ curl "https://seldonvault.io/api/v1/forecasts?sector=geopolitics&status=active"
 curl https://seldonvault.io/api/v1/events/stream
 ```
 
-**13 endpoints** covering forecasts, metrics, regions, narratives, signals, and real-time events. Rate limit: 10 requests/second per IP.
+**16 endpoints** covering forecasts, metrics, regions, narratives, signals, pipeline audit, and real-time events. Rate limit: 10 requests/second per IP.
 
 > **[Full API guide with examples →](docs/api-guide.md)** | **[API docs on the website →](https://seldonvault.io/developers)**
 
@@ -171,7 +172,8 @@ curl https://seldonvault.io/api/v1/events/stream
 - **Pipeline Audit Log** — full transparency: see every analyst proposal, why it was approved or rejected
 - **Heuristic Sanity Checks** — automated detection of overconfidence, anchoring, analyst disagreement, and temporal mismatches
 - **Media Bias Detection** — Skeptic agent identifies availability bias, selection bias, and narrative momentum in news sources
-- **Free public REST API** — 15 endpoints, no authentication
+- **Auto-Resolution Engine** — forecasts automatically verified against data APIs (FRED, Yahoo Finance) and AI-powered news analysis
+- **Free public REST API** — 16 endpoints, no authentication
 - **Real-time updates** via Server-Sent Events (SSE)
 - **Completely free**, no registration required
 
@@ -203,7 +205,7 @@ The result isn't prophecy. It's calibrated probability with transparent reasonin
 
 | Document | Description |
 |----------|-------------|
-| [How It Works](docs/how-it-works.md) | Detailed 7-step pipeline walkthrough |
+| [How It Works](docs/how-it-works.md) | Detailed 8-step pipeline walkthrough |
 | [The AI Agents](docs/agents.md) | Profiles of all 10 core agents + supporting roles |
 | [Five Pillars](docs/five-pillars.md) | The analytical framework behind every forecast |
 | [Accuracy & Metrics](docs/accuracy.md) | Brier Score, calibration, feedback loops |

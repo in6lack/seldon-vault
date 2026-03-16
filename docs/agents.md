@@ -201,6 +201,26 @@ After individual forecasts are produced, the Cascade Detector looks for somethin
 
 These cascades are some of Seldon Vault's most valuable outputs — they reveal how isolated events can trigger chain reactions across the global system.
 
+### Resolution Extractor
+
+After a forecast is created, the Resolution Extractor determines *how* it should eventually be verified.
+
+**What it does:**
+- Analyzes each forecast to extract **resolution criteria** — the specific conditions that would confirm or refute the prediction
+- Classifies forecasts as **structured** (checkable via data APIs), **qualitative** (requires news search), or **hybrid** (both)
+- Determines the **check strategy**: on a specific date (e.g., after an FOMC meeting), periodically (every few days), or near the forecast's expiry deadline
+- Generates search queries optimized for later automated fact-checking
+
+### Resolver
+
+When a forecast is due for resolution, the Resolver makes the judgment call.
+
+**What it does:**
+- For structured conditions, queries real-world data APIs (interest rates, asset prices, economic indicators)
+- For qualitative conditions, searches the web for evidence and analyzes it with LLM reasoning
+- Assesses confidence: **high** (auto-resolve), **medium** (flag for review), **low** (insufficient evidence)
+- Never auto-resolves Seldon Crisis forecasts — these require human judgment
+
 ---
 
 ## How They Work Together
@@ -214,6 +234,7 @@ The entire pipeline runs every 6 hours, processing the latest intelligence signa
 | **3. Adversarial Review** | The Skeptic | All analyst forecasts | Validated forecasts + rejections |
 | **4. Synthesis** | The Seldon Arbiter | Validated forecasts | Final top 3-5 forecasts, calibrated |
 | **5. Cascade Detection** | Cascade Detector | Final forecasts | Cascade narratives + links |
+| **6. Auto-Resolution** | Resolution Extractor + Resolver | Active forecasts near expiry | Resolution outcomes + evidence |
 
 The key design principle: **no groupthink**. Each analyst works in isolation. The Skeptic challenges everything. The Arbiter synthesizes only what survives. This adversarial structure is what separates Seldon Vault from simpler "ask one AI" approaches.
 

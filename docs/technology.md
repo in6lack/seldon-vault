@@ -105,6 +105,19 @@ Graph algorithms detect **causal chains between forecasts**, modeling how events
 
 ---
 
+## Resolution Engine
+
+Automated forecast verification through data APIs and AI analysis:
+
+- **Structured adapters** check measurable conditions against real-world data sources (FRED, Yahoo Finance, Exchange Rates, World Bank)
+- **LLM Resolver** handles qualitative events using web search + AI analysis
+- **Three check strategies:** scheduled (on_date for events like FOMC meetings), periodic (every N days for ongoing situations), near_deadline (as forecast approaches expiry)
+- **Confidence-gated:** only high-confidence resolutions applied automatically; ambiguous cases flagged for review
+- **Crisis protection:** Seldon Crisis forecasts are never auto-resolved
+- **Full audit trail:** every resolution attempt logged with evidence, confidence, and reasoning
+
+---
+
 ## Real-Time Updates
 
 **Server-Sent Events (SSE)** provide push-based updates to connected clients.

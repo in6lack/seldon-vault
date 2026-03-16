@@ -1,4 +1,4 @@
-# How Seldon Vault Works — The 7-Step Pipeline
+# How Seldon Vault Works — The 8-Step Pipeline
 
 > *"Psychohistory dealt not with man, but with man-masses. It was the science of mobs; mobs in their billions."*
 > — Isaac Asimov, *Foundation*
@@ -7,7 +7,7 @@ Hari Seldon had the Galactic Empire. We have the internet.
 
 Every day, Seldon Vault runs an automated pipeline that transforms the raw chaos of global news into **calibrated probabilistic forecasts** — predictions with numbers attached, tracked over time, and scored for accuracy. No hand-waving, no punditry. Just signal, analysis, and math.
 
-This document walks through all seven steps of that pipeline, from the moment a Reuters headline hits our ingestion layer to the moment a Brier Score tells us whether we got it right.
+This document walks through all eight steps of that pipeline, from the moment a Reuters headline hits our ingestion layer to the moment a Brier Score tells us whether we got it right.
 
 ---
 
@@ -23,6 +23,7 @@ This document walks through all seven steps of that pipeline, from the moment a 
 | 5.5 | ⚠️ Heuristic Alerts | Automated sanity checks catch common forecasting pitfalls |
 | 6 | 📊 Bayesian Updates | Probabilities revised every 6 hours as new evidence arrives |
 | 7 | 🎯 Accuracy Tracking | Resolved forecasts scored, agents receive calibration feedback |
+| 8 | 🤖 Auto-Resolution | Forecasts near expiry checked against real data and news sources |
 
 ---
 
@@ -264,6 +265,41 @@ For full accuracy methodology and current scores, see [accuracy.md](accuracy.md)
 
 ---
 
+## Step 8: 🤖 Auto-Resolution
+
+Forecasts don't stay active forever. When a forecast approaches its expiry date, the **Resolution Agent** attempts to determine whether the predicted event occurred.
+
+### Structured Resolution
+
+For forecasts with measurable conditions — interest rate changes, asset price thresholds, economic indicators — the system checks directly against **data APIs**:
+
+| Data Source | What It Checks |
+|-------------|----------------|
+| **FRED** | Federal Reserve data: interest rates, unemployment, inflation, GDP |
+| **Yahoo Finance** | Asset prices, commodity futures, exchange rates |
+| **Exchange Rate APIs** | Currency pairs |
+| **World Bank** | Development indicators |
+
+If all conditions are met, the forecast is resolved as **correct**. If none are met, **incorrect**. If some but not all, **partial**.
+
+### Qualitative Resolution
+
+For events that can't be reduced to a number — military actions, political decisions, diplomatic breakthroughs — the system uses **AI-powered web search** to find evidence:
+
+1. Search queries extracted from the forecast's resolution criteria
+2. Web search via Tavily API gathers recent evidence
+3. An LLM Resolver analyzes the evidence and determines the outcome
+4. Resolution confidence is assessed: **high** (auto-resolve), **medium** (flag for review), **low** (skip)
+
+### Safeguards
+
+- **Seldon Crisis forecasts** are never auto-resolved — these are too consequential for automated judgment
+- **Minimum evidence threshold** — at least 2 independent sources required
+- **Confidence gating** — only high-confidence resolutions are applied automatically
+- **Full audit trail** — every resolution attempt is logged with reasoning, evidence, and confidence level
+
+---
+
 ## Seldon Crisis Detection
 
 In Asimov's *Foundation* series, a **Seldon Crisis** is a pivotal moment in galactic history — a point where the mathematical inevitability of psychohistory converges into a single, unavoidable confrontation. The crisis resolves only one way, and that resolution shapes centuries to come.
@@ -344,6 +380,6 @@ This means:
 *"The future is already here — it's just not evenly distributed."*
 — William Gibson
 
-Seldon Vault doesn't predict the future with certainty. Nothing can. What it does is **distribute probability across possible futures**, update those probabilities as evidence arrives, and hold itself accountable when the future finally resolves into fact. Seven steps, every day, relentlessly.
+Seldon Vault doesn't predict the future with certainty. Nothing can. What it does is **distribute probability across possible futures**, update those probabilities as evidence arrives, and hold itself accountable when the future finally resolves into fact. Eight steps, every day, relentlessly.
 
 The Foundation's work continues.
