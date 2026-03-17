@@ -1,6 +1,6 @@
 # Seldon Vault API Guide
 
-Seldon Vault offers a free, public REST API with no authentication required. JSON responses, 16 endpoints, real-time updates via SSE.
+Seldon Vault offers a free, public REST API with no authentication required. JSON responses, 20 endpoints, real-time updates via SSE.
 
 ---
 
@@ -45,6 +45,10 @@ https://seldonvault.io/api/v1/
 | `/signals` | GET | Raw news signals from data sources |
 | `/events/stream` | GET | Real-time Server-Sent Events |
 | `/metrics/resolution` | GET | Resolution statistics (auto-resolved, manual, expired, resolution rates) |
+| `/sources/ratings` | GET | Source reliability ratings (per-source per-sector, Brier-based) |
+| `/sources/ratings/{source_name}` | GET | All sector ratings for a specific source |
+| `/events/chains` | GET | Event chains with lifecycle stages (status filter, pagination) |
+| `/events/chains/{id}` | GET | Event chain detail with cluster timeline |
 | `/pipeline/runs` | GET | Pipeline audit log: list runs with pagination and run_type filter |
 | `/pipeline/runs/{id}` | GET | Pipeline run detail with all proposals (approved/rejected) |
 

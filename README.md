@@ -151,7 +151,7 @@ curl "https://seldonvault.io/api/v1/forecasts?sector=geopolitics&status=active"
 curl https://seldonvault.io/api/v1/events/stream
 ```
 
-**16 endpoints** covering forecasts, metrics, regions, narratives, signals, pipeline audit, and real-time events. Rate limit: 10 requests/second per IP.
+**20 endpoints** covering forecasts, metrics, regions, narratives, signals, pipeline audit, and real-time events. Rate limit: 10 requests/second per IP.
 
 > **[Full API guide with examples →](docs/api-guide.md)** | **[API docs on the website →](https://seldonvault.io/developers)**
 
@@ -173,7 +173,8 @@ curl https://seldonvault.io/api/v1/events/stream
 - **Heuristic Sanity Checks** — automated detection of overconfidence, anchoring, analyst disagreement, and temporal mismatches
 - **Media Bias Detection** — Skeptic agent identifies availability bias, selection bias, and narrative momentum in news sources
 - **Auto-Resolution Engine** — forecasts automatically verified against data APIs (FRED, Yahoo Finance) and AI-powered news analysis
-- **Free public REST API** — 16 endpoints, no authentication
+- **Knowledge Graph** — Signal Clustering (deduplication via embedding similarity), Source Ratings (per-source reliability from Brier scores), Event Chains (cross-day temporal linking with lifecycle stages from rumor to resolution)
+- **Free public REST API** — 20 endpoints, no authentication
 - **Real-time updates** via Server-Sent Events (SSE)
 - **Completely free**, no registration required
 
@@ -189,6 +190,7 @@ curl https://seldonvault.io/api/v1/events/stream
 - **Interactive D3.js world map** with TopoJSON and regional risk scoring
 - **Server-Sent Events (SSE)** for real-time push updates
 - **Cascade Propagation** — graph algorithms for causal chain detection
+- **Knowledge Graph Engine** — signal clustering (embedding similarity), source reliability ratings (Brier-based), event chains (cross-day temporal linking with lifecycle stages)
 - **Schema.org JSON-LD** structured data for search engine and AI discoverability
 
 > **[Full technology details →](docs/technology.md)**

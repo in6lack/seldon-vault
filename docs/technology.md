@@ -105,6 +105,16 @@ Graph algorithms detect **causal chains between forecasts**, modeling how events
 
 ---
 
+## Knowledge Graph Engine
+
+Three layers of semantic structure built on top of the signal pipeline:
+
+- **Signal Clustering** — embedding cosine similarity (threshold 0.72) groups related signals from different sources into semantic clusters. Multi-signal clusters get LLM-generated summaries. Each cluster carries `source_count` for independent source diversity
+- **Source Reliability Ratings** — per-source, per-sector accuracy and independence scores computed from historical Brier Scores. Zero LLM cost — pure SQL aggregation. Composite score: 0.7 × accuracy + 0.3 × independence. Daily Celery task at 01:00 UTC
+- **Event Chain Linking** — cross-day temporal matching via centroid embedding cosine similarity (threshold 0.78). Lifecycle stage classification (8 stages: rumor → aftermath) via LLM or keyword heuristics. Stage regression protection prevents illogical transitions. Chain-based forecast deduplication
+
+---
+
 ## Resolution Engine
 
 Automated forecast verification through data APIs and AI analysis:

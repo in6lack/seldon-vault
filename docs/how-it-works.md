@@ -70,6 +70,37 @@ Signals are processed in **batches of 10–15** for efficiency. By the end of th
 
 ---
 
+## Step 2.5: 🔗 Knowledge Graph
+
+Before signals reach the analysts, three Knowledge Graph layers add structure and context:
+
+### Signal Clustering
+
+Similar signals from different sources are grouped into **semantic clusters** using embedding cosine similarity (threshold: 0.72). If Reuters, BBC, and TASS all report on the same sanctions discussion, they become one cluster with `source_count: 3` instead of three separate signals. This reduces noise and tells analysts *how many independent sources* confirm an event.
+
+### Source Reliability Ratings
+
+Each news source has a **per-sector reliability score** computed from historical Brier Scores. If forecasts based on Reuters' geopolitics reporting were consistently accurate (low Brier), Reuters gets a high accuracy rating in that sector. A second metric — **independence** — measures how often a source provides unique information rather than echoing others. These ratings are injected into clusters so the Seldon Arbiter can weigh evidence from reliable sources more heavily.
+
+### Event Chains
+
+Signal clusters from different days are linked into **temporal event chains** via centroid embedding similarity (threshold: 0.78, stricter than clustering). Each chain tracks how a story evolves over time and classifies its current **lifecycle stage**:
+
+| Stage | Description |
+|-------|-------------|
+| **Rumor** | Unverified reports, "sources say" |
+| **Discussion** | Official meetings, proposals, debates |
+| **Confirmation** | Official announcements, signed agreements |
+| **Development** | Implementation, next steps |
+| **Escalation** | Situation worsening |
+| **De-escalation** | Tensions reducing |
+| **Resolution** | Event concluded |
+| **Aftermath** | Post-event consequences |
+
+The Seldon Arbiter sees the full event chain context — how long a story has been developing, what stage it's at, and whether it's escalating or winding down. If a cluster belongs to a chain that already has an active forecast, the system **updates the existing forecast** instead of creating a duplicate.
+
+---
+
 ## Step 3: 🧠 Multi-Agent Analysis
 
 This is where Seldon Vault's architecture gets interesting.
