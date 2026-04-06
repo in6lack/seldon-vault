@@ -9,7 +9,7 @@ Choosing how to think about the future is a real decision. There are prediction 
 | Alternative | Key Difference | Best Read If You... |
 |---|---|---|
 | [Prediction Markets](seldon-vs-prediction-markets.md) | Markets give a number. Seldon gives reasoning. | Use Polymarket, Metaculus, or PredictIt |
-| [Asking ChatGPT](seldon-vs-asking-chatgpt.md) | One model, one answer, no tracking. Seldon uses ten agents with accountability. | Wonder why you can't just ask an AI directly |
+| [Asking ChatGPT](seldon-vs-asking-chatgpt.md) | One model, one answer, no tracking. Seldon uses eleven analysts with accountability. | Wonder why you can't just ask an AI directly |
 | [News Media](seldon-vs-news-media.md) | News says what happened. Seldon says what might happen next. | Rely on Reuters, BBC, CNN, or Google News |
 | [Human Analysts](seldon-vs-human-analysts.md) | Analysts have deep intuition. Seldon has scale and transparency. | Follow Stratfor, RAND, or Eurasia Group |
 | [Astrology & Gut Feelings](seldon-vs-astrology.md) | Vibes aren't falsifiable. Seldon publishes its track record. | Are curious why evidence-based forecasting matters |
@@ -20,7 +20,7 @@ Choosing how to think about the future is a real decision. There are prediction 
 
 | Dimension | Seldon Vault | Prediction Markets | ChatGPT / LLMs | News Media | Human Analysts | Astrology / Gut Feeling |
 |---|---|---|---|---|---|---|
-| **Output** | Probability + reasoning from 10 agents | Probability (price) | Text answer | Narrative articles | Qualitative assessments | Vague guidance |
+| **Output** | Probability + reasoning from 11 analysts + Skeptic + Arbiter | Probability (price) | Text answer | Narrative articles | Qualitative assessments | Vague guidance |
 | **Reasoning visible** | Yes — full chain from each agent | No — just the price | Partial — one perspective | Editorial framing | Sometimes (reports) | No |
 | **Accuracy tracked** | Yes (Brier Score, calibration curves) | Implicitly (market resolves) | No | No | Rarely | No |
 | **Update frequency** | Every 6 hours (Bayesian) | Continuous (trades) | On demand (snapshot) | As events break | Weekly/monthly reports | Daily horoscopes |

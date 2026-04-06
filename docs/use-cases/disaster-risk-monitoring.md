@@ -70,7 +70,7 @@ A severe drought hits Central Asia. Here's how Seldon Vault traces the cascade:
 
 1. **Environmental** — Climatologist agent flags multi-year drought trend, below-average crop yields expected
 2. **Economic** — Economist agent models food price spike in dependent economies, increased import costs
-3. **Social** — Sociopolitical Analyst assesses social unrest risk in countries where food expenditure represents a large share of household budgets
+3. **Social** — Sociologist assesses social unrest risk in countries where food expenditure represents a large share of household budgets
 4. **Migration** — Forecast of increased migration pressure toward neighboring regions
 5. **Political** — Assessment of political instability risk in both origin and destination countries
 6. **Security** — Military Analyst evaluates potential for resource competition to escalate

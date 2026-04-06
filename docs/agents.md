@@ -2,175 +2,215 @@
 
 > *"Like the Second Foundation in Asimov's universe, Seldon Vault's agents work independently — each a specialist, none seeing the others' analysis until the final synthesis."*
 
-Seldon Vault doesn't rely on a single AI to predict the future. Instead, it deploys a team of ten specialized agents, each trained to see the world through a different lens. They argue, challenge, and synthesize — producing forecasts that no single perspective could achieve alone.
+Seldon Vault doesn't rely on a single AI to predict the future. Instead, it deploys a team of specialized agents — 11 domain analysts with deliberately opposing cognitive biases, a two-tier adversarial Skeptic, and a Seldon Arbiter that investigates before it judges. They argue, challenge, and synthesize — producing forecasts that no single perspective could achieve alone.
 
 ---
 
-## The Core Team
+## Architecture Overview
 
-The architecture is deliberately adversarial. Eight domain analysts work in parallel, each producing independent forecasts from the same intelligence signals. They never see each other's work. Then the Skeptic tears their conclusions apart, searching for flaws, biases, and blind spots. Finally, the Seldon Arbiter synthesizes the surviving forecasts into a coherent picture.
+The system uses **dual-persona cognitive diversity** for three key domains, ensuring that every geopolitical, economic, and political forecast is shaped by genuinely opposing viewpoints:
 
-**8 Analysts (parallel)** --> **1 Skeptic (adversarial review)** --> **1 Arbiter (final synthesis)**
+**11 Analysts (parallel)** --> **Merge Layer (match Hawk/Dove pairs)** --> **2-tier Skeptic (adversarial review)** --> **Seldon Arbiter (ReACT synthesis)**
 
-This structure prevents groupthink — the silent killer of prediction accuracy. When everyone sees everyone else's answer, forecasts converge toward consensus rather than truth. Seldon Vault's agents converge only at the end, and only after surviving hostile scrutiny.
-
----
-
-## Agent Profiles
-
-### 1. The Geopolitician
-
-**Role:** Geopolitical lens — power dynamics, conflicts, diplomacy, sanctions
-
-**Focus areas:** Conflicts, diplomacy, sanctions, alliances, territorial disputes, elections
-
-**Analytical framework:**
-Power dynamics --> Structural forces --> Historical parallels --> Second-order effects --> Regime stability
-
-**Pillars:** [Game Theory](five-pillars.md#1-game-theory) | [Network Theory](five-pillars.md#5-network-theory) | [Psychohistory](five-pillars.md#4-psychohistory)
-
-*Think of them as: A foreign policy advisor who never sleeps.* The Geopolitician reads the world as a chessboard of competing interests. They track who has leverage over whom, which alliances are fraying, and where structural pressures are pushing states toward confrontation — or accommodation. When a border skirmish flares up or a sanctions package is announced, this is the agent that maps out who benefits, who loses, and what happens next.
+This structure prevents groupthink — the silent killer of prediction accuracy. Analysts converge only at the end, and only after surviving hostile scrutiny and persona merge.
 
 ---
 
-### 2. The Economist
+## Dual-Persona Agents
 
-**Role:** Economic lens — markets, monetary policy, trade flows, debt cycles
+Three domains deploy **opposing persona pairs** — agents with the same domain expertise but opposite cognitive biases. Each persona has 4 calibrated dimensions:
 
-**Focus areas:** Interest rates, inflation, recessions, trade wars, central bank decisions, commodity prices
+| Dimension | Low (0.0-0.35) | Mid (0.35-0.65) | High (0.65-1.0) |
+|-----------|-----------------|------------------|------------------|
+| **Risk appetite** | Conservative | Moderate | Aggressive |
+| **Contrarian index** | Consensus-seeking | Independent | Contrarian |
+| **Temporal bias** | Reactive (near-term) | Balanced | Strategic (long-term) |
+| **Confidence style** | Cautious | Calibrated | Decisive |
 
-**Analytical framework:**
-Supply/Demand --> Monetary policy --> Trade flows --> Labor markets --> Innovation cycles
+### Geopolitician Hawk
 
-**Pillars:** [Bayesian Inference](five-pillars.md#2-bayesian-inference) | [Psychohistory](five-pillars.md#4-psychohistory) | [Game Theory](five-pillars.md#1-game-theory)
+**Persona:** Aggressive risk assessment — escalation, hard power, sanctions as coercion
 
-*Think of them as: A Wall Street analyst with a history degree.* The Economist doesn't just watch the ticker — they track the deep currents that move economies: debt cycles that unfold over decades, demographic shifts that reshape labor markets, and the monetary policy decisions that ripple across borders. When a central bank raises rates or a trade war escalates, this agent calculates the cascading consequences through the global economic system.
+**Dimensions:** Risk appetite 0.75, Contrarian 0.70, Temporal 0.65, Confidence 0.70
+
+*Sees troop movements as signals of intent. Reads diplomatic language as cover for power plays. When others see a "routine military exercise," the Hawk sees a rehearsal.*
+
+### Geopolitician Dove
+
+**Persona:** Conciliatory perspective — diplomacy, cooperation, de-escalation paths
+
+**Dimensions:** Risk appetite 0.25, Contrarian 0.30, Temporal 0.35, Confidence 0.30
+
+*Sees the same troop movements as a bargaining chip. Reads diplomatic language as genuine intent. When others see "provocative posturing," the Dove sees a negotiating position.*
+
+### Economist Bull
+
+**Persona:** Optimistic outlook — growth drivers, market resilience, innovation cycles
+
+**Dimensions:** Risk appetite 0.75, Contrarian 0.70, Temporal 0.65, Confidence 0.70
+
+*Tracks the tailwinds: productivity growth, labor market strength, technological adoption curves. When bear markets panic, the Bull asks what opportunities are being mispriced.*
+
+### Economist Bear
+
+**Persona:** Pessimistic outlook — risk, tail events, debt crises, asset bubbles
+
+**Dimensions:** Risk appetite 0.25, Contrarian 0.30, Temporal 0.35, Confidence 0.30
+
+*Tracks the headwinds: debt-to-GDP ratios, yield curve inversions, credit spreads, systemic fragility. When bull markets celebrate, the Bear asks what risks are being ignored.*
+
+### Political Hawk
+
+**Persona:** Power realism — consolidation, repression, hard power politics
+
+**Dimensions:** Risk appetite 0.75, Contrarian 0.70, Temporal 0.65, Confidence 0.70
+
+*Reads domestic politics through the lens of power: who benefits, who controls, who is threatened. When a government "reforms," the Hawk asks whether it's reforming institutions or consolidating authority.*
+
+### Political Dove
+
+**Persona:** Institutional perspective — democratic resilience, reform, soft power
+
+**Dimensions:** Risk appetite 0.25, Contrarian 0.30, Temporal 0.35, Confidence 0.30
+
+*Reads the same domestic politics through the lens of institutions: are checks and balances holding? Is civil society mobilizing? When a government cracks down, the Dove asks whether the institutions can absorb the shock.*
 
 ---
 
-### 3. The Technologist
+## Solo-Persona Agents
+
+Five domains use single personas. The Technologist uses multi-model **LLM Council debate** (running the same analysis across 3 different providers and debating to consensus) for cognitive diversity instead of persona pairs.
+
+### The Technologist
 
 **Role:** Technology lens — AI, semiconductors, energy, biotech, disruption
 
 **Focus areas:** AI developments, chip industry, energy transition, biotech breakthroughs, regulation
 
-**Analytical framework:**
-Adoption curves --> Regulatory landscape --> Competitive dynamics --> Infrastructure readiness --> Societal impact
+**Diversity mode:** Multi-model LLM Council (DeepSeek, GPT, Claude debate across up to 3 rounds)
 
-**Pillars:** [Network Theory](five-pillars.md#5-network-theory) | [Chaos Theory](five-pillars.md#3-chaos-theory) | [Bayesian Inference](five-pillars.md#2-bayesian-inference)
+*Think of them as: A Silicon Valley futurist who reads physics papers.* Tracks adoption curves, regulatory landscapes, competitive dynamics, and the intersection of technology with geopolitics. When a chip export ban is announced or a fusion breakthrough is published, this agent maps the disruption path.
 
-*Think of them as: A Silicon Valley futurist who reads physics papers.* The Technologist tracks the technologies that reshape power: AI capabilities, semiconductor supply chains, energy breakthroughs, and biotech advances. They understand that technology doesn't exist in a vacuum — adoption curves interact with regulation, infrastructure, and geopolitics. When a new chip export ban is announced or a breakthrough in fusion energy is published, this agent maps the disruption path.
+### The Sociologist
 
----
+**Role:** Social dynamics — collective action, demographics, migration, institutional trust
 
-### 4. The Sociologist
+**Focus areas:** Protests, social movements, demographic shifts, migration, inequality
 
-**Role:** Social dynamics — collective action, demographics, migration
+*Think of them as: A social trends researcher who sees the crowd before the wave.* Watches the human terrain — demographic bulges that produce instability, trust in institutions eroding, migration patterns reshaping political coalitions.
 
-**Focus areas:** Protests, social movements, demographic shifts, migration, institutional trust, inequality
+### The Climatologist
 
-**Analytical framework:**
-Collective Action --> Demographic Structural Theory --> Social networks --> Institutional trust --> Migration
+**Role:** Environmental lens — climate risks, resource scarcity, energy transition, tipping points
 
-**Pillars:** [Psychohistory](five-pillars.md#4-psychohistory) | [Network Theory](five-pillars.md#5-network-theory) | [Bayesian Inference](five-pillars.md#2-bayesian-inference)
+**Focus areas:** Extreme weather, resource scarcity, environmental policy, planetary boundaries
 
-*Think of them as: A social trends researcher who sees the crowd before the wave.* The Sociologist watches the human terrain — the slow-moving forces that suddenly erupt. Demographic bulges that produce instability a generation later. Trust in institutions eroding until a single spark triggers mass protest. Migration patterns reshaping political coalitions. This agent reads the mood of populations and the structural pressures that shape collective behavior.
+*Think of them as: An environmental scientist who thinks in systems.* Tracks water scarcity sparking conflicts, extreme weather disrupting supply chains, energy transitions reshaping alliances. Understands tipping points — gradual change becoming sudden transformation.
 
----
-
-### 5. The Climatologist
-
-**Role:** Environmental lens — climate risks, resource scarcity, energy transition
-
-**Focus areas:** Extreme weather, resource scarcity, energy transition, environmental policy, tipping points
-
-**Analytical framework:**
-Climate risk --> Resource scarcity --> Energy transition --> Tipping points --> Policy governance
-
-**Pillars:** [Chaos Theory](five-pillars.md#3-chaos-theory) | [Bayesian Inference](five-pillars.md#2-bayesian-inference) | [Network Theory](five-pillars.md#5-network-theory)
-
-*Think of them as: An environmental scientist who thinks in systems.* The Climatologist tracks the planetary-scale forces that increasingly drive geopolitics: water scarcity sparking conflicts, extreme weather disrupting supply chains, energy transitions reshaping alliances. They understand tipping points — the moments when gradual change becomes sudden, irreversible transformation. When a drought hits a breadbasket region or a country announces a major energy policy shift, this agent calculates the systemic consequences.
-
----
-
-### 6. The Military Analyst
+### The Military Analyst
 
 **Role:** Military lens — force balance, deterrence, arms trade, nuclear posture
 
-**Focus areas:** Military conflicts, force deployments, arms deals, nuclear posture, defense budgets
+**Focus areas:** Military conflicts, force deployments, arms deals, defense budgets, dead zone detection
 
-**Analytical framework:**
-Force balance --> Deterrence theory --> Arms trade dynamics --> Nuclear posture --> Dead zone detection (intelligence gaps)
+*Think of them as: A defense intelligence officer who reads between the lines.* Assesses hard power: who can project force where, which deterrence structures are stable, where arms buildups signal intent.
 
-**Pillars:** [Game Theory](five-pillars.md#1-game-theory) | [Network Theory](five-pillars.md#5-network-theory) | [Psychohistory](five-pillars.md#4-psychohistory)
-
-*Think of them as: A defense intelligence officer who reads between the lines.* The Military Analyst assesses the hard power equation: who can project force where, which deterrence structures are stable, and where arms buildups signal intent. They specialize in dead zone detection — identifying the intelligence gaps where surprises emerge. When satellite imagery shows troop movements or a country announces a defense budget increase, this agent evaluates whether the balance of power is shifting.
-
----
-
-### 7. The Cybersecurity Analyst
+### The Cybersecurity Analyst
 
 **Role:** Cyber lens — APT groups, infrastructure vulnerability, zero-days, information warfare
 
 **Focus areas:** APT campaigns, critical infrastructure, zero-day exploits, ransomware, disinformation
 
-**Analytical framework:**
-APT attribution --> Infrastructure vulnerability --> Zero-day economics --> Ransomware ecosystem --> Information warfare
-
-**Pillars:** [Network Theory](five-pillars.md#5-network-theory) | [Chaos Theory](five-pillars.md#3-chaos-theory) | [Game Theory](five-pillars.md#1-game-theory)
-
-*Think of them as: A cybersecurity investigator who tracks nation-state hackers.* The Cybersecurity Analyst monitors the invisible battlefield: state-sponsored hacking groups, critical infrastructure vulnerabilities, the zero-day exploit market, and disinformation campaigns. In a world where a cyberattack can disable a power grid or manipulate an election, this agent maps the digital threat landscape and its intersection with traditional geopolitics.
+*Think of them as: A cybersecurity investigator who tracks nation-state hackers.* Monitors state-sponsored hacking, critical infrastructure vulnerabilities, the zero-day market, and disinformation campaigns.
 
 ---
 
-### 8. The Political Analyst
+## The Merge Layer
 
-**Role:** Political lens — domestic politics, regime stability, censorship, mobilization, civil liberties
+After analysts produce their proposals and before the Skeptic review, the Merge Layer processes dual-persona outputs — **entirely without LLM calls**:
 
-**Focus areas:** Regime stability, domestic politics, protests, censorship, mobilization, civil liberties, electoral manipulation
+1. Match Hawk/Dove proposals by **title Jaccard similarity** (threshold 0.80, boosted by sector match)
+2. Compute **weighted average probability** (classical merge)
+3. Compute **disagreement spread** — how much Hawk and Dove diverge
+4. Compute **quantum persona interference** — wave superposition modeling the interaction between opposing cognitive biases
+5. Identify **consensus indicators** (both personas flagged independently) and **disagreement indicators** (only one persona flagged)
 
-**Analytical framework:**
-Regime stability --> Domestic power dynamics --> Censorship & information control --> Mobilization capacity --> Civil liberties trajectory
-
-**Pillars:** [Game Theory](five-pillars.md#1-game-theory) | [Psychohistory](five-pillars.md#4-psychohistory) | [Network Theory](five-pillars.md#5-network-theory)
-
-*Think of them as: A political risk consultant who monitors the internal fault lines of states.* The Political Analyst watches the domestic arena — the space where regimes consolidate or fracture, where censorship tightens or cracks, and where populations are mobilized or suppressed. While the Geopolitician focuses on relations between states, the Political Analyst looks inside them: tracking regime stability indicators, protest movements, electoral manipulation, civil liberties erosion, and the mobilization dynamics that precede both revolutions and repressions. When a government cracks down on dissent or a protest movement gains momentum, this agent maps the trajectory of internal political risk.
+The spread itself is information: a large Hawk/Dove disagreement tells the Skeptic and Arbiter that this topic is genuinely ambiguous, while agreement despite opposite biases is a strong signal.
 
 ---
 
-### 9. The Skeptic
+## The Skeptic (Two Tiers)
 
-**Role:** Adversarial critic — exists to DISPROVE analyst forecasts
+### Quick Skeptic
+
+**Role:** Fast pre-filter — structural kill rules, no web search
+
+**Kill rules:** Unfalsifiable, vague, duplicate, speculative, factual error, probability unsupported, stale/past event, sector mismatch
+
+*The bouncer at the door.* Cheap, fast, handles the obviously flawed proposals so the Max Skeptic can focus on substantive review.
+
+### Max Skeptic
+
+**Role:** Deep adversarial critic — web search, veto power
 
 **Tools:** Real-time web search (Tavily) for live fact-checking
 
 **Evaluation criteria:**
-- Logical consistency of the argument
+- Logical consistency
 - Evidence quality and sourcing
-- Base rate neglect (are probabilities realistic?)
-- Confirmation bias (did the analyst only seek supporting evidence?)
-- Missing perspectives (what viewpoints were ignored?)
+- Base rate neglect
+- Confirmation bias
+- Missing perspectives
+- **Media bias detection:** availability bias, selection bias, narrative momentum
 
-**Veto power:** Any forecast receiving a risk score below 50 is automatically rejected.
+**Veto power:** Risk score below 50 = automatic rejection.
 
-*Think of them as: A devil's advocate with a search engine and veto power.* The Skeptic is the most important quality control mechanism in the system. While the eight analysts build cases for their forecasts, the Skeptic tears them down. They search the live web for contradicting evidence, check base rates, probe logical weaknesses, and flag biases. A forecast that survives the Skeptic has been stress-tested. One that doesn't is sent back or discarded entirely.
+*The prosecutor.* The Max Skeptic's job is to find reasons proposals are wrong. It searches the live web for contradicting evidence, checks base rates, and probes logical weaknesses. A forecast that survives has been stress-tested.
+
+Both tiers understand that Hawk/Dove disagreement is **intentional** — they don't penalize merged proposals for having an internal spread.
 
 ---
 
-### 10. The Seldon Arbiter
+## The Seldon Arbiter
 
 **Named after Hari Seldon himself** — the mathematician who proved that the future of civilizations could be predicted through the statistical behavior of populations.
 
-**Role:** Final synthesizer — selects the top 3-5 forecasts, calibrates probabilities, writes bilingual output
+### ReACT Reasoning
 
-**Key responsibilities:**
-- Selects the strongest surviving forecasts from the Skeptic's review
-- Calibrates probability scores based on cross-analyst agreement and pillar convergence
-- Detects **Seldon Crises** — critical high-probability events that demand immediate attention
-- Ensures **horizon diversity** — the final output always includes long-term forecasts, not just immediate predictions
-- Produces bilingual output (English and Spanish)
+The Arbiter doesn't just read proposals and decide. It uses **iterative ReACT reasoning** (Thought-Action-Observation loops) with 6 tools:
 
-*Think of them as: The judge who makes the final call — with the broadest view.* The Seldon Arbiter sees what no individual analyst can: the complete picture. They weigh competing analyses, resolve contradictions, and produce the final forecast. When multiple analysts independently converge on the same conclusion through different frameworks, the Arbiter recognizes this as a high-confidence signal. When a potential Seldon Crisis emerges — a high-probability event with severe consequences — the Arbiter flags it for special attention.
+| Tool | What It Does |
+|------|-------------|
+| `search_analogies` | Find historical parallels in the RAG database |
+| `query_indicators` | Fetch real-time economic data from FRED |
+| `fact_check` | Search the web for verification via Tavily |
+| `get_event_chain` | Explore temporal context and lifecycle of a story |
+| `get_agent_track_record` | Check which analysts have been accurate in this sector |
+| `compare_proposals` | Analytically compare proposals on shared dimensions |
+
+The Arbiter might: search for historical analogies to a proposed conflict scenario, check whether current economic indicators support the claimed trajectory, verify a factual claim, and examine the event chain's lifecycle stage — all before making the final call.
+
+### Key Responsibilities
+
+- Select the **top 3-7 forecasts** from approved proposals
+- **Calibrate probabilities** (5%-95%, never certainty)
+- Ensure **sector and horizon diversity** in the output
+- Detect **Seldon Crises** — critical convergence events
+- Detect **Cascade Narratives** — causal chains between forecasts
+- Receive **agent weight card** — data-driven reliability rankings per agent per sector
+- Produce **English-only output** (Translation Layer handles Russian)
+
+### Context
+
+The Arbiter receives the richest context of any agent:
+- All approved proposals with full Skeptic critique
+- Agent reliability weight card (Brier-based rankings)
+- Global forecast memory (similar resolved forecasts with lessons)
+- Source reliability ratings
+- Event chain context with density matrix interpretations
+- Decision-maker behavioral profiles
+
+*Think of them as: The judge with the broadest view, a library of historical precedents, and a research team on speed dial.*
 
 ---
 
@@ -178,93 +218,92 @@ Regime stability --> Domestic power dynamics --> Censorship & information contro
 
 ### Signal Processor
 
-Before the analysts ever see a piece of intelligence, the Signal Processor has already done the heavy lifting.
-
-**What it does:**
-- Converts raw news feeds into structured intelligence signals
-- Classifies each signal by sector, sentiment, importance, and named entities
-- Uses a cost-efficient model optimized for high throughput
-- Filters noise from signal, ensuring analysts focus on what matters
-
-The Signal Processor is the unsung hero of the pipeline — handling the firehose of global news and distilling it into clean, structured inputs that the analysts can reason about efficiently.
+Converts raw news feeds into structured intelligence signals. Classifies by sector, sentiment, importance, entities, and temporal scope. Uses a cost-efficient model (DeepSeek Chat) optimized for throughput.
 
 ### Cascade Detector
 
-After individual forecasts are produced, the Cascade Detector looks for something the analysts themselves might miss: **causal chains between forecasts**.
-
-**What it does:**
-- Identifies connections between independently produced forecasts
-- Creates **Cascade Narratives** — chains of cause and effect across domains
-- Assesses trajectory (escalating, stable, de-escalating) and link strength
-
-**Example cascade:** Military conflict in the Middle East --> Oil supply disruption --> Energy price spike --> European recession risk --> Political instability in import-dependent nations
-
-These cascades are some of Seldon Vault's most valuable outputs — they reveal how isolated events can trigger chain reactions across the global system.
+After individual forecasts are produced, identifies **causal chains**: military conflict → oil disruption → energy spike → European recession → political instability. Creates Cascade Narratives with link types, strengths, and conditional probability shifts.
 
 ### Resolution Extractor
 
-After a forecast is created, the Resolution Extractor determines *how* it should eventually be verified.
-
-**What it does:**
-- Analyzes each forecast to extract **resolution criteria** — the specific conditions that would confirm or refute the prediction
-- Classifies forecasts as **structured** (checkable via data APIs), **qualitative** (requires news search), or **hybrid** (both)
-- Determines the **check strategy**: on a specific date (e.g., after an FOMC meeting), periodically (every few days), or near the forecast's expiry deadline
-- Generates search queries optimized for later automated fact-checking
+Analyzes each forecast to extract **resolution criteria** — the specific conditions that would confirm or refute it. Classifies as structured (checkable via data APIs), qualitative (requires news search), or hybrid. Determines check strategy: on a specific date, periodically, or near deadline.
 
 ### Resolver
 
-When a forecast is due for resolution, the Resolver makes the judgment call.
+Makes the judgment call when a forecast is due. For structured conditions, queries FRED/Yahoo Finance. For qualitative events, uses web search + LLM analysis. Confidence-gated: high = auto-resolve, medium = flag, low = skip.
 
-**What it does:**
-- For structured conditions, queries real-world data APIs (interest rates, asset prices, economic indicators)
-- For qualitative conditions, searches the web for evidence and analyzes it with LLM reasoning
-- Assesses confidence: **high** (auto-resolve), **medium** (flag for review), **low** (insufficient evidence)
-- Never auto-resolves Seldon Crisis forecasts — these require human judgment
+### Post-Mortem Generator
+
+After resolution, generates a post-mortem analysis: which agent was closest, which was furthest, what went right, what went wrong, and the error pattern (anchoring bias, confirmation bias, base rate neglect, etc.). Key lessons are stored as **forecast memory** for future analyst context.
+
+### Cluster Summarizer
+
+Generates human-readable summaries for multi-signal clusters, combining the key information from all constituent signals into a coherent headline and summary.
+
+### Chain Interpreter
+
+Generates and recalibrates **density matrix interpretations** for event chains — the competing scenarios with probability weights that track meta-uncertainty.
+
+---
+
+## Structural Pipeline Agents
+
+The monthly Seldon Plan uses a separate team of 6 **futurist analysts** plus a structural Skeptic and structural Seldon:
+
+| Agent | Domain | Focus |
+|-------|--------|-------|
+| **Economist Structural** | Economics | Kondratiev waves, debt supercycles, paradigm shifts |
+| **Geopolitician Structural** | Geopolitics | Hegemonic cycles, power transitions, world order |
+| **Technologist Structural** | Technology | S-curves, techno-economic paradigms, innovation diffusion |
+| **Sociologist Structural** | Society | Demographic transitions, generational shifts, social cohesion |
+| **Climatologist Structural** | Climate | IPCC scenarios, energy transitions, tipping points |
+| **Military Structural** | Military | RMA, offense-defense balance, conflict patterns |
+| **Structural Skeptic** | All | 6 "deadly traps" of long-term forecasting |
+| **Structural Seldon** | All | Master scenarios, critical junctures, leading indicators |
+
+The Structural Seldon also uses **ReACT reasoning** with 8 tools (the daily 6 plus `compare_domain_briefs` and `get_previous_report` for inter-epoch continuity).
 
 ---
 
 ## How They Work Together
 
-The entire pipeline runs every 6 hours, processing the latest intelligence signals through the full agent team.
-
 | Stage | Agent(s) | Input | Output |
 |-------|----------|-------|--------|
-| **1. Signal Processing** | Signal Processor | Raw news feeds | Structured intelligence signals |
-| **2. Parallel Analysis** | 8 Domain Analysts | Intelligence signals | Independent forecasts (8 sets) |
-| **3. Adversarial Review** | The Skeptic | All analyst forecasts | Validated forecasts + rejections |
-| **4. Synthesis** | The Seldon Arbiter | Validated forecasts | Final top 3-5 forecasts, calibrated |
-| **5. Cascade Detection** | Cascade Detector | Final forecasts | Cascade narratives + links |
-| **6. Auto-Resolution** | Resolution Extractor + Resolver | Active forecasts near expiry | Resolution outcomes + evidence |
-
-The key design principle: **no groupthink**. Each analyst works in isolation. The Skeptic challenges everything. The Arbiter synthesizes only what survives. This adversarial structure is what separates Seldon Vault from simpler "ask one AI" approaches.
+| **Signal Processing** | Signal Processor | Raw news feeds | Structured signals |
+| **Parallel Analysis** | 11 Domain Analysts | Signals + context | Independent proposals |
+| **Merge** | Merge Layer (no LLM) | Dual-persona proposals | Enriched proposals + spread |
+| **Pre-filter** | Quick Skeptic | All proposals | Filtered proposals |
+| **Deep Review** | Max Skeptic | Filtered proposals | Validated + rejections |
+| **Synthesis** | Seldon Arbiter (ReACT) | Validated proposals + tools | Final top 3-7 forecasts |
+| **Cascade Detection** | Cascade Detector | Final forecasts | Narrative links |
+| **Translation** | Translator | EN output | Bilingual output (EN/RU) |
+| **Resolution** | Resolution Extractor + Resolver | Active forecasts near expiry | Outcomes + evidence |
+| **Post-mortem** | Post-Mortem Generator | Resolved forecasts | Lessons + error patterns |
 
 ---
 
 ## Self-Correcting System
 
-Prediction without accountability is just speculation. Seldon Vault holds its agents accountable.
+### Agent Calibration Feedback Loop
 
-**Every 30 days**, each analyst receives calibration data injected directly into their system prompts:
+Every **30 days**, each analyst receives calibration data in their prompt:
 
-- **Brier Score** — a mathematical measure of forecast accuracy (0 = perfect, 1 = always wrong)
-- **Bias Direction** — is the agent consistently over-predicting or under-predicting certain event types?
-- **Adjustment Guidance** — specific instructions to correct identified biases
+- **Brier Score** over the period
+- **Bias direction** (overconfident? underconfident?)
+- **Specific adjustment guidance**
 
-Underperforming agents receive explicit feedback: "Your conflict probability estimates have been 15% too high over the past month. Adjust your base rates downward." This creates a self-correcting loop where the system learns from its own mistakes — not by retraining the model, but by tuning the analytical lens of each agent through prompt engineering.
-
-Over time, this calibration process pushes each agent toward better-calibrated probabilities, making the entire system more accurate with each cycle.
+Dual-persona agents are tracked **separately**: `economist_bull` and `economist_bear` have independent Brier Scores. The system learns which cognitive bias (optimistic vs. pessimistic) performs better in each sector over time.
 
 ### Agent Weight Ranking
 
-The calibration loop tells agents how to improve. **Weight ranking** ensures the system doesn't wait for them to get better — it adjusts their influence immediately.
+Brier Scores drive **reliability weights** that shape the Arbiter's synthesis:
 
-Each agent receives a **reliability weight per sector** based on their 30-day Brier Score:
 - Higher accuracy → higher weight → more influence on final forecasts
-- Agents are ranked independently in each domain (an economist may be excellent at economics but mediocre at geopolitics)
-- Agents with Brier > 0.40 in a sector are automatically **disqualified** from that domain
-- **Trend detection** tracks whether agents are improving or declining
+- Agents ranked independently per sector
+- Agents with Brier > 0.40 in a sector are **disqualified**
+- **Trend detection** tracks whether agents are improving or declining (comparing recent 15 days vs. previous 15 days)
 
-The Seldon Arbiter receives a structured "weight card" showing each agent's reliability. When two analysts disagree — say the Geopolitician predicts 80% and the Economist predicts 40% — the Arbiter no longer has to guess who to trust. The weight card provides a data-driven basis: if the Geopolitician has weight 0.85 in this sector and the Economist has 0.45, the Arbiter anchors closer to the Geopolitician's estimate.
+The Arbiter receives a structured "weight card" showing each agent's reliability. When a Hawk says 80% and a Dove says 40%, the weight card provides data-driven basis for which perspective to anchor toward.
 
 ---
 
@@ -273,5 +312,5 @@ The Seldon Arbiter receives a structured "weight card" showing each agent's reli
 - [How It Works](how-it-works.md) — The full pipeline from signal to forecast
 - [The Five Pillars of Analysis](five-pillars.md) — The analytical frameworks behind every forecast
 - [Accuracy & Calibration](accuracy.md) — How we measure and improve forecast quality
-- [Back to README](README.md) — Project overview
-- [Methodology (Web)](https://seldonvault.io/methodology) — Detailed methodology documentation
+- [Technology](technology.md) — Architecture and tech stack
+- [Back to README](../README.md) — Project overview

@@ -45,7 +45,7 @@ What made superforecasters effective wasn't raw intelligence or domain expertise
 Why choose? The system is designed to use AI for what it's good at, while structurally mitigating its weaknesses.
 
 ### Multi-Agent Ensemble
-Like having a team of superforecasters, eight specialist agents analyze events from different angles. Ensemble methods — combining multiple independent forecasts — consistently outperform any single forecaster, whether human or AI. This is one of the most robust findings in prediction research.
+Like having a team of superforecasters, eleven specialist analysts analyze events from different angles — with three key domains using opposing Hawk/Dove cognitive pairs that deliberately argue from opposite biases. Ensemble methods — combining multiple independent forecasts — consistently outperform any single forecaster, whether human or AI. This is one of the most robust findings in prediction research.
 
 ### Adversarial Review
 The Skeptic agent plays the role of "red team" — a structured devil's advocate that challenges every forecast. This mimics the intellectual humility that distinguishes superforecasters from overconfident experts. The Skeptic specifically checks for:

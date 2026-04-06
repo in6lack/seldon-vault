@@ -1,4 +1,4 @@
-# How Seldon Vault Works — The 8-Step Pipeline
+# How Seldon Vault Works — The Full Pipeline
 
 > *"Psychohistory dealt not with man, but with man-masses. It was the science of mobs; mobs in their billions."*
 > — Isaac Asimov, *Foundation*
@@ -7,80 +7,85 @@ Hari Seldon had the Galactic Empire. We have the internet.
 
 Every day, Seldon Vault runs an automated pipeline that transforms the raw chaos of global news into **calibrated probabilistic forecasts** — predictions with numbers attached, tracked over time, and scored for accuracy. No hand-waving, no punditry. Just signal, analysis, and math.
 
-This document walks through all eight steps of that pipeline, from the moment a Reuters headline hits our ingestion layer to the moment a Brier Score tells us whether we got it right.
+Once a month, a separate **structural pipeline** (Seldon Plan) produces decade-scale forecasts — master scenarios, critical junctures, and leading indicators for the next 1-10 years.
+
+This document walks through both pipelines, from the moment a Reuters headline hits our ingestion layer to the moment a Brier Score tells us whether we got it right.
 
 ---
 
-## The Pipeline at a Glance
+## The Daily Pipeline at a Glance
 
 | Step | Name | What Happens |
 |------|------|-------------|
-| 1 | 📡 Signal Collection | Hundreds of raw signals ingested from 12 sources |
-| 2 | 🔬 Signal Processing | AI classifies, scores, and filters each signal |
-| 3 | 🧠 Multi-Agent Analysis | 8 specialist analysts produce forecast proposals in parallel |
-| 4 | 🔍 Skeptic Review | Adversarial critic tries to disprove every proposal |
-| 5 | ⚖️ Seldon Synthesis | Arbiter selects, calibrates, and finalizes top forecasts |
-| 5.5 | ⚠️ Heuristic Alerts | Automated sanity checks catch common forecasting pitfalls |
-| 6 | 📊 Bayesian Updates | Probabilities revised every 6 hours as new evidence arrives |
-| 7 | 🎯 Accuracy Tracking | Resolved forecasts scored, agents receive calibration feedback |
-| 8 | 🤖 Auto-Resolution | Forecasts near expiry checked against real data and news sources |
+| 1 | Signal Collection | Hundreds of signals ingested 4x/day from 12 sources |
+| 2 | Signal Processing | AI classifies, scores, and filters each signal |
+| 2.5 | Knowledge Graph | Clustering, source ratings, event chains, density matrix |
+| 3 | Multi-Agent Analysis | 11 analysts (including Hawk/Dove pairs) produce proposals in parallel |
+| 3.5 | Merge Layer | Dual-persona pairs matched and merged with quantum interference |
+| 4 | Skeptic Review | Two-tier adversarial review tries to disprove every proposal |
+| 5 | Seldon Synthesis | Arbiter uses ReACT reasoning with 6 tools to select and calibrate top forecasts |
+| 5.5 | Heuristic Alerts | 6 automated sanity checks catch common forecasting pitfalls |
+| 6 | Translation | Dedicated layer translates all EN output to RU |
+| 7 | Cascade Propagation | Causal chains detected; quantum interference on multi-target cascades |
+| 8 | Bayesian Updates | Probabilities revised every 6 hours as new evidence arrives |
+| 9 | Accuracy Tracking | Resolved forecasts scored, agents receive calibration feedback |
+| 10 | Auto-Resolution | Forecasts near expiry checked against real data and news sources |
 
 ---
 
-## Step 1: 📡 Signal Collection
+## Step 1: Signal Collection
 
-The pipeline begins by casting a wide net. Seldon Vault pulls from **12 distinct data sources**, each chosen to cover a different slice of the global information landscape:
+The pipeline begins by casting a wide net. Seldon Vault runs **continuous signal collection 4 times per day** (not just once), pulling from **12 distinct data sources**:
 
 | Source | Type | What It Captures |
 |--------|------|-----------------|
-| **Reuters, BBC, Al Jazeera** (RSS) | Mainstream media | Breaking news, diplomatic events, policy announcements |
+| **RSS Feeds** (~63 feeds) | Mainstream media | Reuters, BBC, Al Jazeera, SCMP, Guardian, NYT, CNBC, Foreign Policy, and more |
 | **GDELT** | Event database | Global Database of Events, Language, and Tone — millions of geocoded events |
-| **ACLED** | Conflict data | Armed Conflict Location & Event Data — protests, battles, violence against civilians |
+| **ACLED** | Conflict data | Armed Conflict Location & Event Data — protests, battles, violence |
 | **FRED** | Economic data | Federal Reserve Economic Data — interest rates, employment, GDP, inflation |
 | **Metaculus** | Prediction market | Community probability estimates on thousands of questions |
 | **Polymarket** | Prediction market | Real-money prediction markets — skin in the game |
 | **GDACS** | Disaster alerts | Global Disaster Alert and Coordination System — earthquakes, floods, cyclones |
-| **UCDP** | Conflict data | Uppsala Conflict Data Program — fatalities, state-based conflicts |
 | **Fear & Greed Index** | Market sentiment | CNN's composite indicator of investor emotion |
-| **Telegram channels** | Social/OSINT | Real-time chatter from conflict zones, political movements |
-| **Reddit** | Social media | Subreddit discussions on geopolitics, economics, technology |
-| **Bluesky** | Social media | Public discourse, emerging narratives |
+| **Telegram** | Social/OSINT | 34 channels — real-time chatter from conflict zones, political movements |
+| **Reddit** | Social media | 6 subreddits on geopolitics, economics, technology |
+| **Bluesky** | Social media | Public discourse, emerging narratives via AT Protocol |
 
-On a typical day, **hundreds of signals** flow into the system.
+On a typical day, **hundreds of signals** flow into the system across all collection cycles.
 
-### Deduplication
+### Incremental Fetching & Deduplication
 
-Raw feeds are noisy. The same event — say, a ceasefire announcement — might appear in Reuters, BBC, three Telegram channels, and a dozen Reddit threads. Seldon Vault deduplicates using **embedding similarity**: each signal is converted into a vector representation, and any pair with a cosine similarity above **0.80** is collapsed into a single signal. This keeps the pipeline focused on genuinely distinct pieces of information.
+The continuous ingest pipeline uses **incremental fetching** — RSS collectors send HTTP conditional requests (ETag/If-Modified-Since) to skip unchanged feeds, and a Redis seen-URL cache (72h TTL) prevents re-collecting known articles. URL normalization strips tracking parameters (utm_*, fbclid, etc.) before hashing for dedup. A **nightly reconciliation** at 03:00 UTC re-runs batch clustering on saved embeddings (zero API calls) to correct any drift from incremental processing.
 
 ---
 
-## Step 2: 🔬 Signal Processing
+## Step 2: Signal Processing
 
-Raw signals are messy. A Reuters headline about a central bank rate decision and a Telegram post about troop movements in eastern Ukraine need very different treatment. The processing step uses a **cost-efficient AI classifier** to tag every signal with structured metadata:
+Raw signals are messy. A Reuters headline about a central bank rate decision and a Telegram post about troop movements need very different treatment. The processing step uses a **cost-efficient AI classifier** (DeepSeek Chat) to tag every signal with structured metadata:
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| **Sector** | Thematic category | `geopolitics`, `economics`, `technology`, `social`, `environment`, `military`, `cybersecurity` |
+| **Sector** | Thematic category | `geopolitics`, `economics`, `technology`, `social`, `environment`, `military`, `cybersecurity`, `political` |
 | **Sentiment** | Tone of the signal | `-1.0` (very negative) to `+1.0` (very positive) |
 | **Importance** | Significance score | `0–100` — signals scoring below **30** are filtered out |
-| **Temporal scope** | Time horizon of the event | `immediate` (breaking news) or `structural` (long-term trend) |
+| **Temporal scope** | Time horizon | `immediate` (breaking news) or `structural` (long-term trend) |
 | **Key entities** | Named actors | Countries, organizations, leaders, institutions |
 
-Signals are processed in **batches of 10–15** for efficiency. By the end of this step, the system has a clean, structured feed of the day's most significant developments — noise removed, context added.
+Signals are processed in **batches of 12** for efficiency. By the end of this step, the system has a clean, structured feed of the day's most significant developments.
 
 ---
 
-## Step 2.5: 🔗 Knowledge Graph
+## Step 2.5: Knowledge Graph
 
-Before signals reach the analysts, three Knowledge Graph layers add structure and context:
+Before signals reach the analysts, four Knowledge Graph layers add structure and context:
 
 ### Signal Clustering
 
-Similar signals from different sources are grouped into **semantic clusters** using embedding cosine similarity (threshold: 0.72). If Reuters, BBC, and TASS all report on the same sanctions discussion, they become one cluster with `source_count: 3` instead of three separate signals. This reduces noise and tells analysts *how many independent sources* confirm an event.
+Similar signals from different sources are grouped into **semantic clusters** using embedding cosine similarity (threshold: 0.72). If Reuters, BBC, and TASS all report on the same sanctions discussion, they become one cluster with `source_count: 3` instead of three separate signals. Multi-signal clusters get LLM-generated summaries. During continuous ingest, a stricter **6-gate incremental clustering** funnel prevents false merges: cluster size cap → sector compatibility → cosine similarity ≥ 0.74 → entity overlap → member-level checks → LLM "same story?" validation.
 
 ### Source Reliability Ratings
 
-Each news source has a **per-sector reliability score** computed from historical Brier Scores. If forecasts based on Reuters' geopolitics reporting were consistently accurate (low Brier), Reuters gets a high accuracy rating in that sector. A second metric — **independence** — measures how often a source provides unique information rather than echoing others. These ratings are injected into clusters so the Seldon Arbiter can weigh evidence from reliable sources more heavily.
+Each news source has a **per-sector reliability score** computed from historical Brier Scores. If forecasts based on Reuters' geopolitics reporting were consistently accurate (low Brier), Reuters gets a high accuracy rating in that sector. A second metric — **independence** — measures how often a source provides unique information rather than echoing others. Composite score: 0.7 × accuracy + 0.3 × independence. Zero LLM cost — pure SQL aggregation.
 
 ### Event Chains
 
@@ -97,320 +102,352 @@ Signal clusters from different days are linked into **temporal event chains** vi
 | **Resolution** | Event concluded |
 | **Aftermath** | Post-event consequences |
 
-The Seldon Arbiter sees the full event chain context — how long a story has been developing, what stage it's at, and whether it's escalating or winding down. If a cluster belongs to a chain that already has an active forecast, the system **updates the existing forecast** instead of creating a duplicate.
+If a cluster belongs to a chain that already has an active forecast, the system **updates the existing forecast** instead of creating a duplicate.
+
+### Density Matrix
+
+Each event chain carries **2-4 competing interpretations** — mutually exclusive scenarios with weights summing to 1.0. For example, a military buildup chain might have: "real escalation" (40%), "pressure tactics" (35%), "media amplification" (25%). **Purity** (sum of squared weights) tracks meta-uncertainty: low purity means the situation is genuinely ambiguous; high purity means one interpretation dominates. Interpretations are updated via keyword-based Bayesian heuristics (zero LLM cost) during continuous ingest, and recalibrated daily via LLM.
 
 ---
 
-## Step 3: 🧠 Multi-Agent Analysis
+## Step 3: Multi-Agent Analysis
 
 This is where Seldon Vault's architecture gets interesting.
 
-Eight **specialized analyst agents** run in parallel, each embodying a different domain expertise. Think of them as eight brilliant analysts sitting in a room together, all reading the same intelligence briefing but seeing different things.
+**Eleven specialized analyst agents** run in parallel, each embodying a different domain expertise and cognitive bias. They don't see each other's work — only the Skeptic and Arbiter see all analyses. This prevents groupthink and ensures diverse perspectives.
 
-Every analyst receives **all filtered signals** from Step 2, but each analyzes through their own lens — a military analyst will focus on force deployments and defense posture, while an economics analyst will track capital flows and trade disruptions.
+### Dual-Persona System
 
-### The Five Pillars Framework
+Three key domains use **opposing persona pairs** to force genuine disagreement:
 
-All eight analysts share a common analytical toolkit called the **Five Pillars** — a structured reasoning framework that ensures rigor:
+| Domain | Optimist | Pessimist | Why |
+|--------|----------|-----------|-----|
+| **Geopolitics** | Dove (diplomacy, cooperation) | Hawk (escalation, hard power) | Geopolitics is inherently ambiguous between cooperation and conflict |
+| **Economics** | Bull (growth, resilience) | Bear (risk, tail events) | Markets are driven by optimism/pessimism cycles |
+| **Politics** | Dove (institutions, reform) | Hawk (power realism, repression) | Internal politics oscillates between openness and control |
 
-1. **Game Theory** — Who are the actors? What are their incentives? What are the Nash equilibria?
-2. **Bayesian Inference** — What's the prior probability? How should new evidence update it?
-3. **Chaos Theory** — Where are the sensitive dependencies? What small changes could cascade?
-4. **Psychohistory** — What do large-scale social dynamics and historical patterns suggest?
-5. **Network Theory** — How are actors, institutions, and events connected? Where are the critical nodes?
+Each persona has 4 calibrated dimensions: **risk appetite**, **contrarian index**, **temporal bias**, and **confidence style** — set as numeric values (0.0-1.0) that systematically shift how the agent interprets ambiguous signals. A Hawk with risk_appetite=0.75 will see the same troop movement data and assign higher conflict probability than a Dove with risk_appetite=0.25.
 
-For a deep dive into each pillar, see [five-pillars.md](five-pillars.md).
+Five solo domains (technology, sociology, climatology, military, cybersecurity) use single personas but can engage **multi-model LLM Council** — running the same analysis across 3 different LLM providers (DeepSeek, GPT, Claude) and debating across up to 3 rounds until consensus.
+
+### Context Injection
+
+Every analyst receives rich context beyond just the signals:
+
+- **Historical analogies** — RAG-retrieved similar past events with outcomes
+- **Agent calibration block** — their own Brier Score, bias direction, adjustment guidance
+- **Forecast memory** — similar resolved forecasts with post-mortem lessons
+- **Decision-maker profiles** — behavioral profiles of 14 world leaders (Trump, Putin, Xi, Erdogan, Netanyahu, Musk, etc.) relevant to the signals' regions and sectors
+- **Event chain context** — lifecycle stage, duration, and density matrix interpretations
+- **Agent weight card** — reliability rankings showing which agents the Arbiter trusts most
 
 ### Output
 
 Each analyst produces:
-- **New forecast proposals** — title, probability estimate, time horizon, sector, region, and detailed reasoning
-- **Updates to existing active forecasts** — adjustments based on new evidence
+- **New forecast proposals** — title, probability, time horizon, sector, region, reasoning, key indicators
+- **Updates to existing active forecasts** — likelihood ratios with confidence levels
 
-When **structural signals** are present (long-term trends rather than breaking news), analysts also engage a **long-term mode**, producing forecasts on decade-plus horizons — the kind of slow-burn predictions that pundits rarely make because there's no news cycle reward for them.
+When **structural signals** are present, analysts also produce **long-term forecasts** on decade-plus horizons.
 
-For details on each agent's personality and specialization, see [agents.md](agents.md).
+For details on each agent, see [agents.md](agents.md).
 
 ---
 
-## Step 4: 🔍 Skeptic Review
+## Step 3.5: Merge Layer
 
-Every forecast proposal now faces an adversary.
+Before proposals reach the Skeptic, the **Merge Layer** processes dual-persona outputs — entirely without LLM calls:
 
-The **Skeptic** is a dedicated agent whose sole purpose is to **disprove** each proposal. It's not looking for reasons to agree — it's looking for reasons to reject. This is deliberate: unchallenged predictions drift toward overconfidence and groupthink.
+1. Split proposals by domain (geopolitics, economics, politics)
+2. Match Hawk/Dove pairs by **title Jaccard similarity** (threshold: 0.80)
+3. For matched pairs, compute:
+   - **Weighted average probability** (classical merge)
+   - **Disagreement spread** — the absolute difference between Hawk and Dove
+   - **Quantum persona interference** — wave superposition modeling: `P = α²P_hawk + β²P_dove + 2αβ·cos(φ)·√(P_hawk·P_dove)`, where coherence φ reflects how much the two personas actually agree despite opposite biases
+   - **Consensus indicators** — key indicators both personas identified independently
 
-### How It Works
+The enriched proposal goes to the Skeptic with both perspectives visible, the spread metric, and the quantum shadow. The Skeptic understands that Hawk/Dove disagreement is **intentional cognitive diversity**, not duplication.
+
+Unmatched proposals (a Hawk with no corresponding Dove topic, or solo-domain agents) pass through unchanged.
+
+---
+
+## Step 4: Skeptic Review
+
+Every forecast proposal faces a **two-tier adversarial review**:
+
+### Quick Skeptic (Pre-filter)
+
+A fast, lightweight review checks proposals against **6 structural kill rules** — no web search, just logical validation. Catches: unfalsifiable claims, vague predictions, obvious duplicates, pure speculation without evidence, factual errors, and probability-description mismatches. Proposals scoring below 50/100 are auto-rejected before reaching the Max Skeptic.
+
+### Max Skeptic (Deep Review)
 
 The Skeptic performs real-time **web search** (via Tavily Search API) to fact-check claims and find counter-evidence. It evaluates each proposal on:
 
 - **Logical consistency** — Does the reasoning hold together?
 - **Evidence quality** — Are the sources reliable? Is the evidence direct or circumstantial?
 - **Base rate neglect** — Is the analyst ignoring how rarely this type of event actually occurs?
-- **Confirmation bias** — Is the analyst cherry-picking evidence that supports the conclusion?
+- **Confirmation bias** — Is the analyst cherry-picking evidence?
 - **Missing perspectives** — What actors, incentives, or dynamics are being ignored?
+- **Media bias detection** — Availability bias (media volume ≠ real risk), selection bias (disproportionate coverage), and narrative momentum (stories continuing after conditions change)
 
 ### Risk Scoring
 
-Each proposal receives a **risk score from 0 to 100**:
-
 | Score Range | Verdict | What Happens |
 |-------------|---------|-------------|
-| **< 50** | AUTO-REJECT | Proposal is dropped entirely. Insufficient evidence or flawed reasoning. |
-| **50–79** | CAUTION | Proposal is approved but with **significant probability adjustment**. The Skeptic may shift the probability substantially. |
-| **80–100** | APPROVED | Proposal passes with minor or no adjustment. |
+| **< 50** | AUTO-REJECT | Proposal is dropped. Insufficient evidence or flawed reasoning. |
+| **50–79** | CAUTION | Approved with significant probability adjustment. |
+| **80–100** | APPROVED | Passes with minor or no adjustment. |
 
-The Skeptic can — and regularly does — **adjust the probability** on proposals it approves. A forecast submitted at 75% might emerge from skeptic review at 60% after the Skeptic identifies overlooked base rates or counter-evidence.
+The Skeptic can — and regularly does — adjust probability. A forecast at 75% might emerge at 60% after identifying overlooked base rates.
 
 ---
 
-## Step 5: ⚖️ Seldon Synthesis
+## Step 5: Seldon Synthesis
 
-The pipeline now has a pool of approved, vetted forecast proposals. The **Seldon Arbiter** takes over.
+The pipeline now has a pool of approved, vetted proposals. The **Seldon Arbiter** takes over.
+
+### ReACT Reasoning
+
+The Arbiter doesn't just read proposals and make a call. It uses **ReACT reasoning** — iterative Thought-Action-Observation loops powered by Claude Opus with extended thinking:
+
+1. **Think** about the proposals, identify questions and gaps
+2. **Act** by calling one of 6 tools:
+   - `search_analogies` — find historical parallels in the RAG database
+   - `query_indicators` — fetch real-time economic data from FRED
+   - `fact_check` — search the web for verification
+   - `get_event_chain` — explore temporal context of a story
+   - `get_agent_track_record` — check which analysts have been accurate in this sector
+   - `compare_proposals` — compare proposals analytically
+3. **Observe** the tool results and update reasoning
+4. **Repeat** until confident (up to 5 rounds, 30 tool calls max)
+
+This iterative approach means the Arbiter can **investigate** rather than just adjudicate. It might search for historical analogies to a proposed scenario, check whether an economic indicator supports the forecast, and verify a factual claim — all before making the final call.
 
 ### Selection and Calibration
 
-The Arbiter selects the **top 3–5 most significant forecasts** from the approved pool. It then:
+The Arbiter selects the **top 3–7 most significant forecasts**. It then:
 
-- **Calibrates probabilities** into the range **5%–95%**. Seldon Vault never assigns 0% or 100% to any forecast. In a complex world, certainty is an illusion — and claiming it destroys your calibration score.
-- **Writes bilingual descriptions** in English and Russian, ensuring accessibility across the primary audience.
-- **Ensures horizon diversity** — the final selection includes at least one long-term forecast if available, preventing the system from becoming myopically focused on next-week events.
+- **Calibrates probabilities** into the range **5%–95%**. Never 0% or 100%.
+- **Ensures sector and horizon diversity** in the final selection.
+- **Produces English-only output** — the Translation Layer handles Russian.
 
 ### Crisis Detection
 
-During synthesis, the Arbiter runs **Seldon Crisis Detection** (more on this [below](#seldon-crisis-detection)), flagging any high-probability critical events that have been independently confirmed by two or more analysts.
+During synthesis, the Arbiter runs **Seldon Crisis Detection**, flagging events meeting all criteria: P > 80%, severity = critical, confirmed by 2+ analysts, 4+ sectors involved.
 
 ### Cascade Analysis
 
-A separate **Cascade Detector** agent identifies **causal chains** between forecasts (more on this [below](#cascade-narratives)). If a new war forecast logically connects to an energy price forecast which connects to a recession forecast, the system maps that chain explicitly.
+A separate **Cascade Detector** agent identifies **causal chains** between forecasts (more on this [below](#cascade-narratives)).
 
 ---
 
-## Step 5.5: ⚠️ Heuristic Alerts
+## Step 5.5: Heuristic Alerts
 
-Before forecasts are saved, a **deterministic rule engine** runs five sanity checks designed to catch common cognitive biases that even multi-agent systems can exhibit:
+Before forecasts are saved, a **deterministic rule engine** runs six sanity checks:
 
 | Check | What It Catches | Example |
 |-------|----------------|---------|
-| **Overconfidence** | Extreme probabilities (>90% or <10%) without overwhelming evidence | "95% that Country X invades" — really? |
-| **Mid-range Anchoring** | Probabilities clustered around 50% that signal hedging, not analysis | "50% chance of recession" = "I don't know" |
-| **Analyst Disagreement** | Large spread (>30%) between analysts on the same forecast | Geopolitician says 80%, Economist says 35% |
-| **Skeptic Red Flag** | Skeptic adjusted probability by >15% but still approved (caution zone) | Original 70% → Skeptic adjusted to 52% |
+| **Overconfidence** | Extreme probabilities (>90% or <10%) | "95% that Country X invades" — really? |
+| **Mid-range Anchoring** | Probabilities near 50% signal hedging | "50% chance of recession" = "I don't know" |
+| **Analyst Disagreement** | Spread >30% between analysts | Hawk says 80%, Dove says 35% |
+| **Skeptic Red Flag** | Skeptic adjusted by >15% in caution zone | Original 70% → Skeptic adjusted to 52% |
 | **Temporal Mismatch** | Description says "imminent" but horizon is 60 days | Words and numbers should agree |
+| **Stale Prediction** | Forecast may describe an already-occurred event | Predicting the past isn't forecasting |
 
-These are **alerts, not auto-corrections**. The system flags potential issues but doesn't override the Seldon Arbiter's judgment. Alert data is stored on each forecast and visible in the forecast detail page. As the system accumulates more resolved forecasts, future phases will add calibration-curve-based corrections.
-
-The Skeptic agent also has **media bias detection** built into its review process, looking for three systematic distortions: **availability bias** (media volume ≠ real risk), **selection bias** (disproportionate coverage), and **narrative momentum** (stories continuing after conditions change).
-
----
-
-## Step 6: 📊 Bayesian Updates
-
-Forecasts don't freeze once published. The world keeps turning, and probabilities should turn with it.
-
-Every **6 hours**, Seldon Vault runs a Bayesian update cycle:
-
-1. New signals from ongoing collection are matched against active forecasts.
-2. Each relevant piece of evidence is assessed: does it **support** or **contradict** the forecast?
-3. Probabilities are updated using **Bayes' theorem**.
-
-### The Formula (Simply Put)
-
-```
-P(new) = P(old) × likelihood_ratio / normalizing_constant
-```
-
-In plain language: *take what you believed before, multiply by how much the new evidence supports that belief, and normalize.* If a forecast was at 60% and strong confirming evidence arrives, it might rise to 68%. If contradictory evidence appears, it might drop to 52%.
-
-### Guardrails
-
-To prevent **overreaction** to noisy or sensational information:
-
-| Guardrail | Rule |
-|-----------|------|
-| **Maximum daily shift** | ±15% per day, regardless of evidence volume |
-| **Per-horizon rates** | Short-term forecasts allow more movement than century-scale ones |
-| **Probability bounds** | Never drops below 5% or rises above 95% |
-
-### Transparency
-
-The **full probability history** of every forecast is stored and publicly visible as charts. You can see exactly how a forecast evolved over days and weeks — every bump, every dip, and the evidence that caused it.
+These are **alerts, not auto-corrections**. Stored as structured data on each forecast for transparency.
 
 ---
 
-## Step 7: 🎯 Accuracy Tracking
+## Step 6: Translation Layer
 
-This is where the rubber meets the road. Predictions without accountability are just opinions.
+All agents produce **English-only output** — no bilingual generation during analysis. A dedicated Translation Layer converts all user-facing fields to Russian via a **single LLM call per forecast** for context coherence: title, description, reasoning, agent summaries, skeptic critique, heuristic messages, narrative elements, and post-mortem lessons. Multiple forecasts are translated in **parallel** (up to 5 concurrent).
 
-### Brier Score
-
-Every resolved forecast is scored using the **Brier Score**:
-
-```
-Brier Score = (Predicted Probability - Actual Outcome)²
-```
-
-Where the actual outcome is 1 (it happened) or 0 (it didn't).
-
-| Brier Score | Interpretation |
-|-------------|---------------|
-| **0.00** | Perfect — you predicted exactly what happened |
-| **0.10** | Good — better than most human forecasters |
-| **0.25** | Random guessing — a coin flip would do as well |
-| **> 0.25** | Worse than chance — actively misleading |
-
-### Per-Agent Tracking
-
-Every analyst agent has its own Brier Score tracked independently. This reveals which agents are sharp on which sectors and which ones drift.
-
-### Calibration Curves
-
-The system plots **predicted probabilities vs. actual frequencies**. A well-calibrated forecaster who says "70%" should be right about 70% of the time. The calibration curve reveals systematic biases — overconfidence, underconfidence, and sector-specific blindspots.
-
-### Agent Calibration Feedback Loop
-
-Every **30 days**, each agent receives its calibration data:
-
-- Their Brier Score over the period
-- Their bias direction (overconfident? underconfident?)
-- Specific adjustment guidance
-
-This data is **injected directly into the agent's prompt**, creating a **self-correcting system**. An agent that has been systematically overconfident on military forecasts will receive instructions to temper its confidence in that sector. Over time, the system converges toward better calibration — not because someone manually tuned it, but because the feedback loop is built into the architecture.
-
-### Agent Weight Ranking
-
-Calibration data also drives a **weight ranking system** that shapes how the Seldon Arbiter weighs competing analyses.
-
-Each agent's Brier Score is tracked per sector. These scores are converted into normalized weights — an agent with excellent accuracy in economics (Brier 0.10) gets roughly **2.7 times more influence** than one with fair accuracy (Brier 0.35). Agents whose accuracy drops below a threshold (Brier > 0.40) are automatically **disqualified** from influencing forecasts in that sector.
-
-This means the system doesn't just tell agents they're wrong — it **reduces their impact** on output until they improve. The dual mechanism of prompt calibration (changing how agents think) and weight ranking (changing how much their opinions count) creates a robust self-correction system.
-
-### Per-Sector Breakdown
-
-Accuracy is tracked per sector (geopolitics, economics, technology, etc.), allowing fine-grained analysis of where the system excels and where it struggles.
-
-### Public Access
-
-All metrics — Brier Scores, calibration curves, per-agent performance, per-sector breakdowns — are **publicly available via API**. Seldon Vault bets on transparency: if the forecasts are good, the numbers will show it. If they're bad, hiding them would only delay the reckoning.
-
-For full accuracy methodology and current scores, see [accuracy.md](accuracy.md).
+This architecture ensures analysts spend their token budget on analysis, not translation. The frontend's `useBilingual()` hook falls back to English when Russian is empty.
 
 ---
 
-## Step 8: 🤖 Auto-Resolution
+## Step 7: Cascade Propagation
 
-Forecasts don't stay active forever. When a forecast approaches its expiry date, the **Resolution Agent** attempts to determine whether the predicted event occurred.
+### Cascade Narratives
 
-### Structured Resolution
+The world doesn't produce events in isolation. A war disrupts supply chains. Supply chains affect commodity prices. Commodity prices reshape energy policy. Energy policy drives elections.
 
-For forecasts with measurable conditions — interest rate changes, asset price thresholds, economic indicators — the system checks directly against **data APIs**:
-
-| Data Source | What It Checks |
-|-------------|----------------|
-| **FRED** | Federal Reserve data: interest rates, unemployment, inflation, GDP |
-| **Yahoo Finance** | Asset prices, commodity futures, exchange rates |
-| **Exchange Rate APIs** | Currency pairs |
-| **World Bank** | Development indicators |
-
-If all conditions are met, the forecast is resolved as **correct**. If none are met, **incorrect**. If some but not all, **partial**.
-
-### Qualitative Resolution
-
-For events that can't be reduced to a number — military actions, political decisions, diplomatic breakthroughs — the system uses **AI-powered web search** to find evidence:
-
-1. Search queries extracted from the forecast's resolution criteria
-2. Web search via Tavily API gathers recent evidence
-3. An LLM Resolver analyzes the evidence and determines the outcome
-4. Resolution confidence is assessed: **high** (auto-resolve), **medium** (flag for review), **low** (skip)
-
-### Safeguards
-
-- **Seldon Crisis forecasts** are never auto-resolved — these are too consequential for automated judgment
-- **Minimum evidence threshold** — at least 2 independent sources required
-- **Confidence gating** — only high-confidence resolutions are applied automatically
-- **Full audit trail** — every resolution attempt is logged with reasoning, evidence, and confidence level
-
----
-
-## Seldon Crisis Detection
-
-In Asimov's *Foundation* series, a **Seldon Crisis** is a pivotal moment in galactic history — a point where the mathematical inevitability of psychohistory converges into a single, unavoidable confrontation. The crisis resolves only one way, and that resolution shapes centuries to come.
-
-Seldon Vault borrows the term (with appropriate humility about the gap between fiction and reality).
-
-A **Seldon Crisis** is flagged when all three criteria are met:
-
-| Criterion | Threshold |
-|-----------|-----------|
-| **Probability** | > 80% |
-| **Severity** | Critical (highest tier) |
-| **Analyst Consensus** | Confirmed independently by **2 or more** analyst agents |
-
-When a Seldon Crisis is detected, it receives special treatment in the output — elevated visibility, detailed causal analysis, and explicit tracking of its evolution. These are the events that demand attention: the moments where multiple independent analytical perspectives converge on the same alarming conclusion.
-
-Seldon Crises are rare by design. If they fired every week, they'd be noise. Their value is in the signal.
-
----
-
-## Cascade Narratives
-
-The world doesn't produce events in isolation. A war disrupts supply chains. Supply chains affect commodity prices. Commodity prices reshape energy policy. Energy policy drives elections. Elections determine alliances. Alliances determine the next war.
-
-Seldon Vault's **Cascade Detector** agent maps these causal chains explicitly.
-
-### How It Works
-
-The Cascade Detector examines the active forecast pool and identifies **links** between forecasts. Each link has:
+The **Cascade Detector** maps these causal chains explicitly:
 
 | Property | Description |
 |----------|-------------|
 | **Link type** | `causes`, `amplifies`, `enables`, or `triggers` |
 | **Strength** | `0.3–1.0` — how tight the causal coupling is |
-| **Conditional probability shift** | How much Forecast B's probability changes *if* Forecast A resolves as predicted |
+| **Conditional shift** | How much Forecast B's probability changes *if* Forecast A resolves |
 | **Trajectory** | `escalating`, `stable`, or `de-escalating` |
 
-### Example
+### Quantum Cascade Interference
 
-Consider this cascade:
+When **two or more cascade shifts target the same forecast** (a "fork target"), their interaction is modeled as **wave superposition** instead of linear summation:
 
 ```
-Middle East conflict (P: 72%)
-  └── causes → Oil supply disruption (P: 58%, shift: +20% if conflict occurs)
-        └── triggers → Price spike above $120/bbl (P: 45%, shift: +25% if disruption occurs)
-              └── amplifies → Energy crisis in Europe (P: 30%, shift: +15% if spike occurs)
+total = classical_sum + interference_term
+interference = 2 × √(|s_A| × |s_B|) × cos(θ)
+θ = π × (1 - coherence)
 ```
 
-Each link in the chain is tracked independently. If the first domino falls — the conflict materializes — the downstream forecasts automatically receive Bayesian updates reflecting the increased conditional probability.
+Coherence is computed from 4 factors: sector match, direction match, temporal proximity, and entity overlap. High coherence produces **constructive interference** (amplifying the combined effect); low coherence produces **destructive interference** (canceling).
 
-Cascade Narratives turn a flat list of forecasts into a **network of interdependent futures**, making it possible to reason about second- and third-order consequences before they arrive.
+Currently running in **shadow mode**: classical formula always determines actual probability; quantum result computed alongside and stored as metadata for validation. The frontend shows both values for comparison.
+
+---
+
+## Step 8: Bayesian Updates
+
+Forecasts don't freeze once published. Every **6 hours**, the system runs a Bayesian update cycle:
+
+1. New signals matched against active forecasts
+2. Each analyst outputs a **likelihood ratio** (0.1–10) with confidence (high/medium/low)
+3. Formula: `P(new) = (LR × P(old)) / (LR × P(old) + (1 - P(old)))`
+4. Confidence dampening: high = full LR, medium = 70%, low = 40%
+5. Neutral band: LR within [0.85, 1.15] = no update (prevents noise)
+
+### Guardrails
+
+| Guardrail | Rule |
+|-----------|------|
+| **Maximum daily shift** | ±15%, regardless of evidence volume |
+| **Per-horizon rates** | Short-term allows more movement than century-scale |
+| **Probability bounds** | Never below 5% or above 95% |
+
+The full probability history is stored and publicly visible as charts.
+
+---
+
+## Step 9: Accuracy Tracking
+
+### Brier Score
+
+Every resolved forecast is scored:
+
+```
+Brier Score = (Predicted Probability - Actual Outcome)²
+```
+
+| Brier Score | Interpretation |
+|-------------|---------------|
+| **0.00** | Perfect |
+| **0.10** | Good — better than most human forecasters |
+| **0.25** | Random guessing |
+| **> 0.25** | Worse than chance |
+
+### Agent Calibration Feedback Loop
+
+Every 30 days, each agent receives calibration data injected into their prompt: Brier Score, bias direction, specific adjustment guidance. Dual-persona agents (e.g., `economist_bull` and `economist_bear`) are tracked as **separate agents**, so the system learns which cognitive bias performs better in each sector.
+
+### Agent Weight Ranking
+
+Brier Scores are converted into **reliability weights per sector**: `weight = 1 / (Brier + 0.05)`, normalized. Agents with Brier > 0.40 are **disqualified**. The Arbiter receives a structured weight card showing each agent's reliability.
+
+For full accuracy methodology, see [accuracy.md](accuracy.md).
+
+---
+
+## Step 10: Auto-Resolution
+
+When a forecast approaches expiry, the **Resolution Agent** determines whether the predicted event occurred.
+
+### Structured Resolution
+
+For measurable conditions:
+
+| Data Source | What It Checks |
+|-------------|----------------|
+| **FRED** | Interest rates, unemployment, inflation, GDP |
+| **Yahoo Finance** | Asset prices, commodity futures, exchange rates |
+| **Exchange Rate APIs** | Currency pairs |
+| **World Bank** | Development indicators |
+
+### Qualitative Resolution
+
+For events that can't be reduced to a number:
+1. Search queries extracted from resolution criteria
+2. Web search via Tavily gathers evidence
+3. LLM Resolver analyzes evidence and determines outcome
+4. Confidence gating: high = auto-resolve, medium = flag for review, low = skip
+
+### Safeguards
+
+- **Seldon Crisis forecasts** never auto-resolved
+- **Minimum 2 independent evidence sources** required
+- **Stale evidence gate** — evidence predating the forecast doesn't count
+- **Full audit trail** — every attempt logged with reasoning and evidence
+
+---
+
+## Seldon Crisis Detection
+
+A **Seldon Crisis** is flagged when:
+
+| Criterion | Threshold |
+|-----------|-----------|
+| **Probability** | > 80% |
+| **Severity** | Critical |
+| **Analyst Consensus** | 2+ analyst agents |
+| **Sector Breadth** | 4+ sectors involved |
+| **Analyst Diversity** | 3+ distinct analysts |
+
+Seldon Crises are rare by design. Their value is in the signal.
+
+---
+
+## The Structural Pipeline (Seldon Plan)
+
+Once a month, a separate pipeline produces **1-10 year structural forecasts**:
+
+### Steps
+
+1. **Data Collection** — World Bank API, IMF WEO, UN Population Division, OWID/GISS climate data for 15 priority countries
+2. **World State Synthesis** — An LLM compresses 90 days of daily forecast history into domain briefs across 6 domains
+3. **Structural RAG** — pgvector similarity search retrieves historical analogies: Kondratiev waves, debt supercycles, hegemonic transitions, demographic shifts
+4. **6 Futurist Analysts** (parallel, optional multi-model council):
+   - Economist Structural (Kondratiev waves, debt cycles, paradigm shifts)
+   - Geopolitician Structural (hegemonic cycles, power transitions, world order)
+   - Technologist Structural (S-curves, techno-economic paradigms)
+   - Sociologist Structural (demographic transitions, generational shifts)
+   - Climatologist Structural (IPCC scenarios, tipping points, energy transitions)
+   - Military Structural (RMA, offense-defense balance, conflict patterns)
+5. **Structural Skeptic** — Reviews each domain for 6 "deadly traps" of long-term forecasting: anchoring to present, linear extrapolation, ignoring cycles, survivorship bias, technology utopianism/dystopianism, and ignoring wildcards
+6. **Seldon Structural** — Claude Opus synthesizes:
+   - **Master scenarios** (2-4 linked scenarios with probabilities, drivers, risks)
+   - **Critical junctures** (key decision points with fork outcomes and scenario shifts)
+   - **Leading indicators** (quantitative metrics to track quarterly)
+   - **Cross-domain causal links** (8-15 explicit links between domain scenarios with quantum interference modeling)
+7. **Translation** — Commentary and scenarios translated to Russian
+8. **Storage** — SeldonReport + 6 StructuralForecasts, epoch auto-increment
+
+### Quantum Structural Cascade
+
+When 2+ cross-domain links target the same master scenario, pairwise **quantum interference** is computed using structural coherence factors: domain adjacency, direction match, horizon overlap, and assumption overlap. Shadow mode applies — classical probabilities always determine the displayed values.
+
+Output is visible at [seldonvault.io/seldon-plan](https://seldonvault.io/seldon-plan).
 
 ---
 
 ## Checkpoint & Resume
 
-The real world is messy, and so is infrastructure. Networks drop, APIs time out, servers restart.
-
-Seldon Vault's pipeline supports **checkpointing** — after each of the seven steps completes, the pipeline saves its state. If the process is interrupted at any point (a crash, a deployment, a transient failure), it **resumes from the last completed step** rather than starting over from scratch.
-
-This means:
-- Signal collection that took 20 minutes doesn't need to re-run if analysis crashes.
-- Expensive multi-agent analysis isn't lost to a network blip during skeptic review.
-- The pipeline is **idempotent within a run** — resuming produces the same result as an uninterrupted execution.
+The pipeline supports **checkpointing** — after each step, state is saved to JSON. If interrupted, it resumes from the last completed step. The `--from-step N` flag allows manual control.
 
 ---
 
 ## Further Reading
 
-- [agents.md](agents.md) — Profiles of all 8 analyst agents and the Skeptic
+- [agents.md](agents.md) — Profiles of all 11 analysts, Skeptic, and Arbiter
 - [five-pillars.md](five-pillars.md) — Deep dive into the analytical framework
-- [accuracy.md](accuracy.md) — Current Brier Scores, calibration curves, and performance metrics
-- [README.md](../README.md) — Project overview and quickstart
-- [Methodology (seldonvault.io)](https://seldonvault.io/methodology) — Public methodology page
+- [accuracy.md](accuracy.md) — Brier Scores, calibration curves, performance metrics
+- [technology.md](technology.md) — Full tech stack and architecture
+- [README.md](../README.md) — Project overview
 
 ---
 
 *"The future is already here — it's just not evenly distributed."*
 — William Gibson
 
-Seldon Vault doesn't predict the future with certainty. Nothing can. What it does is **distribute probability across possible futures**, update those probabilities as evidence arrives, and hold itself accountable when the future finally resolves into fact. Eight steps, every day, relentlessly.
+Seldon Vault doesn't predict the future with certainty. Nothing can. What it does is **distribute probability across possible futures**, update those probabilities as evidence arrives, and hold itself accountable when the future finally resolves into fact. Every day, relentlessly.
 
 The Foundation's work continues.

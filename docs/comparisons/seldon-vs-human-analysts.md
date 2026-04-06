@@ -44,7 +44,7 @@ Seldon Vault's architecture addresses specific, well-documented weaknesses in hu
 
 | Dimension | Seldon Vault | Human Analysts |
 |---|---|---|
-| **Source of analysis** | 10 AI agents with specialized perspectives | Individual experts or small teams |
+| **Source of analysis** | 11 AI analysts with opposing cognitive biases + Skeptic + Arbiter | Individual experts or small teams |
 | **Scale** | Hundreds of signals across 8 domains daily | Deep focus on a few situations |
 | **Cost** | Free | $$$–$$$$ (subscriptions, consulting fees) |
 | **Transparency** | Full reasoning chain visible | Conclusions published; reasoning often opaque |
@@ -79,7 +79,7 @@ Seldon Vault's architecture addresses specific, well-documented weaknesses in hu
 
 - **When cost is a factor.** Professional geopolitical analysis is expensive. Seldon Vault provides multi-domain, multi-perspective analysis for free.
 
-- **When you want transparent reasoning from multiple perspectives.** Seeing exactly how eight different analytical lenses assess the same question — and where they agree and disagree — is valuable context that most professional reports don't provide.
+- **When you want transparent reasoning from multiple perspectives.** Seeing exactly how eleven different analytical lenses (including opposing Hawk/Dove cognitive pairs) assess the same question — and where they agree and disagree — is valuable context that most professional reports don't provide.
 
 - **When you want accuracy to be tracked and published.** If you're relying on a forecast to make decisions, you should be able to see the forecaster's track record. Seldon Vault publishes this. Most human analysts don't.
 
@@ -93,4 +93,4 @@ AI doesn't replace human expertise. But it does complement it — filling gaps i
 
 ---
 
-[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Ten Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)
+[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)

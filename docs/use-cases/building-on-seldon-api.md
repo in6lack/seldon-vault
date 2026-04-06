@@ -8,10 +8,10 @@
 
 - **Free** — no subscription, no payment, no hidden tiers
 - **No authentication required** — no API keys to manage, no OAuth flows to implement
-- **13 endpoints** covering forecasts, metrics, regions, narratives, signals, and real-time events
+- **30+ endpoints** covering forecasts, metrics, regions, narratives, signals, event chains, pipeline audit, structural reports, and real-time events
 - **JSON responses** — works with any programming language
 - **Real-time updates** via Server-Sent Events — subscribe once, get notified instantly
-- **Generous rate limits** — 10 requests/second per IP, burst up to 20
+- **Generous rate limits** — 60 requests/minute per IP (20/min for heavy endpoints)
 
 ## Quick Start — Your First Request in 30 Seconds
 
@@ -115,13 +115,17 @@ es.addEventListener('seldon_crisis', e => {
 
 ## Rate Limits and Best Practices
 
-| Rule | Detail |
+| Tier | Limit | Endpoints |
+|---|---|---|
+| **Default** | 60 requests/minute per IP | Most endpoints |
+| **Heavy** | 20 requests/minute per IP | Search, browse, SSE, graph endpoints |
+| **Admin** | 10 requests/minute per IP | Resolution endpoints |
+
+| Best Practice | Detail |
 |---|---|
-| Rate limit | 10 requests/second per IP |
-| Burst | Up to 20 requests in a short burst |
 | Caching | Cache responses where appropriate — forecasts update daily, not per-second |
 | Real-time | Use SSE instead of polling for live data |
-| Filtering | Use query parameters (`region`, `sector`, `severity`) to minimize response size |
+| Filtering | Use query parameters (`region`, `sector`, `horizon`) to minimize response size |
 
 ### Tips
 

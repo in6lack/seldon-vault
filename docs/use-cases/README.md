@@ -12,7 +12,7 @@ The big question. An honest look at what AI forecasting can and can't do — wit
 
 ## 2. [Understanding Geopolitics](understanding-geopolitics.md)
 
-Navigate the information noise. Hundreds of news articles daily, conflicting narratives, editorial spin. Seldon Vault distills the signal from the noise with structured, probabilistic analysis from eight specialist agents.
+Navigate the information noise. Hundreds of news articles daily, conflicting narratives, editorial spin. Seldon Vault distills the signal from the noise with structured, probabilistic analysis from eleven specialist analysts with opposing cognitive biases.
 
 ## 3. [Tracking Global Risks](tracking-global-risks.md)
 
@@ -28,7 +28,7 @@ The science of prediction. Brier Scores, Bayesian reasoning, calibrated probabil
 
 ## 6. [Building on the API](building-on-seldon-api.md)
 
-For developers. 13 endpoints, no authentication required, real-time SSE, and code examples in Python and JavaScript. Build risk dashboards, Telegram bots, research datasets, or custom analytics — all for free.
+For developers. 30+ endpoints, no authentication required, real-time SSE, and code examples in Python and JavaScript. Build risk dashboards, Telegram bots, research datasets, or custom analytics — all for free.
 
 ## 7. [Disaster Risk Monitoring](disaster-risk-monitoring.md)
 

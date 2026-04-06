@@ -45,19 +45,20 @@ The future is probabilistic, not binary. A forecast of "72% probability of escal
 
 Seldon Vault doesn't use a single AI model making predictions. It uses a structured system designed around the principles that research shows produce the best forecasts:
 
-- **Multi-agent system:** 8 specialist analysts examine events independently — no groupthink, no single point of failure
-- **Adversarial review:** A dedicated Skeptic agent tries to disprove every forecast, checking for bias, base rate neglect, and overconfidence
-- **Bayesian updates:** Probabilities evolve every 6 hours as new evidence arrives from 30+ data sources
+- **Multi-agent system:** 11 specialist analysts (including opposing Hawk/Dove cognitive pairs) examine events independently — no groupthink, no single point of failure
+- **Adversarial review:** A two-tier Skeptic system tries to disprove every forecast — first with structural kill rules, then with real-time web search fact-checking
+- **Bayesian updates:** Probabilities evolve every 6 hours as new evidence arrives from 12+ data sources
 - **Accuracy tracking:** Every forecast is scored with a Brier Score — the gold standard metric for probabilistic accuracy
 - **Self-correcting:** A calibration feedback loop adjusts agent behavior based on past performance
 
-## Why 10 Agents Are Better Than 1
+## Why 11 Analysts Are Better Than 1
 
 This isn't just architectural preference — it's backed by research:
 
 - **Ensemble methods** in machine learning consistently outperform single models. The same principle applies to forecasting.
+- **Opposing cognitive biases** — Hawk/Dove pairs in geopolitics, economics, and politics ensure every major topic is analyzed from both optimistic and pessimistic perspectives. The disagreement spread itself is valuable information.
 - **Different perspectives** catch different signals. The Economist sees financial stress that the Military Analyst misses; the Cybersecurity Analyst detects digital escalation before it becomes kinetic.
-- **The Skeptic** prevents the overconfidence that plagues most prediction systems. Every forecast faces a structured adversarial challenge.
+- **The two-tier Skeptic** prevents the overconfidence that plagues most prediction systems. Every forecast faces structural pre-filtering plus deep adversarial review with web search.
 - **Diversity of frameworks** — the Five Pillars (Game Theory, Bayesian Inference, Chaos Theory, Psychohistory, Network Theory) ensure no single analytical lens dominates.
 
 ## The Superforecasters Connection

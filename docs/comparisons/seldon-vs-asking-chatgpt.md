@@ -15,11 +15,11 @@ Let's start with what chatbots do well. Asking ChatGPT (or Claude, or Gemini) a 
 - **Often reasonable.** Modern LLMs are trained on vast amounts of information and can produce surprisingly thoughtful analysis.
 - **Interactive.** You can ask follow-up questions, refine your query, and explore scenarios conversationally.
 
-For a quick take on a question you're curious about, there's nothing wrong with this approach. But there are five critical differences between a chatbot answer and a Seldon Vault forecast.
+For a quick take on a question you're curious about, there's nothing wrong with this approach. But there are six critical differences between a chatbot answer and a Seldon Vault forecast.
 
 ---
 
-## Five Key Differences
+## Six Key Differences
 
 ### 1. No Tracking
 
@@ -27,11 +27,11 @@ When ChatGPT gives you a probability estimate, that answer disappears into your 
 
 Seldon Vault tracks every forecast with a timestamp, a probability, and a Brier Score when the event resolves. You can see which forecasts were accurate and which weren't — and so can everyone else.
 
-### 2. One Agent vs Ten
+### 2. One Agent vs Eleven
 
 A single LLM gives you one perspective — whatever its training data and current prompt produce. It's one voice answering from one angle.
 
-Seldon Vault runs the same question through eight specialist agents (Geopolitical, Economic, Military, Cybersecurity, Social Stability, Environmental, Technological, and Political), then subjects the results to adversarial review by the Skeptic, and finally synthesizes everything through the Arbiter. The same question gets analyzed from eight different angles before a probability is set.
+Seldon Vault runs the same question through eleven specialist analysts — including opposing Hawk/Dove pairs in geopolitics, economics, and politics that deliberately argue from opposite cognitive biases. Results go through a Merge Layer, then face a two-tier adversarial Skeptic (structural kill rules + web-search fact-checking), and finally the Seldon Arbiter synthesizes everything using ReACT reasoning with 6 investigative tools. The same question gets analyzed from eleven different angles before a probability is set.
 
 ### 3. No Fact-Checking
 
@@ -51,13 +51,17 @@ There's no public data on whether ChatGPT's probability estimates are well-calib
 
 Seldon Vault publishes calibration curves and accuracy metrics. You can see whether its 70% forecasts actually come true about 70% of the time. This is what separates forecasting from guessing.
 
+### 6. No Structural Forecasting
+
+ChatGPT gives you a snapshot of the moment you asked. Seldon Vault also produces a monthly **Seldon Plan** — structural forecasts on 1-10 year horizons covering economic cycles, hegemonic transitions, demographic shifts, and climate scenarios through six dedicated futurist analysts.
+
 ---
 
 ## Side-by-Side Comparison
 
 | Dimension | Seldon Vault | Asking ChatGPT |
 |---|---|---|
-| **Perspectives** | 10 agents (8 specialists + Skeptic + Arbiter) | 1 model, 1 perspective |
+| **Perspectives** | 11 analysts + 2-tier Skeptic + Arbiter | 1 model, 1 perspective |
 | **Fact-checking** | Skeptic performs real-time web verification | No systematic verification |
 | **Accuracy tracking** | Brier Score per forecast, calibration curves | None |
 | **Updates** | Automatic Bayesian updates every 6 hours | Snapshot only (ask again manually) |
@@ -83,7 +87,7 @@ Seldon Vault publishes calibration curves and accuracy metrics. You can see whet
 ## When Seldon Vault Is Better
 
 - **When accuracy matters and should be tracked.** If you're making decisions based on the forecast, you want to know whether the forecaster has a good track record.
-- **When you need multiple expert perspectives.** Eight specialist domains plus adversarial review beats a single model's single take.
+- **When you need multiple expert perspectives.** Eleven specialist analysts (with opposing cognitive biases) plus two-tier adversarial review beats a single model's single take.
 - **When you want continuously updated probabilities.** Automatic Bayesian updates mean the forecast stays current without you having to re-ask.
 - **When you need adversarial fact-checking.** The Skeptic agent exists specifically to challenge assumptions and find counter-evidence.
 - **When you want to see how a forecast evolved.** The full probability history shows how confidence changed as events unfolded — something no chatbot conversation preserves.
@@ -92,10 +96,10 @@ Seldon Vault publishes calibration curves and accuracy metrics. You can see whet
 
 ## Conclusion
 
-Asking ChatGPT is like asking a smart friend for their take. Seldon Vault is like convening a panel of eight specialists, having them independently analyze the question, appointing a devil's advocate to challenge their conclusions, and then publishing a tracked, scored, continuously updated forecast.
+Asking ChatGPT is like asking a smart friend for their take. Seldon Vault is like convening a panel of eleven specialists — some deliberately arguing opposite positions — having them independently analyze the question, appointing a two-tier devil's advocate to challenge their conclusions, and then publishing a tracked, scored, continuously updated forecast.
 
 Both have their place. Use chatbots for quick takes and interactive exploration. Use Seldon Vault when the answer matters enough to deserve rigor.
 
 ---
 
-[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Ten Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)
+[Back to comparisons index](README.md) · [Main documentation](../../README.md) · [The Agents](../agents.md) · [Accuracy & Calibration](../accuracy.md)

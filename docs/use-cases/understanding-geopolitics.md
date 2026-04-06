@@ -20,16 +20,16 @@ From hundreds of daily signals across 30+ data sources (GDACS, ACLED, SIPRI, gov
 
 ### Multiple Perspectives
 
-Eight specialist analysts examine every significant event from different angles:
+Eleven specialist analysts examine every significant event from different angles — with three key domains using opposing Hawk/Dove cognitive pairs:
 
-- **Geopolitician** — alliances, sovereignty, diplomatic dynamics
-- **Economist** — trade flows, sanctions impact, financial stress
+- **Geopolitician Hawk + Dove** — one sees escalation signals, the other sees diplomatic opportunities
+- **Economist Bull + Bear** — one tracks growth drivers, the other tracks systemic risks
+- **Political Hawk + Dove** — one reads power consolidation, the other reads institutional resilience
 - **Military Analyst** — force posture, logistics, escalation ladders
 - **Cybersecurity Analyst** — digital warfare, APT activity, infrastructure threats
-- **Sociopolitical Analyst** — public opinion, protest dynamics, social cohesion
+- **Sociologist** — public opinion, protest dynamics, demographics, social cohesion
 - **Climatologist** — resource scarcity, climate migration, environmental stress
-- **Technology Analyst** — emerging tech impact, innovation disruption, digital transformation
-- **Political Analyst** — domestic politics, regime stability, censorship, mobilization, civil liberties
+- **Technologist** — emerging tech impact, innovation disruption, multi-model council debate
 
 ### Probabilistic Framing
 

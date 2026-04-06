@@ -45,7 +45,7 @@ This is where Seldon Vault's multi-agent architecture becomes particularly valua
 - **Geopolitical tensions increase APT activity** — the Geopolitician agent catches the diplomatic breakdown; the Cybersecurity Analyst forecasts the cyber escalation that typically follows
 - **Economic sanctions drive state-sponsored cybercrime** — the Economist agent sees the financial pressure; the Cybersecurity Analyst assesses the incentive for revenue-generating cyber operations
 - **Military conflicts extend into cyberspace** — the Military Analyst tracks the kinetic escalation; the Cybersecurity Analyst evaluates the "fifth domain" implications
-- **Social media manipulation supports military objectives** — the Sociopolitical Analyst detects narrative shifts; the Cybersecurity Analyst identifies the technical infrastructure behind them
+- **Social media manipulation supports military objectives** — the Sociologist detects narrative shifts; the Cybersecurity Analyst identifies the technical infrastructure behind them
 
 **Cascade Narratives** make these connections explicit: a cyberattack on energy infrastructure leads to economic disruption, which triggers political consequences, which changes the security calculus for the next round of cyber operations.
 

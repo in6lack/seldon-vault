@@ -22,9 +22,9 @@ These platforms harness the "wisdom of crowds" — the idea that aggregating man
 
 Prediction markets and Seldon Vault both produce probability estimates, but they get there in fundamentally different ways.
 
-- **Seldon gives reasoning — markets give a number.** A prediction market tells you the probability is 72%. Seldon Vault tells you *why* it's 72%, with analysis from eight specialist agents, adversarial fact-checking from the Skeptic, and a synthesis from the Arbiter.
+- **Seldon gives reasoning — markets give a number.** A prediction market tells you the probability is 72%. Seldon Vault tells you *why* it's 72%, with analysis from eleven specialist analysts (including opposing Hawk/Dove cognitive pairs), adversarial fact-checking from a two-tier Skeptic, and a synthesis from the Arbiter using ReACT reasoning with 6 investigative tools.
 
-- **Ten agents with different perspectives vs aggregated crowd wisdom.** Seldon's multi-agent architecture ensures every question is analyzed through geopolitical, economic, military, cybersecurity, social, environmental, technological, and political lenses. Markets aggregate whatever the traders happen to think about.
+- **Eleven analysts with opposing perspectives vs aggregated crowd wisdom.** Seldon's multi-agent architecture ensures every question is analyzed through geopolitical, economic, military, cybersecurity, social, environmental, technological, and political lenses — with three key domains using opposing Hawk/Dove cognitive pairs for built-in debate. Markets aggregate whatever the traders happen to think about.
 
 - **The Skeptic fact-checks each forecast.** Markets assume the crowd self-corrects through financial incentives. Seldon builds adversarial review directly into the process — the Skeptic runs web searches to verify claims and challenge assumptions before the final probability is set.
 
@@ -38,7 +38,7 @@ Prediction markets and Seldon Vault both produce probability estimates, but they
 
 | Dimension | Seldon Vault | Prediction Markets |
 |---|---|---|
-| **Source of probability** | Multi-agent AI analysis (10 agents) | Aggregated trader bets |
+| **Source of probability** | Multi-agent AI analysis (11 analysts + Skeptic + Arbiter) | Aggregated trader bets |
 | **Reasoning transparency** | Full reasoning chain from each agent | None — just a price |
 | **Update mechanism** | Bayesian inference every 6 hours | Market trades (continuous) |
 | **Topic coverage** | Any topic, including obscure/niche | Only topics with active markets |
@@ -68,9 +68,9 @@ This is worth being honest about: for events with liquid, well-known markets, pr
 
 - **Topics with no market.** Most real-world questions don't have a prediction market. Will a specific cyber vulnerability be exploited in the next 90 days? How will climate policy in Southeast Asia evolve over the next decade? What's the probability of a particular territorial dispute escalating? Seldon covers these. Markets don't.
 
-- **When you need reasoning, not just a number.** A probability alone isn't actionable for most people. Seldon Vault explains *why* the number is what it is, with perspectives from eight specialist domains and adversarial review.
+- **When you need reasoning, not just a number.** A probability alone isn't actionable for most people. Seldon Vault explains *why* the number is what it is, with perspectives from eleven specialist analysts and two-tier adversarial review.
 
-- **Long time horizons.** Prediction market liquidity dries up for questions beyond a few months. Seldon Vault forecasts across five time horizons: immediate (days), short-term (weeks), medium-term (months), long-term (years to decades), and extended (decades to a century).
+- **Long time horizons.** Prediction market liquidity dries up for questions beyond a few months. Seldon Vault forecasts across seven time horizons from days to a century, plus monthly Seldon Plan structural reports covering 1-10 year scenarios.
 
 - **Free and accessible.** You don't need cryptocurrency, a brokerage account, or any money at all. The analysis is open and free.
 

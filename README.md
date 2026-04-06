@@ -3,8 +3,9 @@
 > What if AI could predict the future? Seldon Vault is trying to find out.
 >
 > Inspired by Hari Seldon's psychohistory from Asimov's *Foundation*,
-> Seldon Vault uses 10 AI agents to analyze world events and generate
-> daily probabilistic forecasts. Free, public, no registration required.
+> Seldon Vault uses 11 AI analysts with opposing cognitive personas to analyze world events and generate
+> daily probabilistic forecasts — plus monthly structural forecasts spanning decades.
+> Free, public, no registration required.
 
 [![Website](https://img.shields.io/badge/Website-seldonvault.io-blue)](https://seldonvault.io)
 [![API](https://img.shields.io/badge/API-Free%20%26%20Public-green)](https://seldonvault.io/developers)
@@ -17,44 +18,75 @@
 
 ## What is Seldon Vault?
 
-Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It doesn't rely on human bets like prediction markets (Polymarket, Metaculus) or give one-shot answers like asking ChatGPT directly. Instead, it uses a **multi-agent AI system** where 8 specialized analysts independently examine world events from different perspectives, an adversarial Skeptic fact-checks their work, and a Seldon Arbiter synthesizes the strongest forecasts into calibrated probabilities.
+Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It doesn't rely on human bets like prediction markets (Polymarket, Metaculus) or give one-shot answers like asking ChatGPT directly. Instead, it uses a **multi-agent AI system** where 11 specialized analysts — including opposing Hawk/Dove and Bull/Bear persona pairs — independently examine world events from different perspectives, an adversarial Skeptic fact-checks their work, and a Seldon Arbiter synthesizes the strongest forecasts into calibrated probabilities using iterative ReACT reasoning with live tool access.
 
 Every forecast comes with full reasoning from each agent, a probability between 5% and 95%, and a time horizon. Probabilities are updated every 6 hours using Bayesian inference as new evidence arrives. Accuracy is tracked publicly through [Brier Score](docs/accuracy.md) — because a prediction without a track record is just an opinion.
 
-The name comes from [Hari Seldon](https://en.wikipedia.org/wiki/Hari_Seldon), the mathematician from Isaac Asimov's *Foundation* series who created **psychohistory** — a mathematical framework for predicting the future behavior of large populations. While real psychohistory remains science fiction, Seldon Vault explores what's possible when multiple AI agents with different expertise collaborate to analyze the same world events.
+Beyond daily forecasts, a monthly **Seldon Plan** pipeline produces structural forecasts on 1-10 year horizons — analyzing Kondratiev cycles, hegemonic transitions, and demographic shifts through 6 futurist analysts.
+
+The name comes from [Hari Seldon](https://en.wikipedia.org/wiki/Hari_Seldon), the mathematician from Isaac Asimov's *Foundation* series who created **psychohistory** — a mathematical framework for predicting the future behavior of large populations. While real psychohistory remains science fiction, Seldon Vault explores what's possible when multiple AI agents with different expertise and opposing cognitive biases collaborate to analyze the same world events.
 
 ## How It Works
 
-Seldon Vault runs an 8-step pipeline every day:
+Seldon Vault runs two pipelines: a **daily pipeline** for near-term forecasting and a **monthly structural pipeline** (Seldon Plan) for decade-scale scenarios.
 
-1. **Signal Collection** — News and data signals collected from 12 sources: RSS feeds (Reuters, BBC, Al Jazeera), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), UCDP (conflict data), Fear & Greed Index (market sentiment), Telegram channels, Reddit, and Bluesky
+### Daily Pipeline
+
+1. **Continuous Signal Collection** — Signals collected 4x/day from 12 sources: RSS feeds (~63 feeds including Reuters, BBC, Al Jazeera, SCMP), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), Fear & Greed Index (market sentiment), Telegram channels, Reddit, and Bluesky. Incremental fetching with Redis deduplication prevents redundant collection
 2. **Signal Processing** — An AI classifier categorizes each signal by sector, sentiment, importance (0-100), and temporal scope (breaking news vs. structural trend). Signals below importance 30 are filtered out
-3. **Multi-Agent Analysis** — 8 specialized analysts examine the filtered signals in parallel, each through their own lens. Every analyst uses the [Five Pillars framework](docs/five-pillars.md) and produces independent forecast proposals with probabilities and reasoning
-4. **Skeptic Review** — An adversarial critic with real-time web search (Tavily) tries to disprove each proposal. Checks for logical flaws, missing evidence, base rate neglect, and confirmation bias. Proposals scoring below 50/100 are automatically vetoed
-5. **Seldon Synthesis** — The Arbiter selects the top 3-5 strongest forecasts from all approved proposals, calibrates probabilities, writes bilingual descriptions (EN/RU), and detects [Seldon Crises](docs/how-it-works.md#seldon-crisis-detection) and [Cascade Narratives](docs/how-it-works.md#cascade-narratives)
-6. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem with Likelihood Ratios as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
-7. **Accuracy Tracking** — Every resolved forecast is scored by [Brier Score](docs/accuracy.md). Per-agent accuracy feeds back into prompt calibration and into reliability weights that shape future synthesis, creating a self-correcting system
-8. **Auto-Resolution** — Forecasts near their expiry are automatically checked against real data (interest rates, asset prices, economic indicators) and news sources. High-confidence resolutions are applied automatically; ambiguous cases are flagged for review
-9. **Pipeline Audit Log** — Every pipeline run records all analyst proposals (approved and rejected), Skeptic's reasoning, risk scores, and final Seldon adjustments. Full decision transparency at [`/pipeline`](https://seldonvault.io/pipeline)
+3. **Knowledge Graph** — Three layers of semantic structure: Signal Clustering (embedding similarity groups related signals, tracks independent source count), Source Reliability Ratings (per-source Brier-based accuracy scores), and Event Chains (cross-day temporal linking with 8 lifecycle stages from rumor to aftermath, plus Density Matrix competing interpretations)
+4. **Multi-Agent Analysis** — 11 specialized analysts examine filtered signals in parallel. Three key domains (geopolitics, economics, politics) use **dual-persona pairs** — a Hawk and a Dove with opposing cognitive biases — to force cognitive diversity. Five solo domains (technology, sociology, climatology, military, cybersecurity) can use multi-model LLM Council debate across 3 providers. Every analyst uses the [Five Pillars framework](docs/five-pillars.md) and receives decision-maker behavioral profiles, agent calibration feedback, forecast memory from similar past events, and event chain context
+5. **Merge Layer** — Hawk/Dove proposal pairs are matched by title similarity and merged into enriched proposals with disagreement spread metrics and quantum persona interference calculations — all without any LLM calls
+6. **Skeptic Review** — A two-tier adversarial review: Quick Skeptic (fast pre-filter with 6 structural kill rules) followed by Max Skeptic with real-time web search (Tavily) for fact-checking. Checks for logical flaws, base rate neglect, confirmation bias, and media bias. Proposals scoring below 50/100 are automatically vetoed
+7. **Seldon Synthesis** — The Arbiter uses **ReACT reasoning** (iterative Thought-Action-Observation loops) with 6 live tools: historical analogy search, economic indicator queries, web fact-checking, event chain exploration, agent track record lookup, and proposal comparison. Selects top 3-7 forecasts, calibrates probabilities, detects [Seldon Crises](docs/how-it-works.md#seldon-crisis-detection) and [Cascade Narratives](docs/how-it-works.md#cascade-narratives)
+8. **Heuristic Alerts** — 6 deterministic sanity checks catch overconfidence, mid-range anchoring, analyst disagreement, skeptic red flags, temporal mismatches, and stale predictions
+9. **Translation** — All agents produce English-only output. A dedicated Translation Layer converts all user-facing fields to Russian via a single LLM call per forecast for context coherence
+10. **Cascade Propagation** — Causal chains between forecasts are detected and probabilities propagate through the narrative graph. Quantum interference modeling computes constructive/destructive effects when multiple cascades target the same forecast
+11. **Bayesian Updates** — Every 6 hours, probabilities are updated using Bayes' theorem with Likelihood Ratios as new evidence arrives. Maximum shift: ±15% per day to prevent overreaction
+12. **Accuracy Tracking** — Every resolved forecast is scored by [Brier Score](docs/accuracy.md). Per-agent accuracy feeds back into prompt calibration and reliability weights, creating a self-correcting system
+13. **Auto-Resolution** — Forecasts near expiry are automatically checked against real data (FRED, Yahoo Finance, exchange rates, World Bank) and news sources. High-confidence resolutions are applied automatically; ambiguous cases are flagged for review
+
+### Monthly Structural Pipeline (Seldon Plan)
+
+On the 1st of each month, a separate pipeline produces long-term (1-10 year) structural forecasts:
+
+1. **Data Collection** — World Bank API, IMF WEO, UN Population data, OWID/GISS climate data for 15 priority countries
+2. **World State Synthesis** — LLM compresses 90 days of daily forecast history into domain briefs
+3. **Structural RAG** — Historical analogies retrieved via pgvector similarity (Kondratiev waves, hegemonic transitions, debt crises)
+4. **6 Futurist Analysts** — Economics, Geopolitics, Technology, Society, Climate, Military structural specialists produce scenario trees
+5. **Structural Skeptic** — Reviews each domain for 6 "deadly traps" of long-term forecasting
+6. **Seldon Structural** — Claude Opus synthesizes master scenarios, critical junctures with fork outcomes, and leading indicators. Cross-domain causal links with quantum interference modeling
+7. **Output** — SeldonReport with master scenarios, critical junctures, domain forecasts, and cross-domain causal graph
 
 > **[Full pipeline details →](docs/how-it-works.md)**
 
 ## The AI Agents
 
-| Agent | What They Analyze | Think of Them As... |
-|-------|-------------------|---------------------|
-| **Geopolitician** | Wars, diplomacy, sanctions, alliances, elections | A foreign policy advisor |
-| **Economist** | Markets, central banks, trade, inflation, debt cycles | A Wall Street analyst |
-| **Technologist** | AI, semiconductors, biotech, energy transition | A Silicon Valley futurist |
-| **Sociologist** | Demographics, migration, social movements, public opinion | A social trends researcher |
-| **Climatologist** | Climate risks, extreme weather, energy transition, tipping points | An environmental scientist |
-| **Military Analyst** | Force balance, deterrence, arms trade, nuclear posture | A defense intelligence officer |
-| **Cybersecurity Analyst** | APT groups, zero-days, ransomware, information warfare | A cybersecurity investigator |
-| **Political Analyst** | Domestic politics, regime stability, censorship, mobilization | A political risk consultant |
-| **Skeptic** | Everything above — finds flaws, biases, and missing evidence | A devil's advocate with Google |
-| **Seldon Arbiter** | Synthesizes all analyses into final calibrated forecasts | The judge who makes the final call |
+### 11 Analysts (3 Dual-Persona Pairs + 5 Solo)
 
-Each analyst operates independently with their own analytical framework. They don't see each other's work — only the Skeptic and Arbiter see all analyses. This prevents groupthink and ensures diverse perspectives.
+| Agent | What They Analyze | Persona Mode |
+|-------|-------------------|-------------|
+| **Geopolitician Hawk** | Wars, escalation, hard power, sanctions | Aggressive risk assessment |
+| **Geopolitician Dove** | Diplomacy, cooperation, de-escalation | Conciliatory perspective |
+| **Economist Bull** | Growth, resilience, market opportunities | Optimistic outlook |
+| **Economist Bear** | Risk, tail events, debt crises, bubbles | Pessimistic outlook |
+| **Political Hawk** | Power consolidation, repression, realism | Hard power focus |
+| **Political Dove** | Institutions, reform, democratic resilience | Soft power focus |
+| **Technologist** | AI, semiconductors, biotech, energy transition | Multi-model Council debate |
+| **Sociologist** | Demographics, migration, social movements | Solo persona |
+| **Climatologist** | Climate risks, extreme weather, tipping points | Solo persona |
+| **Military Analyst** | Force balance, deterrence, arms trade, nuclear posture | Solo persona |
+| **Cybersecurity Analyst** | APT groups, zero-days, ransomware, info warfare | Solo persona |
+
+### Key Roles
+
+| Agent | Role |
+|-------|------|
+| **Quick Skeptic** | Fast pre-filter with structural kill rules (no web search) |
+| **Max Skeptic** | Deep adversarial review with Tavily web search and veto power |
+| **Seldon Arbiter** | Final synthesis via ReACT reasoning with 6 live tools |
+
+The dual-persona system forces genuine disagreement. When a Hawk says 80% chance of conflict and a Dove says 35%, the disagreement spread itself becomes valuable information for the Arbiter. Personas are merged before Skeptic review — the Merge Layer matches Hawk/Dove proposals by topic, creates enriched proposals with both perspectives, and computes quantum interference between opposing viewpoints.
 
 > **[Detailed agent profiles →](docs/agents.md)**
 
@@ -88,7 +120,7 @@ Unlike prediction markets that typically cover weeks to months, Seldon Vault for
 | **Generation** | 10-30 years | "Demographic shift impact on European labor markets" |
 | **Century** | 30-100 years | "Climate migration reshaping global population centers" |
 
-Long-term forecasts use a separate analytical mode focused on structural trends, demographic cycles, and historical pattern matching rather than breaking news.
+Short-to-yearly forecasts come from the daily pipeline. Decade-to-century forecasts use both the daily longterm mode and the monthly **Seldon Plan** structural pipeline, which focuses on Kondratiev waves, demographic transitions, hegemonic cycles, and technological paradigm shifts.
 
 ## Questions Seldon Vault Helps Answer
 
@@ -104,6 +136,7 @@ Long-term forecasts use a separate analytical mode focused on structural trends,
 - "Are prediction markets accurate?"
 - "Can AI predict natural disasters?"
 - "What are the biggest cybersecurity threats?"
+- "What will the world look like in 10 years?"
 
 > **[Explore use cases →](docs/use-cases/)**
 
@@ -111,14 +144,15 @@ Long-term forecasts use a separate analytical mode focused on structural trends,
 
 | Feature | Seldon Vault | Prediction Markets | Asking ChatGPT | News Media | Human Analysts |
 |---------|-------------|-------------------|----------------|------------|----------------|
-| **Source** | 10 specialized AI agents | Crowd bets | Single LLM | Journalists | Individual experts |
-| **Methodology** | Multi-agent debate + Skeptic review | Market price = probability | One-shot answer | Narrative-driven | Subjective assessment |
-| **Accuracy tracking** | Brier Score per forecast | Market resolution | None | None | Rare |
-| **Updates** | Bayesian every 6 hours + auto-resolution against real data | Real-time (market) | None (conversation-bound) | Article by article | Periodic reports |
-| **Transparency** | Full reasoning from each agent | Just a price | Just an answer | Editorial perspective | Varies |
-| **Time horizons** | Days to centuries (7 horizons) | Usually months | N/A | Breaking news focus | Varies |
+| **Source** | 11 specialized AI analysts with opposing personas | Crowd bets | Single LLM | Journalists | Individual experts |
+| **Methodology** | Multi-agent debate + Merge Layer + Skeptic review + ReACT synthesis | Market price = probability | One-shot answer | Narrative-driven | Subjective assessment |
+| **Accuracy tracking** | Brier Score per forecast, per agent, per sector | Market resolution | None | None | Rare |
+| **Updates** | Bayesian every 6 hours + continuous ingest 4x/day + auto-resolution against real data | Real-time (market) | None (conversation-bound) | Article by article | Periodic reports |
+| **Transparency** | Full reasoning from each agent + pipeline audit log | Just a price | Just an answer | Editorial perspective | Varies |
+| **Time horizons** | Days to centuries (7 horizons) + monthly structural scenarios | Usually months | N/A | Breaking news focus | Varies |
+| **Long-term** | Monthly Seldon Plan with master scenarios and critical junctures | Rare | N/A | Occasional think pieces | Annual reports |
 | **Cost** | Free | Requires money to bet | Subscription | Paywalls | Consulting fees |
-| **Bias check** | Built-in Skeptic with fact-checking | Crowd wisdom | No adversarial review | Editorial review | Peer review (sometimes) |
+| **Bias check** | Built-in dual-persona disagreement + Skeptic with fact-checking + media bias detection | Crowd wisdom | No adversarial review | Editorial review | Peer review (sometimes) |
 
 > **[Detailed comparisons →](docs/comparisons/)**
 
@@ -130,8 +164,10 @@ We don't claim to predict the future perfectly — we track how often we're righ
 - **Calibration curves** are publicly available — when we say 70%, it should happen ~70% of the time
 - **Per-agent accuracy** is tracked — underperforming agents get feedback through a self-correcting calibration loop
 - **Dynamic agent weighting** — each agent receives a reliability weight per sector based on their Brier Score track record. The Seldon Arbiter weighs opinions from more accurate agents more heavily. Agents with Brier Score above 0.40 in a sector are automatically disqualified from influencing forecasts in that domain
+- **Dual-persona calibration** — Hawk and Dove variants are tracked as separate agents, so the system learns which cognitive bias performs better in each sector
 - **Per-sector breakdown** shows which domains (geopolitics, economics, technology) have the best track record
 - Full **probability history** for every forecast shows how our confidence evolved over time
+- **Density Matrix purity** tracks meta-uncertainty on event chains — when competing interpretations collapse toward one scenario, situation clarity improves
 - This is an experiment in AI forecasting, not an oracle. Black swan events are inherently unpredictable
 
 > **[Full accuracy methodology →](docs/accuracy.md)**
@@ -147,50 +183,68 @@ curl https://seldonvault.io/api/v1/forecasts/daily
 # Browse all forecasts with filters
 curl "https://seldonvault.io/api/v1/forecasts?sector=geopolitics&status=active"
 
+# Get the latest Seldon Plan (structural report)
+curl https://seldonvault.io/api/v1/structural/reports/latest
+
 # Get real-time updates via Server-Sent Events
 curl https://seldonvault.io/api/v1/events/stream
 ```
 
-**20 endpoints** covering forecasts, metrics, regions, narratives, signals, pipeline audit, and real-time events. Rate limit: 10 requests/second per IP.
+**30+ endpoints** covering forecasts, metrics, regions, narratives, signals, event chains, source ratings, pipeline audit, structural reports, and real-time events. Rate limit: 60 requests/minute per IP (20/minute for heavy endpoints).
 
 > **[Full API guide with examples →](docs/api-guide.md)** | **[API docs on the website →](https://seldonvault.io/developers)**
 
 ## Key Features
 
-- **Daily AI-generated geopolitical forecasts** from 12 data sources across 7 sectors
-- **Multi-agent ensemble** — 8 specialized analysts + adversarial Skeptic + Arbiter
+- **Daily AI-generated geopolitical forecasts** from 12 data sources across 8 sectors
+- **Multi-agent ensemble** — 11 specialized analysts with dual-persona cognitive diversity + adversarial Skeptic + Arbiter
+- **Dual-persona system** — Hawk/Dove and Bull/Bear pairs force genuine disagreement, with quantum interference merge modeling
+- **ReACT reasoning** — Seldon Arbiter uses iterative reasoning with 6 live tools (analogy search, indicator queries, fact-checking, event chains, track records, proposal comparison)
+- **Monthly Seldon Plan** — structural forecasts on 1-10 year horizons with master scenarios, critical junctures, and cross-domain causal graphs
+- **Continuous signal collection** — 4x/day incremental ingest with 6-gate clustering and nightly reconciliation
 - **Bayesian probability updates** every 6 hours with new evidence
 - **Brier Score accuracy tracking** — public, per-agent, per-sector
 - **Self-correcting system** — agent calibration feedback loop adjusts prompts based on accuracy
 - **Dynamic agent weighting** — per-sector reliability weights computed from Brier Score history
-- **Bilingual** — full English and Russian support
+- **Decision-maker profiling** — 14 behavioral profiles of world leaders (Trump, Putin, Xi, Erdogan, Netanyahu, Musk, etc.) injected into analyst context
+- **Bilingual** — full English and Russian support via dedicated Translation Layer
 - **Interactive world map** with regional risk analysis
 - **Historical analogy matching** via RAG (Retrieval-Augmented Generation)
 - **7 forecast horizons** — from days to centuries
-- **Cascade Narratives** — causal chains showing how events connect and propagate
+- **Cascade Narratives** — causal chains showing how events connect and propagate, with quantum interference modeling
+- **Density Matrix** — competing interpretations for event chains with purity-based meta-uncertainty tracking
 - **Seldon Crisis detection** — automatic flagging of high-probability critical events
 - **Pipeline Audit Log** — full transparency: see every analyst proposal, why it was approved or rejected
-- **Heuristic Sanity Checks** — automated detection of overconfidence, anchoring, analyst disagreement, and temporal mismatches
+- **Heuristic Sanity Checks** — automated detection of overconfidence, anchoring, analyst disagreement, temporal mismatches, and stale predictions
 - **Media Bias Detection** — Skeptic agent identifies availability bias, selection bias, and narrative momentum in news sources
 - **Auto-Resolution Engine** — forecasts automatically verified against data APIs (FRED, Yahoo Finance) and AI-powered news analysis
 - **Knowledge Graph** — Signal Clustering (deduplication via embedding similarity), Source Ratings (per-source reliability from Brier scores), Event Chains (cross-day temporal linking with lifecycle stages from rumor to resolution)
-- **Free public REST API** — 20 endpoints, no authentication
+- **Free public REST API** — 30+ endpoints, no authentication
 - **Real-time updates** via Server-Sent Events (SSE)
 - **Completely free**, no registration required
 
 ## Technology Stack
 
-- **Multi-Provider LLM Factory** — GPT, Claude, Gemini, DeepSeek with automatic failover
-- **Cost-optimized architecture** — efficient models for preprocessing, powerful models for synthesis and critical review
+- **Multi-Provider LLM Factory** — GPT, Claude, Gemini, DeepSeek with automatic failover and circuit breaker
+- **Cost-optimized architecture** — DeepSeek for preprocessing, GPT for skeptic review, Claude Opus for Seldon synthesis
+- **ReACT tool system** — iterative reasoning with live tool calls for the Seldon Arbiter (6 tools for daily, 8 for structural)
+- **Dual-persona merge with quantum interference** — opposing personas merged via wave superposition modeling
 - **RAG** (Retrieval-Augmented Generation) with pgvector for historical analogy matching
+- **Structural RAG** — separate analogy bank for long-term patterns (Kondratiev waves, hegemonic transitions, debt crises)
 - **Bayesian inference engine** for probability updates with per-horizon shift constraints
-- **12 data collectors** — RSS, GDELT, ACLED, FRED, Metaculus, Polymarket, GDACS, UCDP, Fear & Greed Index, Telegram, Reddit, Bluesky
+- **12 data collectors** — RSS (~63 feeds), GDELT, ACLED, FRED, Metaculus, Polymarket, GDACS, Fear & Greed Index, Telegram, Reddit, Bluesky, plus World Bank/IMF/UN/OWID for structural data
+- **Continuous ingest pipeline** — 4x/day incremental collection with Redis deduplication, 6-gate incremental clustering, nightly batch reconciliation
 - **Adversarial fact-checking** via Tavily Search API with media bias detection
-- **Heuristic alert engine** — 5 deterministic rules catch forecasting pitfalls before storage
+- **Heuristic alert engine** — 6 deterministic rules catch forecasting pitfalls before storage
+- **Cascade propagation with quantum interference** — graph algorithms for causal chain detection with constructive/destructive interference modeling
+- **Density Matrix engine** — competing interpretations for event chains, purity tracking, LLM recalibration
+- **Knowledge Graph Engine** — signal clustering, source reliability ratings, event chains with lifecycle stages
+- **Decision-maker behavioral profiling** — 14 leader profiles loaded from YAML configurations
+- **Translation Layer** — dedicated EN→RU translation via cheap LLM (1 forecast = 1 parallel call)
 - **Interactive D3.js world map** with TopoJSON and regional risk scoring
+- **D3 force-directed cascade graphs** — interactive causal chain visualization
+- **Cross-domain hexagonal graph** — structural pipeline domain relationship visualization
 - **Server-Sent Events (SSE)** for real-time push updates
-- **Cascade Propagation** — graph algorithms for causal chain detection
-- **Knowledge Graph Engine** — signal clustering (embedding similarity), source reliability ratings (Brier-based), event chains (cross-day temporal linking with lifecycle stages)
 - **Schema.org JSON-LD** structured data for search engine and AI discoverability
 
 > **[Full technology details →](docs/technology.md)**
@@ -199,7 +253,7 @@ curl https://seldonvault.io/api/v1/events/stream
 
 Seldon Vault is named after **Hari Seldon**, the mathematician from Isaac Asimov's *Foundation* series who created **psychohistory** — a mathematical framework for predicting the future behavior of large populations by combining history, sociology, and statistical mechanics.
 
-While real psychohistory remains science fiction, the core insight resonates: individual events are unpredictable, but large-scale patterns can be modeled. Seldon Vault explores this idea by having multiple AI agents — each a specialist in their domain — independently analyze the same world events and debate through an adversarial process.
+While real psychohistory remains science fiction, the core insight resonates: individual events are unpredictable, but large-scale patterns can be modeled. Seldon Vault explores this idea by having multiple AI agents — each a specialist in their domain, some deliberately given opposing cognitive biases — independently analyze the same world events and debate through an adversarial process.
 
 The result isn't prophecy. It's calibrated probability with transparent reasoning and a public track record.
 
@@ -207,12 +261,12 @@ The result isn't prophecy. It's calibrated probability with transparent reasonin
 
 | Document | Description |
 |----------|-------------|
-| [How It Works](docs/how-it-works.md) | Detailed 8-step pipeline walkthrough |
-| [The AI Agents](docs/agents.md) | Profiles of all 10 core agents + supporting roles |
+| [How It Works](docs/how-it-works.md) | Full pipeline walkthrough: daily + structural |
+| [The AI Agents](docs/agents.md) | Profiles of all 11 analysts, dual-persona system, Skeptic, Arbiter, and supporting roles |
 | [Five Pillars](docs/five-pillars.md) | The analytical framework behind every forecast |
-| [Accuracy & Metrics](docs/accuracy.md) | Brier Score, calibration, feedback loops |
-| [Technology](docs/technology.md) | Architecture and tech stack |
-| [API Guide](docs/api-guide.md) | Endpoints, examples, integration recipes |
+| [Accuracy & Metrics](docs/accuracy.md) | Brier Score, calibration, feedback loops, density matrix purity |
+| [Technology](docs/technology.md) | Architecture, tech stack, quantum cascade, ReACT, structural pipeline |
+| [API Guide](docs/api-guide.md) | 30+ endpoints, examples, integration recipes |
 | [FAQ](docs/faq.md) | Frequently asked questions |
 | **Use Cases** | |
 | [Can AI Predict the Future?](docs/use-cases/can-ai-predict-the-future.md) | The big question |
@@ -235,6 +289,7 @@ The result isn't prophecy. It's calibrated probability with transparent reasonin
 - **Website:** [seldonvault.io](https://seldonvault.io)
 - **API Documentation:** [seldonvault.io/developers](https://seldonvault.io/developers)
 - **Methodology:** [seldonvault.io/methodology](https://seldonvault.io/methodology)
+- **Seldon Plan:** [seldonvault.io/seldon-plan](https://seldonvault.io/seldon-plan)
 - **World Map:** [seldonvault.io/map](https://seldonvault.io/map)
 - **Atom Feed:** [seldonvault.io/feed.xml](https://seldonvault.io/feed.xml)
 - **Telegram:** [@seldonvault](https://t.me/seldonvault)

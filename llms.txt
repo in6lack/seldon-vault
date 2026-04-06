@@ -1,28 +1,39 @@
 # Seldon Vault
 
-> Multi-agent AI forecasting engine for geopolitical, economic, technological, social, environmental, military, and cybersecurity events.
+> Multi-agent AI forecasting engine for geopolitical, economic, technological, social, environmental, military, cybersecurity, and political events.
 
 ## What is Seldon Vault?
 
-Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses a multi-agent LLM architecture with 8 specialized analysts, an adversarial Skeptic with real-time fact-checking capabilities, and a Seldon Arbiter to generate daily probabilistic forecasts. Unlike prediction markets (Polymarket, Metaculus) that aggregate human bets, Seldon Vault uses AI agents that independently analyze signals and debate through an adversarial review process. Inspired by Hari Seldon's psychohistory from Isaac Asimov's Foundation series.
+Seldon Vault is a free, public AI-powered geopolitical forecasting engine. It uses a multi-agent LLM architecture with 11 specialized analysts (including 3 dual-persona Hawk/Dove pairs for cognitive diversity), an adversarial Skeptic with real-time fact-checking, and a Seldon Arbiter that uses iterative ReACT reasoning with 6 live tools to synthesize daily probabilistic forecasts. A separate monthly structural pipeline (Seldon Plan) produces 1-10 year forecasts through 6 futurist analysts. Unlike prediction markets (Polymarket, Metaculus) that aggregate human bets, Seldon Vault uses AI agents that independently analyze signals and debate through an adversarial review process. Inspired by Hari Seldon's psychohistory from Isaac Asimov's Foundation series.
 
 ## How it works
 
-1. **Data Collection**: Signals collected from 12 sources — RSS feeds (Reuters, BBC, Al Jazeera), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), UCDP (conflict data), Fear & Greed Index (market sentiment), Telegram, Reddit, and Bluesky
-2. **Signal Processing**: AI classifies signals by sector, sentiment, importance (0-100), and temporal scope (immediate vs structural). Signals below importance 30 are filtered out
-3. **Multi-Agent Analysis**: Eight specialized analysts assess signals in parallel:
-   - Geopolitician (conflicts, diplomacy, alliances, sanctions)
-   - Economist (markets, central banks, trade, supply chains)
-   - Technologist (AI, semiconductors, energy, biotech)
-   - Sociologist (demographics, migration, social dynamics)
-   - Climatologist (climate risks, environment, energy transition)
-   - Military Analyst (force balance, deterrence, arms trade, nuclear posture)
-   - Cybersecurity Analyst (APT groups, infrastructure attacks, zero-days, ransomware)
-   - Political Analyst (domestic politics, regime stability, censorship, mobilization)
-4. **Skeptic Review**: Independent adversarial critic with web search fact-checking (Tavily), veto power on poorly supported forecasts (risk score < 50 = automatic rejection)
-5. **Seldon Arbiter**: Synthesizes top 3-5 approved forecasts, assigns calibrated probabilities (5%-95%), bilingual output (EN/RU), detects Seldon Crises and cascade narratives
-6. **Bayesian Updates**: Probabilities updated every 6 hours using Bayes' theorem, max ±15% daily shift
-7. **Accuracy Tracking**: Brier Score measures calibration (0.0 = perfect, 0.25 = random); per-agent accuracy feeds back into prompt calibration for self-correction
+### Daily Pipeline
+1. **Continuous Data Collection**: Signals collected 4x/day from 12 sources — RSS feeds (~63 feeds: Reuters, BBC, Al Jazeera, SCMP), GDELT (global events), ACLED (conflict data), FRED (economic indicators), Metaculus & Polymarket (prediction markets), GDACS (disaster alerts), Fear & Greed Index (market sentiment), Telegram channels, Reddit, and Bluesky. Incremental fetching with Redis deduplication
+2. **Signal Processing**: AI classifies signals by sector, sentiment, importance (0-100), and temporal scope (immediate vs structural). Signals below importance 30 filtered out
+3. **Knowledge Graph**: Signal clustering (embedding cosine similarity, source diversity tracking), source reliability ratings (Brier-based accuracy), event chains (cross-day temporal linking with 8 lifecycle stages, density matrix competing interpretations with purity tracking)
+4. **Multi-Agent Analysis**: 11 specialized analysts assess signals in parallel:
+   - 3 dual-persona pairs: Geopolitician Hawk/Dove, Economist Bull/Bear, Political Hawk/Dove
+   - 5 solo analysts: Technologist (multi-model LLM Council), Sociologist, Climatologist, Military, Cybersecurity
+   - Each receives: decision-maker behavioral profiles (14 world leaders), agent calibration feedback, forecast memory, event chain context
+5. **Merge Layer**: Hawk/Dove pairs matched by title similarity, merged with disagreement spread and quantum persona interference (no LLM calls)
+6. **Skeptic Review**: Two-tier — Quick Skeptic (fast pre-filter, 6 kill rules) + Max Skeptic (web search via Tavily, veto power, risk score < 50 = automatic rejection)
+7. **Seldon Arbiter**: ReACT reasoning (Thought-Action-Observation loops) with 6 tools: search_analogies, query_indicators, fact_check, get_event_chain, get_agent_track_record, compare_proposals. Synthesizes top 3-7 forecasts with calibrated probabilities (5%-95%), bilingual output (EN/RU), Seldon Crisis detection, cascade narrative detection
+8. **Heuristic Alerts**: 6 deterministic sanity checks (overconfidence, anchoring, disagreement, skeptic flags, temporal mismatch, stale predictions)
+9. **Translation Layer**: All agents produce EN-only; dedicated translator converts to RU via single LLM call per forecast
+10. **Cascade Propagation**: Graph algorithms detect causal chains; quantum interference models constructive/destructive effects when multiple cascades target the same forecast
+11. **Bayesian Updates**: Every 6 hours using Likelihood Ratios, max ±15% daily shift
+12. **Accuracy Tracking**: Brier Score per forecast, per agent, per sector; feeds back into calibration and weight ranking
+13. **Auto-Resolution**: Checked against FRED, Yahoo Finance, exchange rates, World Bank APIs + AI-powered web search
+
+### Monthly Structural Pipeline (Seldon Plan)
+1. Data collection (World Bank, IMF, UN Population, OWID/GISS for 15 countries)
+2. World State Synthesis (90-day forecast history compression)
+3. Structural RAG (historical analogies: Kondratiev waves, hegemonic transitions, debt crises)
+4. 6 Futurist Analysts (Economics, Geopolitics, Technology, Society, Climate, Military)
+5. Structural Skeptic (6 "deadly traps" of long-term forecasting)
+6. Seldon Structural (Claude Opus: master scenarios, critical junctures with fork outcomes, cross-domain causal links with quantum interference)
+7. Output: SeldonReport with master scenarios, critical junctures, domain forecasts, cross-domain graph
 
 ## Five Pillars of Analysis
 
@@ -46,29 +57,38 @@ Seven time horizons from short-term (1-7 days) to century-scale (30-100 years):
 
 ## Key Features
 
-- Daily AI-generated geopolitical forecasts from 12 data sources across 7 sectors
-- Multi-agent ensemble (8 analysts + Skeptic + Arbiter)
+- Daily AI-generated geopolitical forecasts from 12 data sources across 8 sectors
+- Multi-agent ensemble (11 analysts with dual-persona cognitive diversity + Skeptic + Arbiter)
+- Dual-persona system: Hawk/Dove and Bull/Bear pairs with quantum interference merge
+- ReACT reasoning: Seldon Arbiter with 6 live tools for iterative synthesis
+- Monthly Seldon Plan: structural forecasts 1-10 years with master scenarios and critical junctures
+- Continuous signal collection 4x/day with incremental clustering and nightly reconciliation
 - Bayesian probability updates every 6 hours
 - Brier Score accuracy tracking (public, per-agent, per-sector)
 - Self-correcting agent calibration feedback loop
 - Dynamic agent weighting per sector based on Brier Score track record
-- Full bilingual support (English and Russian)
+- Decision-maker behavioral profiling (14 world leaders)
+- Full bilingual support (English and Russian) via dedicated Translation Layer
 - Interactive world map with regional risk analysis
 - Historical analogy matching via RAG (pgvector)
-- 7 forecast horizons from days to centuries
-- Cascade Narratives (causal chains between related events)
+- Cascade Narratives with quantum interference propagation
+- Density Matrix: competing interpretations for event chains with purity tracking
 - Seldon Crisis detection for high-probability critical events
+- Pipeline audit log with full decision transparency
+- Knowledge Graph: signal clustering, source ratings, event chains with lifecycle stages
 - Real-time updates via Server-Sent Events (SSE)
-- Free public REST API (13 endpoints, no authentication)
+- Free public REST API (30+ endpoints, no authentication)
 
 ## Pages
 
 - https://seldonvault.io/ — Daily forecast digest
-- https://seldonvault.io/forecasts — Browse all forecasts with filters (status, sector, date, probability range)
+- https://seldonvault.io/forecasts — Browse all forecasts with filters (status, sector, date, probability range, horizon, region)
 - https://seldonvault.io/narratives — Cascade narratives (causal chains between forecasts)
 - https://seldonvault.io/map — Interactive world map with regional risk data
+- https://seldonvault.io/seldon-plan — Seldon Plan: monthly structural forecasts with master scenarios
+- https://seldonvault.io/pipeline — Pipeline audit log with all proposals and decisions
 - https://seldonvault.io/about — About Seldon Vault (FAQ format)
-- https://seldonvault.io/methodology — How the multi-agent pipeline works (7-step process)
+- https://seldonvault.io/methodology — How the multi-agent pipeline works
 - https://seldonvault.io/developers — API documentation with examples
 
 ## API
@@ -80,18 +100,33 @@ Base URL: https://seldonvault.io/api/v1/
 ### Endpoints
 
 - GET /api/v1/forecasts/daily — Today's forecast digest
-- GET /api/v1/forecasts — Browse all forecasts with filters (status, sector, search, date_from, date_to, prob_min, prob_max, page, per_page)
-- GET /api/v1/forecasts/{id} — Full forecast detail with agent analyses, Skeptic review, historical analogies
-- GET /api/v1/forecasts/{id}/updates — Probability update history (Bayesian updates over time)
+- GET /api/v1/forecasts — Browse all forecasts with filters (status, sector, search, date_from, date_to, prob_min, prob_max, horizon, region, resolution, sort, page, per_page)
+- GET /api/v1/forecasts/{id} — Full forecast detail with agent analyses, Skeptic review, historical analogies, quantum shadows
+- GET /api/v1/forecasts/{id}/updates — Probability update history (Bayesian updates with quantum shadow)
 - GET /api/v1/metrics — Aggregated accuracy metrics (total, resolved, avg Brier score, by sector, by agent)
 - GET /api/v1/metrics/calibration — Calibration curve data
+- GET /api/v1/metrics/resolution — Resolution statistics (auto-resolved, manual, rates)
 - GET /api/v1/regions — Regional risk summaries (active count, avg probability, top sector)
 - GET /api/v1/regions/{region}/forecasts — Forecasts by region
 - GET /api/v1/narratives — Cascade narratives with status filter and pagination
 - GET /api/v1/narratives/{id} — Narrative detail with causal links
 - GET /api/v1/narratives/{id}/graph — D3-compatible graph data (nodes + edges)
 - GET /api/v1/signals — Raw news signals from data sources
-- GET /api/v1/events/stream — Real-time Server-Sent Events (forecast_created, forecast_updated, narrative_created)
+- GET /api/v1/pipeline/runs — Pipeline audit log (pagination, run_type filter)
+- GET /api/v1/pipeline/runs/{id} — Pipeline run detail with all proposals
+- GET /api/v1/sources/ratings — Source reliability ratings (per-source per-sector)
+- GET /api/v1/sources/ratings/{source_name} — All sector ratings for a source
+- GET /api/v1/events/chains — Event chains with lifecycle stages
+- GET /api/v1/events/chains/{id} — Event chain detail with cluster timeline and density matrix
+- GET /api/v1/events/chains/by-forecast/{forecast_id} — Chain linked to forecast
+- GET /api/v1/structural/reports — Seldon Plan reports (paginated)
+- GET /api/v1/structural/reports/latest — Latest structural report with domain forecasts
+- GET /api/v1/structural/reports/{id} — Report detail with domain forecasts and cross-domain links
+- GET /api/v1/structural/reports/{id}/domains/{domain} — Single domain forecast
+- GET /api/v1/structural/indicators — Leading indicator snapshots
+- GET /api/v1/events/stream — Real-time Server-Sent Events (forecast_created, forecast_updated, narrative_created, structural_report_created)
+- GET /sitemap.xml — Dynamic sitemap
+- GET /feed.xml — Atom feed (latest 50 forecasts)
 
 ### Feeds
 
@@ -104,7 +139,7 @@ Base URL: https://seldonvault.io/api/v1/
 
 ## Canonical description
 
-Seldon Vault is a free, public AI geopolitical forecasting engine using multi-agent probabilistic analysis with 8 specialized AI analysts, adversarial review, Bayesian probability updates, and self-correcting accuracy tracking.
+Seldon Vault is a free, public AI geopolitical forecasting engine using multi-agent probabilistic analysis with 11 specialized AI analysts (including dual-persona Hawk/Dove pairs), adversarial review, ReACT reasoning with live tools, Bayesian probability updates, monthly structural scenarios (Seldon Plan), quantum interference cascade modeling, and self-correcting accuracy tracking.
 
 ## Cite as
 
@@ -130,5 +165,14 @@ https://seldonvault.io
 - agent reliability weighting
 - per-sector agent ranking
 - long-term forecasting
+- dual-persona cognitive diversity
+- ReACT reasoning
+- quantum cascade interference
+- density matrix meta-uncertainty
+- structural forecasting
+- Seldon Plan
+- decision-maker profiling
+- knowledge graph
+- event chain lifecycle
 
 ## URL: https://seldonvault.io

@@ -25,7 +25,7 @@ On any given day, hundreds of news articles are published about global events. W
 This is genuinely hard for anyone to manage.
 
 - **Seldon Vault processes hundreds of signals** from twelve real-time data sources and distills them into focused forecasts with probabilities.
-- **Each forecast includes reasoning from eight different analytical perspectives** — geopolitical, economic, military, cybersecurity, social, environmental, technological, and political. A single news article rarely covers more than one or two of these angles.
+- **Each forecast includes reasoning from eleven specialist analysts** — including opposing Hawk/Dove pairs in geopolitics, economics, and politics, plus specialists in military, cybersecurity, social, environmental, and technological domains. A single news article rarely covers more than one or two of these angles.
 - **Cascade Narratives** connect events across domains, showing how a development in one area (say, a cyberattack on energy infrastructure) might cascade into others (economic disruption, social instability, geopolitical escalation). News covers these connections occasionally. Seldon Vault looks for them systematically.
 
 ---
@@ -38,7 +38,7 @@ This is genuinely hard for anyone to manage.
 | **Output format** | Probability + multi-agent reasoning | Narrative articles and broadcasts |
 | **Update frequency** | Every 6 hours (Bayesian updates) | Continuous (as events break) |
 | **Accuracy tracking** | Brier Score per forecast | None |
-| **Perspective diversity** | 8 specialist domains per forecast | Varies by outlet and journalist |
+| **Perspective diversity** | 11 specialist analysts per forecast | Varies by outlet and journalist |
 | **Actionability** | Calibrated probabilities with reasoning | "Experts say..." qualitative framing |
 | **Time orientation** | Forward-looking | Backward-looking (with some speculation) |
 | **Editorial bias** | Multi-agent architecture reduces single-perspective bias | Varies by outlet (editorial line, funding, audience) |
@@ -59,7 +59,7 @@ News does things that Seldon Vault simply cannot:
 
 ## When Seldon Vault Is Better
 
-- **"What does this event mean for the future?"** News tells you a missile was fired. Seldon Vault estimates the probability of escalation, de-escalation, or wider conflict — with reasoning from eight perspectives.
+- **"What does this event mean for the future?"** News tells you a missile was fired. Seldon Vault estimates the probability of escalation, de-escalation, or wider conflict — with reasoning from eleven specialist analysts.
 - **Probabilistic assessment instead of narrative.** "Tensions are rising" is vague. "Probability of armed conflict has increased from 23% to 37% based on three converging factors" is actionable.
 - **Tracking how situations evolve over time.** Seldon Vault's probability charts show how confidence changed as events unfolded. News archives exist, but they don't present information this way.
 - **Connecting events across domains.** A drought in one region, a trade policy shift in another, and a technological breakthrough in a third might be connected in ways that no single news article covers. Seldon Vault's Cascade Narratives look for exactly these cross-domain connections.
